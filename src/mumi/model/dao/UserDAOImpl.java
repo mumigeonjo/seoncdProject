@@ -16,9 +16,30 @@ import mumi.model.dto.ReviewDTO;
 public class UserDAOImpl implements UserDAO {
 
 	@Override
-	public int loginFunction(String memberid, String pwd) {
-		// TODO Auto-generated method stub
-		return 0;
+	public MemberDTO loginFunction(String memberid, String pwd) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<MemberDTO> list = new ArrayList<>();
+		MemberDTO memberDTO = null;
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("select * from Member where id=? and pwd=?");
+			ps.setString(1, memberid);
+			ps.setString(2, pwd);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				memberDTO = new MemberDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getInt(6));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(con, ps, rs);
+		}
+
+		return memberDTO;
 	}
 
 	@Override

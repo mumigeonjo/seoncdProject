@@ -20,7 +20,7 @@ public interface UserDAO{
 	 * @param pwd
 	 * @return 인트로 리턴 or 불리으로 리
 	 */
-	public int loginFunction(String memberid, String pwd);
+	public MemberDTO loginFunction(String memberid, String pwd);
 	
 	/**
 	 * 회원가입

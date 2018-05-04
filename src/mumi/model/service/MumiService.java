@@ -23,6 +23,12 @@ public class MumiService {
 		int result = userDAO.insertMember(memberDTO);
 		return result;
 	}
+	
+	//로그인
+	public static MemberDTO selectUserById(String id, String pwd) throws SQLException{
+			MemberDTO memberDTO = userDAO.loginFunction(id, pwd);
+		return memberDTO;
+	}
 		
 	/*//장바구니 삭제
 	public static int deleteCart() throws SQLException{
@@ -44,10 +50,7 @@ public class MumiService {
 		return 0;
 	}
 	
-	//로그인
-	public static UserDTO selectUserById() throws SQLException{
-		return null;
-	}
+
 	
 	
 	
