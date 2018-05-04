@@ -14,7 +14,7 @@ import mumi.model.dto.ProductDTO;
 import mumi.model.dto.QADTO;
 import mumi.model.dto.QAReplyDTO;
 
-public class MumiDAOImpl implements MumiDAO{
+public class MumiDAOImpl implements MumiDAO {
 
 	@Override
 	public List<OrderDTO> adminOrderListRead() throws SQLException {
