@@ -46,7 +46,7 @@ public interface MumiDAO {
 	 * 고객이 작성한 Q&A 읽기
 	 * QA게시판에 올라온 모든 게시글을 출력한다. (답글 달렸나 표시도?) - SQL문 수정
 	 */
-	public List<QADTO> adminQAReplyRead() throws SQLException;
+	public List<QADTO> adminQAReadAll() throws SQLException;
 	
 	/**
 	 * 고객 질문글에 답변 달기
