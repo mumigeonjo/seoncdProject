@@ -49,7 +49,7 @@ public interface MumiDAO {
 	
 	/**
 	 * 답변 수정하기
-	 */
+	 */ 
 	public int adminQAReplyUpdate(Reply reply) throws SQLException;
 	
 	/**
