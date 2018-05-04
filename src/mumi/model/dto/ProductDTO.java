@@ -9,8 +9,9 @@ public class ProductDTO {
 	private int pEA;
 	private String pImage;
 	private String pDetailImage;
-	
-	public ProductDTO() {}
+
+	public ProductDTO() {
+	}
 
 	public ProductDTO(int pCode, String pName, int pPrice, String pSize, String pDate, int pEA, String pImage,
 			String pDetailImage) {
@@ -88,5 +89,4 @@ public class ProductDTO {
 	public void setpDetailImage(String pDetailImage) {
 		this.pDetailImage = pDetailImage;
 	}
-	
 }

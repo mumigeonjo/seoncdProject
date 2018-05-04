@@ -57,4 +57,8 @@ public class MemberDTO {
 		this.isMGR = isMGR;
 	}
 	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git

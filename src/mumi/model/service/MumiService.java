@@ -15,6 +15,10 @@ import mumi.model.dto.QADTO;
 import mumi.model.dto.ReviewDTO;
 
 public class MumiService {
+<<<<<<< HEAD
+=======
+	private static MumiDAO Mumidao = new MumiDAOImpl();
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	private static UserDAO userDAO = new UserDAOImpl();
 	
 	//회원가입
@@ -94,12 +98,17 @@ public class MumiService {
 	public static int updateQA() throws SQLException{
 		return 0;
 	}
-	
+	*/
 	//1:1 문의 게시글 보기(로그인 한 유저의 글만)
-	public static QADTO selectQAByQAIndex(QAindex,userid) throws SQLException{
-		return null;
+	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{
+		
+		List<QADTO> list = null;
+		
+		list = userDAO.userQARead(userid);
+		
+		return list;
 	}
-	
+	/*
 	//1:1 문의 게시글 상세보기(로그인 한 유저의 글만)
 	public static QADTO selectQADetailByQANO() throws SQLException{
 		return null;
