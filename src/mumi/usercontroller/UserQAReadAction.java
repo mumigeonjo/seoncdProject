@@ -20,14 +20,17 @@ public class UserQAReadAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ModelAndView mv=new ModelAndView();
+		
 		HttpSession session = request.getSession();
 		
 		String userid =(String)session.getAttribute("memberid");
-		
+		List<QADTO> list;
 		try{
-			
-			List<QADTO> list = MumiService.selectQAByQAIndex();
-			
+			if(userid.equals("admin")) {
+				list = MumiService.selectQAListAll();
+			}else {
+				list = MumiService.selectQAByQAIndex(userid);
+			}
 			request.setAttribute("list", list);
 			
 			for(QADTO qaDTO:list) {
