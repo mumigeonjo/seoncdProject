@@ -53,7 +53,6 @@ public interface MumiDAO {
 	 * 각 고객의 질문글에 리플 형식으로 답변을 달 수 있다.
 	 */
 	public int adminQAReplyInsert(QAReplyDTO reply) throws SQLException;
-	
 	/**
 	 * 답변 수정하기
 	 */ 
