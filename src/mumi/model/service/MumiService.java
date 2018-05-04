@@ -5,6 +5,8 @@ import java.util.List;
 
 import mumi.model.dao.MumiDAO;
 import mumi.model.dao.MumiDAOImpl;
+import mumi.model.dao.UserDAO;
+import mumi.model.dao.UserDAOImpl;
 import mumi.model.dto.MemberDTO;
 import mumi.model.dto.NoticeDTO;
 import mumi.model.dto.OrderDTO;
@@ -13,8 +15,14 @@ import mumi.model.dto.QADTO;
 import mumi.model.dto.ReviewDTO;
 
 public class MumiService {
-	private static MumiDAO Mumidao = new MumiDAOImpl();
+	private static UserDAO userDAO = new UserDAOImpl();
 	
+	//회원가입
+	public static int insertUser(MemberDTO memberDTO) throws SQLException{
+		int result = userDAO.insertMember(memberDTO);
+		return result;
+	}
+		
 	/*//장바구니 삭제
 	public static int deleteCart() throws SQLException{
 		return 0;
@@ -40,10 +48,7 @@ public class MumiService {
 		return null;
 	}
 	
-	//회원가입
-	public static int insertUser() throws SQLException{
-		return 0;
-	}
+	
 	
 	//회원탈퇴
 	public static int deleteUserById() throws SQLException{

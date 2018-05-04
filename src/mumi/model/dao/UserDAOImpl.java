@@ -1,5 +1,7 @@
 package mumi.model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import mumi.model.dto.MemberDTO;
@@ -18,9 +20,26 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int registerMember(MemberDTO memberDTO) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertMember(MemberDTO memberDTO) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("insert into Member values(?,?,?,?,?,?)");
+			ps.setString(1, memberDTO.getMemberID());
+			ps.setString(2, memberDTO.getPwd());
+			ps.setString(3, memberDTO.getName());
+			ps.setString(4, memberDTO.getPhone());
+			ps.setString(5, memberDTO.getAddr());
+			ps.setInt(6, memberDTO.getIsMGR());
+			result=ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		return result;
 	}
 
 	@Override
