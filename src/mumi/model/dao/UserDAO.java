@@ -218,5 +218,5 @@ public interface UserDAO{
 	 * @param rIndexNo
 	 * @return
 	 */
-	public int userReviewDelete(String rIndexNo);
+	public int userReviewDelete(int rIndexNo);
 }

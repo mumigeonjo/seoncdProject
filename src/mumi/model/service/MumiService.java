@@ -3,6 +3,7 @@ package mumi.model.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import kosta.model.dto.Electronics;
 import mumi.model.dao.MumiDAO;
 import mumi.model.dao.MumiDAOImpl;
 import mumi.model.dao.UserDAO;
@@ -17,6 +18,7 @@ import mumi.model.dto.ReviewDTO;
 public class MumiService {
 	private static MumiDAO mumiDAO = new MumiDAOImpl();
 	private static UserDAO userDAO = new UserDAOImpl();
+	
 	
 	//장바구니 삭제
 	public static int deleteCart() throws SQLException{
@@ -111,28 +113,41 @@ public class MumiService {
 	//1:1 문의 게시글 수정(로그인 한 유저의 글만)
 	public static int updateQA() throws SQLException{
 		return 0;
-	}
+	}*/
 	
 	//리뷰 게시글 삭제(자기가 쓴 글만)
-	public static int deleteUserReview() throws SQLException{
-		return 0;
+	public static int userReviewDelete(int rIndexNo) throws SQLException{
+		 int re = userDAO.userReviewDelete(rIndexNo);
+		 if(re==0)throw new SQLException("삭제되지 않았습니다.");
+		 return re;
 	}
 	
 	//리뷰 게시글 삽입(로그인 한 유저의 글만)
-	public static int insertUserReview() throws SQLException{
-		return 0;
+	public static int userReviewInsert(ReviewDTO reviewDTO) throws SQLException{
+		 int re = userDAO.userReviewInsert(reviewDTO);
+		 if(re==0)throw new SQLException("등록되지 않았습니다.");
+		 return re;
+		
 	}
 	
 	//리뷰 게시글 수정(로그인 한 유저의 글만)
-	public static int updateUserReview() throws SQLException{
-		return 0;
+	public static int userReviewUpdate(ReviewDTO reviewDTO) throws SQLException{
+		  int re = userDAO.userReviewUpdate(reviewDTO);
+		  if(re==0)throw new SQLException("수정되지 않았습니다.");
+		  return re;
+		
 	}
 	
 	//모든 리뷰 게시글 읽기(로그인 한 유저의 글만)
-	public static List<ReviewDTO> selectUserReview() throws SQLException{
-		return null;
+	public static List<ReviewDTO> userReviewRead(String pCode) throws SQLException{
+		List<ReviewDTO> list = userDAO.userReviewRead(pCode);
+		 
+		return list;
+		
 	}
 	
+	
+	/*
 	////////////////////////관리자 ////////////////////////////
 	//공지사항 삭제
 	public static int deleteNotice() throws SQLException{
@@ -207,5 +222,10 @@ public class MumiService {
 	public int dropUser() throws SQLException{
 		return 0;
 	
+	}*/
+	public int adminReviewDelete(int rIndexNo) throws SQLException{
+		 int re = mumiDAO.adminReviewDelete(rIndexNo);
+		 if(re==0)throw new SQLException("삭제되지 않았습니다.");
+		 return re;
 	}
 }
