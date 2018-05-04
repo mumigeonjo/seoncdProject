@@ -3,6 +3,13 @@ package mumi.model.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import mumi.model.dto.MemberDTO;
+import mumi.model.dto.NoticeDTO;
+import mumi.model.dto.OrderDTO;
+import mumi.model.dto.ProductDTO;
+import mumi.model.dto.QADTO;
+import mumi.model.dto.QAReplyDTO;
+
 public interface MumiDAO {
 	
 	/**
@@ -10,7 +17,7 @@ public interface MumiDAO {
 	 * 단, O_STATUS가 true(1?)인 경우만 가져온다. O_STATUS가 false(0?)이면 장바구니에만 있다는 뜻.
 	 * SELECT MEMBER_ID, P_CODE, O_EA, O_DATE FROM ORDER WHERE O_STATUS=1;
 	 */
-	public List<Order> adminOrderListRead() throws SQLException;
+	public List<OrderDTO> adminOrderListRead() throws SQLException;
 	
 	/**
 	 * 공지 사항 추가하기
@@ -18,7 +25,7 @@ public interface MumiDAO {
 	 * 공지 작성 페이지에서 값을 읽어서 DB의 NOTICE 테이블에 저장한다.
 	 * insert into notice (n_indexno, n_title, n_content, n_date) values (notice_seq, ?, ?, sysdate);
 	 */
-	public int adminNoticeInsert(Notice notice) throws SQLException;
+	public int adminNoticeInsert(NoticeDTO notice) throws SQLException;
 	
 	/**
 	 * 공지 사항 삭제하기
@@ -33,24 +40,24 @@ public interface MumiDAO {
 	 * 공지의 제목, 내용을 수정할 수 있다. 
 	 * 공지가 수정된 시간으로 N_DATE의 값이 변경된다.
 	 */
-	public int adminNoticeUpdate(Notice notice) throws SQLException;
+	public int adminNoticeUpdate(NoticeDTO notice) throws SQLException;
 	
 	/**
 	 * 고객이 작성한 Q&A 읽기
 	 * QA게시판에 올라온 모든 게시글을 출력한다. (답글 달렸나 표시도?) - SQL문 수정
 	 */
-	public List<QA> adminQAReplyRead() throws SQLException;
+	public List<QADTO> adminQAReplyRead() throws SQLException;
 	
 	/**
 	 * 고객 질문글에 답변 달기
 	 * 각 고객의 질문글에 리플 형식으로 답변을 달 수 있다.
 	 */
-	public int adminQAReplyInsert(Reply reply) throws SQLException;
+	public int adminQAReplyInsert(QAReplyDTO reply) throws SQLException;
 	
 	/**
 	 * 답변 수정하기
 	 */ 
-	public int adminQAReplyUpdate(Reply reply) throws SQLException;
+	public int adminQAReplyUpdate(QAReplyDTO reply) throws SQLException;
 	
 	/**
 	 * 답변 삭제하기
@@ -61,7 +68,12 @@ public interface MumiDAO {
 	 * QA 자세히 읽기. QA 클릭하면 내용 띄워주기?
 	 * 리플은 어떻게 가져올까. 별개 메소드로?
 	 */
-	public QADTO adminQAReadDetail() throws SQLEx
+	public QADTO adminQAReadDetail() throws SQLException;
+	
+	/**
+	 * QA 자세히 읽기- 리뷰 부분만 가져오는 메소드(추가)
+	 */
+	public QAReplyDTO adminQAReplyReadDetail() throws SQLException;
 	
 	/**
 	 * 리뷰 삭제하기
@@ -72,29 +84,29 @@ public interface MumiDAO {
 	 * 회원 정보 확인
 	 * 비번 빼고 모든 회원정보 확인..?
 	 */
-	public List<Member> adminAllMemberSelect() throws SQLException;
+	public List<MemberDTO> adminSelectAllMember() throws SQLException;
 	
 	
 	/**
 	 * 상품 추가하기
 	 * p_code, p_name, p_price, p_size, p_ea
 	 */
-	public int adminProductInsert(Product product) throws SQLException;
+	public int adminProductAllInsert(ProductDTO product) throws SQLException;
 	
 	/**
 	 * 상품 수정하기
 	 * 가격, 수량을 변경할 수 있음
 	 */
-	public int adminProductUpdate(Product product) throws SQLException;
+	public int adminProductAllUpdate(ProductDTO product) throws SQLException;
 	
 	/**
 	 * 상품 삭제하기
 	 */
-	public int adminProductDelete(int pCode) throws SQLException;
+	public int adminProductAllDelete(int pCode) throws SQLException;
 	
 	/**
 	 * 회원 강퇴시키기 - cascade 옵션 추가해야 함
 	 */
-	public int adminMemberDelete(String memberID) throws SQLException;
+	public int adminUserDelete(String memberID) throws SQLException;
 
 }
