@@ -74,33 +74,6 @@ public class ReviewDTO {
 	public int getrRate() {
 		return rRate;
 	}
-	private int rIndexNo;
-	private String pCode;
-	private String memberID;
-	private String rDate;
-	private String rContent;
-	private String rPhoto;
-	private int rRate;
-	
-	public ReviewDTO() {}
-	private int rIndexNo;
-	private String pCode;
-	private String memberID;
-	private String rDate;
-	private String rContent;
-	private String rPhoto;
-	private int rRate;
-	
-	public ReviewDTO() {}
-	private int rIndexNo;
-	private String pCode;
-	private String memberID;
-	private String rDate;
-	private String rContent;
-	private String rPhoto;
-	private int rRate;
-	
-	public ReviewDTO() {}
 
 	public void setrRate(int rRate) {
 		this.rRate = rRate;

@@ -56,9 +56,4 @@ public class MemberDTO {
 	public void setIsMGR(int isMGR) {
 		this.isMGR = isMGR;
 	}
-	
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git

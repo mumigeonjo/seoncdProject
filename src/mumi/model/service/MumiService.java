@@ -15,10 +15,7 @@ import mumi.model.dto.QADTO;
 import mumi.model.dto.ReviewDTO;
 
 public class MumiService {
-<<<<<<< HEAD
-=======
-	private static MumiDAO Mumidao = new MumiDAOImpl();
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
+
 	private static UserDAO userDAO = new UserDAOImpl();
 	
 	//회원가입

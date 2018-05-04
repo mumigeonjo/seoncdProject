@@ -2,11 +2,8 @@ package mumi.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-<<<<<<< HEAD
-=======
 import java.sql.ResultSet;
 import java.util.ArrayList;
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 import java.util.List;
 
 import mumi.model.dto.MemberDTO;
@@ -30,18 +27,18 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps = null;
 		int result = 0;
 		try {
-			con=DBUtil.getConnection();
-			ps=con.prepareStatement("insert into Member values(?,?,?,?,?,?)");
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("insert into Member values(?,?,?,?,?,?)");
 			ps.setString(1, memberDTO.getMemberID());
 			ps.setString(2, memberDTO.getPwd());
 			ps.setString(3, memberDTO.getName());
 			ps.setString(4, memberDTO.getPhone());
 			ps.setString(5, memberDTO.getAddr());
 			ps.setInt(6, memberDTO.getIsMGR());
-			result=ps.executeUpdate();
-		}catch(Exception e) {
+			result = ps.executeUpdate();
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBUtil.dbClose(con, ps);
 		}
 		return result;
@@ -151,30 +148,30 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<QADTO> userQARead(String memberid) {
-		
-		Connection conn= null;
+
+		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<QADTO> qlist = new ArrayList<>();
-		
+
 		try {
 			conn = DBUtil.getConnection();
 			ps = conn.prepareStatement("select * from QA where member_id=?");
 			ps.setString(1, memberid);
-			//??의 순서대로 개수만큼 setXxx( , ) 작성
+			// ??의 순서대로 개수만큼 setXxx( , ) 작성
 			rs = ps.executeQuery();
-			while(rs.next()) {
-				QADTO cusDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getString(5), rs.getString(6));
+			while (rs.next()) {
+				QADTO cusDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6));
 				qlist.add(cusDTO);
-			
+
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBUtil.dbClose(conn, ps, rs);
 		}
-		
+
 		return qlist;
 	}
 
@@ -231,7 +228,5 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	
 
 }
