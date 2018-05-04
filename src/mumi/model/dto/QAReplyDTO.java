@@ -5,8 +5,9 @@ public class QAReplyDTO {
 	private int bIndexNo;
 	private String qDate;
 	private String qContent;
-	
-	public QAReplyDTO() {}
+
+	public QAReplyDTO() {
+	}
 
 	public QAReplyDTO(int qIndexNo, int bIndexNo, String qDate, String qContent) {
 		super();
@@ -47,5 +48,5 @@ public class QAReplyDTO {
 	public void setqDate(String qDate) {
 		this.qDate = qDate;
 	}
-	
+
 }

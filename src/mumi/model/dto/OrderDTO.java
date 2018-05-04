@@ -9,10 +9,12 @@ public class OrderDTO {
 	private int oStatus;
 	private String oAddr;
 	private String oPhone;
-	
-	public OrderDTO() {}
 
-	public OrderDTO(int oIndexNo, String pCode, String memberID, int oEA, String oDate, int oStatus, String oAddr, String oPhone) {
+	public OrderDTO() {
+	}
+
+	public OrderDTO(int oIndexNo, String pCode, String memberID, int oEA, String oDate, int oStatus, String oAddr,
+			String oPhone) {
 		super();
 		this.oIndexNo = oIndexNo;
 		this.pCode = pCode;
@@ -87,5 +89,4 @@ public class OrderDTO {
 	public void setoStatus(int oStatus) {
 		this.oStatus = oStatus;
 	}
-	
 }
