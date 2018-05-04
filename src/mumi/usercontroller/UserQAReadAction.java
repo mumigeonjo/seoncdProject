@@ -26,7 +26,7 @@ public class UserQAReadAction implements Action{
 		
 		try{
 			
-			List<QADTO> list = MumiService.selectQAByQAIndex(userid);
+			List<QADTO> list = MumiService.selectQAByQAIndex();
 			
 			request.setAttribute("list", list);
 			
