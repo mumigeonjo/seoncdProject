@@ -183,7 +183,7 @@ public interface UserDAO{
 	 * @param qIndexNo
 	 * @return 정보뿌려주기.
 	 */
-	public QADTO userQAReadForUpdate(String qIndexNo);
+	public QADTO userQAReadForUpdate(int qIndexNo);
 	
 	/**
 	 * Q&A게시판 삭제 메소드 
@@ -191,7 +191,7 @@ public interface UserDAO{
 	 * @return 삭제되었다/됬다.
 	 * 
 	 */
-	public int userQADelete(String bIndexNo);
+	public int userQADelete(int bIndexNo);
 	
 	/**
 	 * 리뷰조회메소드 

@@ -42,12 +42,12 @@ public class MumiService {
 	public static UserDTO selectUserById() throws SQLException{
 		return null;
 	}
-	
+	*/
 	//회원가입
-	public static int insertUser() throws SQLException{
+	public static int insertUser(MemberDTO memberDTO) throws SQLException{
 		return 0;
 	}
-	
+	/*
 	//회원탈퇴
 	public static int deleteUserById() throws SQLException{
 		return 0;
@@ -82,17 +82,25 @@ public class MumiService {
 	public static ProductDTO selectProductByProductCode() throws SQLException{
 		return null;
 	}
-	
-	//1:1 문의 게시글 삭제(로그인 한 유저의 글만)
-	public static int deleteQA() throws SQLException{
-		return 0;
-	}
-	
-	//1:1 문의 게시글 수정(로그인 한 유저의 글만)
-	public static int updateQA() throws SQLException{
-		return 0;
-	}
 	*/
+	//1:1 문의 게시글 삭제(로그인 한 유저의 글만)
+	public static int deleteQA(int bIndexNO) throws SQLException{
+		int result = 0;
+		
+		result = userDAO.userQADelete(bIndexNO);
+		
+		return result;
+	}
+	
+	//1:1 문의 게시글 추가(로그인 한 유저의 글만)
+	public static int insertQA(QADTO qaDTO) throws SQLException{
+		
+		int result;
+		
+		result = userDAO.userQAInsert(qaDTO);
+		return result;
+	}
+	
 	//1:1 문의 게시글 보기(로그인 한 유저의 글만)
 	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{
 		
@@ -102,17 +110,23 @@ public class MumiService {
 		
 		return list;
 	}
-	/*
+	
 	//1:1 문의 게시글 상세보기(로그인 한 유저의 글만)
-	public static QADTO selectQADetailByQANO() throws SQLException{
-		return null;
+	public static QADTO selectQADetailByQANO(int bIndexNo) throws SQLException{
+		
+		QADTO qaDTO = userDAO.userQAReadForUpdate(bIndexNo);
+		
+		return qaDTO;
 	}
 	
 	//1:1 문의 게시글 수정(로그인 한 유저의 글만)
-	public static int updateQA() throws SQLException{
-		return 0;
+	public static int updateQA(QADTO qaDTO) throws SQLException{
+		int result;
+		
+		result = userDAO.userQAUpdate(qaDTO);
+		return result;
 	}
-	
+	/*
 	//리뷰 게시글 삭제(자기가 쓴 글만)
 	public static int deleteUserReview() throws SQLException{
 		return 0;
