@@ -3,7 +3,10 @@ package mumi.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+<<<<<<< HEAD
 import java.sql.SQLException;
+=======
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,9 +137,32 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<QADTO> userQARead() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QADTO> userQARead(String memberid) {
+		
+		Connection conn= null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<QADTO> qlist = new ArrayList<>();
+		
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("select * from QA where member_id=?");
+			ps.setString(1, memberid);
+			//??의 순서대로 개수만큼 setXxx( , ) 작성
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				QADTO cusDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6));
+				qlist.add(cusDTO);
+			
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(conn, ps, rs);
+		}
+		
+		return qlist;
 	}
 
 	@Override
@@ -238,5 +264,7 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }
