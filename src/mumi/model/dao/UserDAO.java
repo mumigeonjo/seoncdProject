@@ -43,9 +43,10 @@ public interface UserDAO{
 	
 	/**
 	 * 회원탈퇴 
+	 * @param id 
 	 * @return
 	 */
-	public int userLeave();
+	public int userLeave(String id);
 	
 	/**
 	 * 전체상품조회 

@@ -28,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
 		MemberDTO memberDTO = null;
 		try {
 			con = DBUtil.getConnection();
-			ps = con.prepareStatement("select * from Member where id=? and pwd=?");
+			ps = con.prepareStatement("select * from Member where member_id=? and pwd=?");
 			ps.setString(1, memberid);
 			ps.setString(2, pwd);
 			rs = ps.executeQuery();
@@ -48,14 +48,25 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public int userInfoUpdate(MemberDTO memberDTO) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("update set pwd=?,name=?,phone=?,addr=? where member_id=?");
+			ps.setString(1, memberDTO.getPwd());
+			ps.setString(2, memberDTO.getName());
+			ps.setString(3, memberDTO.getPhone());
+			ps.setString(4, memberDTO.getAddr());
+			ps.setString(5, memberDTO.getMemberID());
 
-	@Override
-	public int userLeave() {
-		// TODO Auto-generated method stub
-		return 0;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		return result;
 	}
 
 	@Override
@@ -316,6 +327,24 @@ public class UserDAOImpl implements UserDAO {
 	public List<QADTO> userQARead() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int userLeave(String id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("delete from member where member_id=?");
+			ps.setString(1, id);
+			result=ps.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		return result;
 	}
 
 }

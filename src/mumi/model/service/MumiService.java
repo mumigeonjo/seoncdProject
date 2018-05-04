@@ -30,6 +30,18 @@ public class MumiService {
 			MemberDTO memberDTO = userDAO.loginFunction(id, pwd);
 		return memberDTO;
 	}
+	
+	//회원탈퇴
+	public static int deleteUserById(String id) throws SQLException{
+			int result = userDAO.userLeave(id);
+		return result;
+	}
+	
+	//회원정보수정
+	public static int updateUser(MemberDTO memberDTO) throws SQLException{
+		int result = userDAO.userInfoUpdate(memberDTO);
+		return result;
+	}
 		
 	/*//장바구니 삭제
 =======
@@ -61,10 +73,7 @@ public class MumiService {
 		return 0;
 	}
 	
-	//회원탈퇴
-	public static int deleteUserById() throws SQLException{
-		return 0;
-	}
+
 	
 	//공지사항 조회
 	public static List<NoticeDTO> selectNoticeAll() throws SQLException{
