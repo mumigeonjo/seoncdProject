@@ -210,6 +210,7 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(4, reviewDTO.getrContent());
 			ps.setString(5, reviewDTO.getrPhoto());
 			ps.setInt(6, reviewDTO.getrRate());
+			re=ps.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally {
