@@ -7,8 +7,9 @@ public class QADTO {
 	private String bContent;
 	private String bTitle;
 	private String bDate;
-	
-	public QADTO() {}
+
+	public QADTO() {
+	}
 
 	public QADTO(int bIndexNo, String memberID, String bCategory, String bContent, String bTitle, String bDate) {
 		super();
@@ -67,5 +68,4 @@ public class QADTO {
 	public void setbDate(String bDate) {
 		this.bDate = bDate;
 	}
-	
 }

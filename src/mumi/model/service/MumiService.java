@@ -15,7 +15,7 @@ import mumi.model.dto.QADTO;
 import mumi.model.dto.ReviewDTO;
 
 public class MumiService {
-	private static MumiDAO Mumidao = new MumiDAOImpl();
+	private static MumiDAO mumiDAO = new MumiDAOImpl();
 	private static UserDAO userDAO = new UserDAOImpl();
 	
 	/*//장바구니 삭제
@@ -173,12 +173,16 @@ public class MumiService {
 	public static int insertAnswer() throws SQLException{
 		return 0;
 	}
-	
+	*/
 	//QA 게시글 모두 조회
 	public static List<QADTO> selectQAListAll() throws SQLException{
-		return 0;
+		List<QADTO> list = null;
+		
+		list = mumiDAO.adminQAReadAll();
+		
+		return list;
 	}
-	
+	/*
 	//QA 게시글 디테일 조회
 	public static QADTO selectQADetail() throws SQLException{
 		return null;

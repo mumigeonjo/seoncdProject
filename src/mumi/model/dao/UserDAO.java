@@ -32,7 +32,7 @@ public interface UserDAO{
 	 * @param memberDTO 위의 값들을 받는 생성자 생성필요.
 	 * @return int값으로 리턴, 0이면 true, 1이면 false
 	 */
-	public int registerMember(MemberDTO memberDTO); 
+	public int insertMember(MemberDTO memberDTO); 
 	
 	/**
 	 * 회원정보 수정 메소드 
