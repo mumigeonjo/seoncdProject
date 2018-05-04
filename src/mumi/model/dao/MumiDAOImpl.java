@@ -99,7 +99,22 @@ public class MumiDAOImpl implements MumiDAO {
 
 	@Override
 	public int adminReviewDelete(int rIndexNo) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection con=null;
+		PreparedStatement ps=null;
+		int re=0;
+		
+		try {
+			con= DBUtil.getConnection();
+			ps= con.prepareStatement("delete review where r_indexNo=?");
+			ps.setInt(1, rIndexNo);
+			re=ps.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		
 		return 0;
 	}
 
