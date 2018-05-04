@@ -144,8 +144,8 @@ public class UserDAOImpl implements UserDAO {
 			//??의 순서대로 개수만큼 setXxx( , ) 작성
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				QADTO cusDTO = new QADTO(rs.getString("id"), rs.getString("name"), rs.getInt("age"),
-						rs.getString("tel"), rs.getString("addr"));
+				QADTO cusDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6));
 				qlist.add(cusDTO);
 			
 			}
@@ -156,7 +156,6 @@ public class UserDAOImpl implements UserDAO {
 		}
 		
 		return qlist;
-	}
 	}
 
 	@Override

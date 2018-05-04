@@ -30,7 +30,11 @@ public class UserQAReadAction implements Action{
 			
 			request.setAttribute("list", list);
 			
-			mv.setPath("elecView/list.jsp");
+			for(QADTO qaDTO:list) {
+				System.out.println(qaDTO);
+			}
+			
+			mv.setPath("???");
 			mv.setRedirect(false);
 			return mv;
 			
