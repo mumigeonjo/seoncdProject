@@ -3,10 +3,7 @@ package mumi.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-<<<<<<< HEAD
 import java.sql.SQLException;
-=======
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,32 +134,9 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<QADTO> userQARead(String memberid) {
-		
-		Connection conn= null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		List<QADTO> qlist = new ArrayList<>();
-		
-		try {
-			conn = DBUtil.getConnection();
-			ps = conn.prepareStatement("select * from QA where member_id=?");
-			ps.setString(1, memberid);
-			//??의 순서대로 개수만큼 setXxx( , ) 작성
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				QADTO cusDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getString(5), rs.getString(6));
-				qlist.add(cusDTO);
-			
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			DBUtil.dbClose(conn, ps, rs);
-		}
-		
-		return qlist;
+	public List<QADTO> userQARead() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -237,6 +211,7 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(5, reviewDTO.getrPhoto());
 			ps.setInt(6, reviewDTO.getrRate());
 			re=ps.executeUpdate();
+			
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally {
@@ -249,22 +224,44 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public int userReviewUpdate(ReviewDTO reviewDTO) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ReviewDTO userReviewReadForUpdate(String rIndexNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int userReviewDelete(String rIndexNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con= null;
+		PreparedStatement ps= null;
+		int re=0;
+		try {
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("update review set pCode=?, sysdate, rContent=?, rPhoto=?, rRate=? ");
+			ps.setString(1, reviewDTO.getpCode());
+			ps.setString(2, reviewDTO.getrContent());
+			ps.setString(3, reviewDTO.getrPhoto());
+			ps.setInt(4, reviewDTO.getrRate());
+			re=ps.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		return re;
 	}
 
 	
+	@Override
+	public int userReviewDelete(String rIndexNo) {
+		Connection con= null;
+		PreparedStatement ps= null;
+		int re=0;
+		try {
+			con= DBUtil.getConnection();
+			ps= con.prepareStatement("delete review where r_indexNo=?");
+			ps.setString(1, rIndexNo);
+			re=ps.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		return re;
+	}
 
 }
