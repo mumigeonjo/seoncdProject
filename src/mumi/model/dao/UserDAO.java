@@ -158,10 +158,7 @@ public interface UserDAO{
 	 * @return 리스트로 리턴해준다.
 	 * 전역변수에 저장되어있는 MemberID를 불러와서 조회한다.
 	 */
-	public default List<QADTO> userQARead(String memberid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<QADTO> userQARead();
 	
 	/**
 	 * Q&A게시판 등록 메소드 
@@ -214,12 +211,7 @@ public interface UserDAO{
 	 */
 	public int userReviewUpdate(ReviewDTO reviewDTO);
 	
-	/**
-	 * 리뷰업데이트용 정보 가져오기 메소드 
-	 * @param rIndexNo
-	 * @return
-	 */
-	public ReviewDTO userReviewReadForUpdate(String rIndexNo);
+
 	
 	/**
 	 * 리뷰 삭제메소드 

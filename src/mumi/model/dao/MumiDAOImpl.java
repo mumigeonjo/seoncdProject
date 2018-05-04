@@ -1,6 +1,10 @@
 package mumi.model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import mumi.model.dto.MemberDTO;
@@ -10,7 +14,7 @@ import mumi.model.dto.ProductDTO;
 import mumi.model.dto.QADTO;
 import mumi.model.dto.QAReplyDTO;
 
-public class MumiDAOImpl implements MumiDAO{
+public class MumiDAOImpl implements MumiDAO {
 
 	@Override
 	public List<OrderDTO> adminOrderListRead() throws SQLException {
@@ -37,9 +41,30 @@ public class MumiDAOImpl implements MumiDAO{
 	}
 
 	@Override
-	public List<QADTO> adminQAReplyRead() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QADTO> adminQAReadAll() throws SQLException {
+		
+		Connection conn= null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<QADTO> qlist = new ArrayList<>();
+		
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("select * from QA");
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				QADTO qaDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6));
+				qlist.add(qaDTO);
+			
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(conn, ps, rs);
+		}
+		
+		return qlist;
 	}
 
 	@Override

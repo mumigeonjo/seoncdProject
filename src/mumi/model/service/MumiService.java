@@ -15,9 +15,10 @@ import mumi.model.dto.QADTO;
 import mumi.model.dto.ReviewDTO;
 
 public class MumiService {
-
+	private static MumiDAO mumiDAO = new MumiDAOImpl();
 	private static UserDAO userDAO = new UserDAOImpl();
 	
+<<<<<<< HEAD
 	//회원가입
 	public static int insertUser(MemberDTO memberDTO) throws SQLException{
 		int result = userDAO.insertMember(memberDTO);
@@ -31,6 +32,9 @@ public class MumiService {
 	}
 		
 	/*//장바구니 삭제
+=======
+	//장바구니 삭제
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	public static int deleteCart() throws SQLException{
 		return 0;
 	}
@@ -52,7 +56,10 @@ public class MumiService {
 	
 
 	
-	
+	//회원가입
+	public static int insertUser() throws SQLException{
+		return 0;
+	}
 	
 	//회원탈퇴
 	public static int deleteUserById() throws SQLException{
@@ -179,12 +186,16 @@ public class MumiService {
 	public static int insertAnswer() throws SQLException{
 		return 0;
 	}
-	
+	*/
 	//QA 게시글 모두 조회
 	public static List<QADTO> selectQAListAll() throws SQLException{
-		return 0;
+		List<QADTO> list = null;
+		
+		list = mumiDAO.adminQAReadAll();
+		
+		return list;
 	}
-	
+	/*
 	//QA 게시글 디테일 조회
 	public static QADTO selectQADetail() throws SQLException{
 		return null;
@@ -208,5 +219,6 @@ public class MumiService {
 	//회원 강제 탈퇴
 	public int dropUser() throws SQLException{
 		return 0;
-	}*/
+	
+	}
 }
