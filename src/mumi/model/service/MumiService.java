@@ -3,7 +3,7 @@ package mumi.model.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import kosta.model.dto.Electronics;
+
 import mumi.model.dao.MumiDAO;
 import mumi.model.dao.MumiDAOImpl;
 import mumi.model.dao.UserDAO;

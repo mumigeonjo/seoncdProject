@@ -146,7 +146,7 @@ public class UserDAOImpl implements UserDAO {
 			// ??의 순서대로 개수만큼 setXxx( , ) 작성
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				QADTO cusDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+				QADTO cusDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),
 						rs.getString(5), rs.getString(6));
 				qlist.add(cusDTO);
 
@@ -161,27 +161,112 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int userQAInsert(QADTO qADTO) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int userQAInsert(QADTO qaDTO) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result=0;
+
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("insert into QA(b_indexNo,member_id,b_category,b_content,b_title,b_date) "
+					+ "values(qa_seq.nextval,?,?,?,?,sysdate)");
+			ps.setString(1, qaDTO.getMemberID());
+			ps.setInt(2, qaDTO.getbCategory());
+			ps.setString(3, qaDTO.getbContent());
+			ps.setString(4, qaDTO.getbTitle());
+			
+			
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, ps);
+		}
+
+		return result;
+	}
+
+
+	@Override
+	public int userQAUpdate(QADTO qaDTO) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result=0;
+
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("update QA set b_category=?,b_content=?,b_title=?,b_date=sysdate) "
+					+ "  where b_indexNo=?");
+			ps.setInt(1, qaDTO.getbCategory());
+			ps.setString(2, qaDTO.getbContent());
+			ps.setString(3, qaDTO.getbTitle());
+			ps.setInt(4, qaDTO.getbIndexNo());
+			
+			// ??의 순서대로 개수만큼 setXxx( , ) 작성
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, ps);
+		}
+
+		return result;
 	}
 
 	@Override
-	public int userQAUpdate(QADTO qADTO) {
-		// TODO Auto-generated method stub
-		return 0;
+	public QADTO userQAReadForUpdate(int qIndexNo) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		QADTO qDTO=null;
+
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("select * from QA where b_indexNo=?");
+			ps.setInt(1, qIndexNo);
+			// ??의 순서대로 개수만큼 setXxx( , ) 작성
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				qDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),
+						rs.getString(5), rs.getString(6));
+				
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, ps, rs);
+		}
+
+		return qDTO;
 	}
 
 	@Override
-	public QADTO userQAReadForUpdate(String qIndexNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public int userQADelete(int bIndexNo) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		int result=0;
 
-	@Override
-	public int userQADelete(String bIndexNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("delete QA where b_indexNo=?");
+			ps.setInt(1, bIndexNo);
+			// ??의 순서대로 개수만큼 setXxx( , ) 작성
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, ps);
+		}
+
+		return result;
 	}
 
 	@Override
