@@ -15,7 +15,7 @@ import mumi.model.dto.ReviewDTO;
 public class MumiService {
 	private static MumiDAO Mumidao = new MumiDAOImpl();
 	
-	/*//장바구니 삭제
+	//장바구니 삭제
 	public static int deleteCart() throws SQLException{
 		return 0;
 	}
@@ -194,5 +194,6 @@ public class MumiService {
 	//회원 강제 탈퇴
 	public int dropUser() throws SQLException{
 		return 0;
-	}*/
+	
+	}
 }
