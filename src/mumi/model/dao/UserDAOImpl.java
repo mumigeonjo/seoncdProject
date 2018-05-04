@@ -1,5 +1,9 @@
 package mumi.model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import mumi.model.dto.MemberDTO;
@@ -126,9 +130,33 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<QADTO> userQARead() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QADTO> userQARead(String memberid) {
+		
+		Connection conn= null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<QADTO> qlist = new ArrayList<>();
+		
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("select * from QA where member_id=?");
+			ps.setString(1, memberid);
+			//??의 순서대로 개수만큼 setXxx( , ) 작성
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				QADTO cusDTO = new QADTO(rs.getString("id"), rs.getString("name"), rs.getInt("age"),
+						rs.getString("tel"), rs.getString("addr"));
+				qlist.add(cusDTO);
+			
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(conn, ps, rs);
+		}
+		
+		return qlist;
+	}
 	}
 
 	@Override
@@ -184,5 +212,7 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }
