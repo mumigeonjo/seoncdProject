@@ -25,11 +25,6 @@ public class UserDAOImpl implements UserDAO {
 		return 0;
 	}
 
-	@Override
-	public int registerMember(MemberDTO memberDTO) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int userInfoUpdate(MemberDTO memberDTO) {
@@ -134,9 +129,6 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<QADTO> userQARead() {
-		// TODO Auto-generated method stub
-		return null;
 	public List<QADTO> userQARead(String memberid) {
 
 		Connection conn = null;
@@ -373,6 +365,13 @@ public class UserDAOImpl implements UserDAO {
 			DBUtil.dbClose(con, ps);
 		}
 		return re;
+	}
+
+
+	@Override
+	public int insertMember(MemberDTO memberDTO) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
