@@ -1,6 +1,14 @@
 package mumi.model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+import com.sun.media.sound.PCMtoPCMCodec;
 
 import mumi.model.dto.MemberDTO;
 import mumi.model.dto.NoticeDTO;
@@ -157,14 +165,59 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<ReviewDTO> userReviewRead(String pCode) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con= null;
+		PreparedStatement ps= null;
+		List<ReviewDTO> list = new ArrayList<>();
+		ResultSet rs=null;
+		
+		try {
+			con= DBUtil.getConnection();
+			ps= con.prepareStatement("select * from review where p_Code=?");
+			ps.setString(1, pCode);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				ReviewDTO dto= new ReviewDTO(
+						rs.getInt("rIndexNo"), 
+						rs.getString("pCode"),
+						rs.getString("memberID"),
+						rs.getString("rDate"),
+						rs.getString("rContent"),
+						rs.getString("rPhoto"),
+						rs.getInt("rRate"));
+				list.add(dto);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps, rs);
+		}
+		
+		return list;
 	}
 
 	@Override
 	public int userReviewInsert(ReviewDTO reviewDTO) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con=null;
+		PreparedStatement ps =null;
+		int re=0;
+		
+		try {
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("insert into review values(?,?,?,sysdate,?,?,?,)");
+			ps.setInt(1, reviewDTO.getrIndexNo());
+			ps.setString(2, reviewDTO.getpCode());
+			ps.setString(3, reviewDTO.getMemberID());
+			ps.setString(4, reviewDTO.getrContent());
+			ps.setString(5, reviewDTO.getrPhoto());
+			ps.setInt(6, reviewDTO.getrRate());
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		
+		
+		return re;
 	}
 
 	@Override
