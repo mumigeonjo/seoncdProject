@@ -18,7 +18,7 @@ public class MumiService {
 	private static MumiDAO mumiDAO = new MumiDAOImpl();
 	private static UserDAO userDAO = new UserDAOImpl();
 	
-<<<<<<< HEAD
+
 	//회원가입
 	public static int insertUser(MemberDTO memberDTO) throws SQLException{
 		int result = userDAO.insertMember(memberDTO);
@@ -107,14 +107,14 @@ public class MumiService {
 	}
 	*/
 	//1:1 문의 게시글 보기(로그인 한 유저의 글만)
-	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{
+/*	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{
 		
 		List<QADTO> list = null;
 		
 		list = userDAO.userQARead(userid);
 		
 		return list;
-	}
+	}*/
 	/*
 	//1:1 문의 게시글 상세보기(로그인 한 유저의 글만)
 	public static QADTO selectQADetailByQANO() throws SQLException{
@@ -220,5 +220,10 @@ public class MumiService {
 	public int dropUser() throws SQLException{
 		return 0;
 	
+	}*/
+
+	public static List<QADTO> selectQAByQAIndex(String userid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
