@@ -88,20 +88,20 @@ public interface MumiDAO {
 	
 	/**
 	 * 상품 추가하기
-	 * p_code, p_name, p_price, p_size, p_ea
+	 * p_code, p_name, p_price, p_size, p_date, p_ea, p_image, p_detail_image
 	 */
-	public int adminProductAllInsert(ProductDTO product) throws SQLException;
+	public int adminProductInsert(ProductDTO productDTO) throws SQLException;
 	
 	/**
 	 * 상품 수정하기
-	 * 가격, 수량을 변경할 수 있음
+	 * 가격, 수량, 상품(메인,디테일)이미지를 변경할 수 있음 p_price, p_ea, p_image, p_detail_image
 	 */
-	public int adminProductAllUpdate(ProductDTO product) throws SQLException;
+	public int adminProductUpdate(ProductDTO productDTO) throws SQLException;
 	
 	/**
 	 * 상품 삭제하기
 	 */
-	public int adminProductAllDelete(int pCode) throws SQLException;
+	public int adminProductDelete(String pCode) throws SQLException;
 	
 	/**
 	 * 회원 강퇴시키기 - cascade 옵션 추가해야 함

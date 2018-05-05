@@ -3,12 +3,10 @@ package mumi.model.service;
 import java.sql.SQLException;
 import java.util.List;
 
-
 import mumi.model.dao.MumiDAO;
 import mumi.model.dao.MumiDAOImpl;
 import mumi.model.dao.UserDAO;
 import mumi.model.dao.UserDAOImpl;
-import mumi.model.dto.MemberDTO;
 import mumi.model.dto.NoticeDTO;
 import mumi.model.dto.OrderDTO;
 import mumi.model.dto.ProductDTO;
@@ -75,14 +73,17 @@ public class MumiService {
 		return null;
 	}
 	
-	//상품 목록 보기(UserProductAllReadAction)
-	public static List<ProductDTO> selectProductAll() throws SQLException{
-		return null;
+	//상품 목록 보기(UserProductAllReadAction) -다영
+	public static List<ProductDTO> userProductAllRead() throws SQLException{
+		List<ProductDTO> list = userDAO.userProductAllRead();
+		return list;
 	}
 	
-	//상품 디테일보기(UserProductReadAction)
-	public static ProductDTO selectProductByProductCode() throws SQLException{
-		return null;
+	//상품 디테일보기(UserProductReadAction) -다영
+	public static ProductDTO userProductRead(String pCode) throws SQLException{
+		ProductDTO productDTO = userDAO.userProductRead(pCode);
+		if(productDTO==null)throw new SQLException(pCode+"에 해당하는 상품정보는 없습니다.");
+		return productDTO;
 	}
 	
 	//1:1 문의 게시글 삭제(로그인 한 유저의 글만)
@@ -94,14 +95,11 @@ public class MumiService {
 	public static int updateQA() throws SQLException{
 		return 0;
 	}
-	*/
+	
 	//1:1 문의 게시글 보기(로그인 한 유저의 글만)
-	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{
-		
-		List<QADTO> list = null;
-		
+	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{	
+		List<QADTO> list = null;	
 		list = userDAO.userQARead(userid);
-		
 		return list;
 	}
 	/*
@@ -140,8 +138,7 @@ public class MumiService {
 	
 	//모든 리뷰 게시글 읽기(로그인 한 유저의 글만)
 	public static List<ReviewDTO> userReviewRead(String pCode) throws SQLException{
-		List<ReviewDTO> list = userDAO.userReviewRead(pCode);
-		 
+		List<ReviewDTO> list = userDAO.userReviewRead(pCode); 
 		return list;
 		
 	}
@@ -168,17 +165,28 @@ public class MumiService {
 	public static List<OrderDTO> selectOrderAll() throws SQLException{
 		return null;
 	}
-	
-	//상품 추가
-	public static int insertProduct() throws SQLException{
-		return 0;
+	*/
+	//상품 추가  -다영
+	public static int adminProductInsert(ProductDTO productDTO) throws SQLException{
+		int re = mumiDAO.adminProductInsert(productDTO);
+		if(re==0)throw new SQLException("추가되지 않았습니다.");
+		return re;
 	}
 	
-	//상품 수정
-	public static int updateProduct() throws SQLException{
-		return 0;
+	//상품 수정  -다영
+	public static int adminProductUpdate(ProductDTO productDTO) throws SQLException{
+		int re = mumiDAO.adminProductUpdate(productDTO);
+		if(re==0)throw new SQLException("수정되지 않았습니다.");
+		return re;
 	}
 	
+	//상품 삭제  -다영
+	public static int adminProductDelete(String pCode) throws SQLException{
+		int re = mumiDAO.adminProductDelete(pCode);
+		if(re==0)throw new SQLException("삭제되지 않았습니다.");
+		return re;
+	}
+	/*
 	//QA 게시글 삭제
 	public static int deleteQA(QAindex) throws SQLException{
 		return 0;
@@ -192,9 +200,7 @@ public class MumiService {
 	//QA 게시글 모두 조회
 	public static List<QADTO> selectQAListAll() throws SQLException{
 		List<QADTO> list = null;
-		
-		list = mumiDAO.adminQAReadAll();
-		
+		list = mumiDAO.adminQAReadAll();	
 		return list;
 	}
 	/*

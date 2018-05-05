@@ -51,14 +51,14 @@ public interface UserDAO{
 	 * 전체상품조회 
 	 * @return 전체리스트 조회 
 	 */
-	public List<ProductDTO> goodsRead();
+	public List<ProductDTO> userProductAllRead();
 	
 	/**
 	 * 상세상품조회 
 	 * @param pCode 
 	 * @return
 	 */
-	public ProductDTO goodsDetailRead(String pCode);
+	public ProductDTO userProductRead(String pCode);
 	
 	/**
 	 * 가격별 정렬 	
