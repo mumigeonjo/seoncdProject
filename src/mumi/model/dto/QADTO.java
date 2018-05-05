@@ -3,21 +3,29 @@ package mumi.model.dto;
 public class QADTO {
 	private int bIndexNo;
 	private String memberID;
-	private String bCategory;
+	private int bCategory;
 	private String bContent;
 	private String bTitle;
 	private String bDate;
 
 	public QADTO() {
 	}
-
-	public QADTO(int bIndexNo, String memberID, String bCategory, String bContent, String bTitle, String bDate) {
-		super();
-		this.bIndexNo = bIndexNo;
+	public QADTO(String memberID, int categoryNo, String bContent, String bTitle) {
 		this.memberID = memberID;
-		this.bCategory = bCategory;
+		this.bCategory = categoryNo;
 		this.bContent = bContent;
 		this.bTitle = bTitle;
+	}
+	public QADTO(int bIndexNo, String memberID, int categoryNo, String bContent, String bTitle) {
+		
+		this(memberID,categoryNo,bContent,bTitle);
+		this.bIndexNo = bIndexNo;
+		
+		
+	}
+	
+	public QADTO(int bIndexNo, String memberID, int bCategory, String bContent, String bTitle, String bDate) {
+		this(bIndexNo,memberID,bCategory,bContent,bTitle);
 		this.bDate = bDate;
 	}
 
@@ -37,11 +45,11 @@ public class QADTO {
 		this.memberID = memberID;
 	}
 
-	public String getbCategory() {
+	public int getbCategory() {
 		return bCategory;
 	}
 
-	public void setbCategory(String bCategory) {
+	public void setbCategory(int bCategory) {
 		this.bCategory = bCategory;
 	}
 

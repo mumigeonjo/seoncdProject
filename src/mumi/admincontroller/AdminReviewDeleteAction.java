@@ -13,7 +13,7 @@ public class AdminReviewDeleteAction implements Action{
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 

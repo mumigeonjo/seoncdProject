@@ -7,7 +7,6 @@ import mumi.model.dao.MumiDAO;
 import mumi.model.dao.MumiDAOImpl;
 import mumi.model.dao.UserDAO;
 import mumi.model.dao.UserDAOImpl;
-import mumi.model.dto.MemberDTO;
 import mumi.model.dto.NoticeDTO;
 import mumi.model.dto.OrderDTO;
 import mumi.model.dto.ProductDTO;
@@ -18,6 +17,7 @@ public class MumiService {
 	private static MumiDAO mumiDAO = new MumiDAOImpl();
 	private static UserDAO userDAO = new UserDAOImpl();
 	
+<<<<<<< HEAD
 
 	//회원가입
 	public static int insertUser(MemberDTO memberDTO) throws SQLException{
@@ -45,6 +45,9 @@ public class MumiService {
 		
 	/*//장바구니 삭제
 =======
+=======
+	
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	//장바구니 삭제
 >>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	public static int deleteCart() throws SQLException{
@@ -95,14 +98,17 @@ public class MumiService {
 		return null;
 	}
 	
-	//상품 목록 보기(UserProductAllReadAction)
-	public static List<ProductDTO> selectProductAll() throws SQLException{
-		return null;
+	//상품 목록 보기(UserProductAllReadAction) -다영
+	public static List<ProductDTO> userProductAllRead() throws SQLException{
+		List<ProductDTO> list = userDAO.userProductAllRead();
+		return list;
 	}
 	
-	//상품 디테일보기(UserProductReadAction)
-	public static ProductDTO selectProductByProductCode() throws SQLException{
-		return null;
+	//상품 디테일보기(UserProductReadAction) -다영
+	public static ProductDTO userProductRead(String pCode) throws SQLException{
+		ProductDTO productDTO = userDAO.userProductRead(pCode);
+		if(productDTO==null)throw new SQLException(pCode+"에 해당하는 상품정보는 없습니다.");
+		return productDTO;
 	}
 	
 	//1:1 문의 게시글 삭제(로그인 한 유저의 글만)
@@ -114,14 +120,18 @@ public class MumiService {
 	public static int updateQA() throws SQLException{
 		return 0;
 	}
-	*/
+	
 	//1:1 문의 게시글 보기(로그인 한 유저의 글만)
+<<<<<<< HEAD
 /*	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{
 		
 		List<QADTO> list = null;
 		
+=======
+	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{	
+		List<QADTO> list = null;	
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 		list = userDAO.userQARead(userid);
-		
 		return list;
 	}*/
 	/*
@@ -133,28 +143,40 @@ public class MumiService {
 	//1:1 문의 게시글 수정(로그인 한 유저의 글만)
 	public static int updateQA() throws SQLException{
 		return 0;
-	}
+	}*/
 	
 	//리뷰 게시글 삭제(자기가 쓴 글만)
-	public static int deleteUserReview() throws SQLException{
-		return 0;
+	public static int userReviewDelete(int rIndexNo) throws SQLException{
+		 int re = userDAO.userReviewDelete(rIndexNo);
+		 if(re==0)throw new SQLException("삭제되지 않았습니다.");
+		 return re;
 	}
 	
 	//리뷰 게시글 삽입(로그인 한 유저의 글만)
-	public static int insertUserReview() throws SQLException{
-		return 0;
+	public static int userReviewInsert(ReviewDTO reviewDTO) throws SQLException{
+		 int re = userDAO.userReviewInsert(reviewDTO);
+		 if(re==0)throw new SQLException("등록되지 않았습니다.");
+		 return re;
+		
 	}
 	
 	//리뷰 게시글 수정(로그인 한 유저의 글만)
-	public static int updateUserReview() throws SQLException{
-		return 0;
+	public static int userReviewUpdate(ReviewDTO reviewDTO) throws SQLException{
+		  int re = userDAO.userReviewUpdate(reviewDTO);
+		  if(re==0)throw new SQLException("수정되지 않았습니다.");
+		  return re;
+		
 	}
 	
 	//모든 리뷰 게시글 읽기(로그인 한 유저의 글만)
-	public static List<ReviewDTO> selectUserReview() throws SQLException{
-		return null;
+	public static List<ReviewDTO> userReviewRead(String pCode) throws SQLException{
+		List<ReviewDTO> list = userDAO.userReviewRead(pCode); 
+		return list;
+		
 	}
 	
+	
+	/*
 	////////////////////////관리자 ////////////////////////////
 	//공지사항 삭제
 	public static int deleteNotice() throws SQLException{
@@ -175,17 +197,28 @@ public class MumiService {
 	public static List<OrderDTO> selectOrderAll() throws SQLException{
 		return null;
 	}
-	
-	//상품 추가
-	public static int insertProduct() throws SQLException{
-		return 0;
+	*/
+	//상품 추가  -다영
+	public static int adminProductInsert(ProductDTO productDTO) throws SQLException{
+		int re = mumiDAO.adminProductInsert(productDTO);
+		if(re==0)throw new SQLException("추가되지 않았습니다.");
+		return re;
 	}
 	
-	//상품 수정
-	public static int updateProduct() throws SQLException{
-		return 0;
+	//상품 수정  -다영
+	public static int adminProductUpdate(ProductDTO productDTO) throws SQLException{
+		int re = mumiDAO.adminProductUpdate(productDTO);
+		if(re==0)throw new SQLException("수정되지 않았습니다.");
+		return re;
 	}
 	
+	//상품 삭제  -다영
+	public static int adminProductDelete(String pCode) throws SQLException{
+		int re = mumiDAO.adminProductDelete(pCode);
+		if(re==0)throw new SQLException("삭제되지 않았습니다.");
+		return re;
+	}
+	/*
 	//QA 게시글 삭제
 	public static int deleteQA(QAindex) throws SQLException{
 		return 0;
@@ -199,9 +232,7 @@ public class MumiService {
 	//QA 게시글 모두 조회
 	public static List<QADTO> selectQAListAll() throws SQLException{
 		List<QADTO> list = null;
-		
-		list = mumiDAO.adminQAReadAll();
-		
+		list = mumiDAO.adminQAReadAll();	
 		return list;
 	}
 	/*
@@ -230,9 +261,16 @@ public class MumiService {
 		return 0;
 	
 	}*/
+<<<<<<< HEAD
 
 	public static List<QADTO> selectQAByQAIndex(String userid) {
 		// TODO Auto-generated method stub
 		return null;
+=======
+	public int adminReviewDelete(int rIndexNo) throws SQLException{
+		 int re = mumiDAO.adminReviewDelete(rIndexNo);
+		 if(re==0)throw new SQLException("삭제되지 않았습니다.");
+		 return re;
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	}
 }

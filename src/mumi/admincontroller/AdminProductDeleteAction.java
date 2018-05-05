@@ -1,36 +1,34 @@
-package mumi.usercontroller;
+package mumi.admincontroller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mumi.model.dto.ProductDTO;
 import mumi.model.service.MumiService;
+import mumi.usercontroller.Action;
+import mumi.usercontroller.ModelAndView;
 
-public class UserProductAllReadAction implements Action{
+public class AdminProductDeleteAction implements Action {
 
-	@Override //다영
+	@Override  //다영
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		String pCode = request.getParameter("pCode");
+		
 		try {
-			List<ProductDTO> list = MumiService.userProductAllRead();
-			request.setAttribute("list", list);//viewpage에서 ${list}
-			mv.setPath("?"); 
-			
-			//System.out.println(list);	
+			int result = MumiService.adminProductDelete(pCode);
+			mv.setPath("?");
+			mv.setRedirect(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			//request.setAttribute("errorMsg", e.getMessage());//뷰페이지 ${errorMsg}
-			//mv.setPath("errorView/error.jsp");			
-		}	
+			request.setAttribute("errorMsg", e.getMessage());
+		}
 		return mv;
 	}
 

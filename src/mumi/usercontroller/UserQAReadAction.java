@@ -26,6 +26,7 @@ public class UserQAReadAction implements Action{
 		String userid =(String)session.getAttribute("memberid");
 		List<QADTO> list;
 		try{
+			
 			if(userid.equals("admin")) {
 				list = MumiService.selectQAListAll();
 			}else {
