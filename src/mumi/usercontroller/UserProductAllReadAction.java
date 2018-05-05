@@ -18,7 +18,7 @@ public class UserProductAllReadAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		ModelAndView mv = new ModelAndView();
+		/*ModelAndView mv = new ModelAndView();
 		
 		try {
 			List<ProductDTO> list = MumiService.userProductAllRead();
@@ -30,8 +30,8 @@ public class UserProductAllReadAction implements Action{
 			e.printStackTrace();
 			//request.setAttribute("errorMsg", e.getMessage());//∫‰∆‰¿Ã¡ˆ ${errorMsg}
 			//mv.setPath("errorView/error.jsp");			
-		}	
-		return mv;
+		}	*/
+		return null;
 	}
 
 }

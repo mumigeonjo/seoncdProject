@@ -16,7 +16,7 @@ public class UserQAInsertAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int result =0;
+		/*int result =0;
 		HttpSession session = request.getSession();
 		ModelAndView mv=new ModelAndView();
 		
@@ -30,10 +30,10 @@ public class UserQAInsertAction implements Action{
 			
 			result = MumiService.(new QADTO(memberId,categoryNo,content,title));
 			request.setAttribute("result", result);
-			/*
+			
 			for(QADTO qaDTO:list) {
 				System.out.println(qaDTO);
-			}*/
+			}
 			
 			mv.setPath("???");
 			mv.setRedirect(false);
@@ -44,7 +44,7 @@ public class UserQAInsertAction implements Action{
 			
 			e.printStackTrace();
 			
-		}
+		}*/
 		
 		return null;
 	}

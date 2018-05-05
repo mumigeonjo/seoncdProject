@@ -446,4 +446,10 @@ public class UserDAOImpl implements UserDAO {
 		return 0;
 	}
 
+	@Override
+	public int userReviewDelete(int rIndexNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

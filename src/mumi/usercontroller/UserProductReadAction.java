@@ -16,7 +16,7 @@ public class UserProductReadAction implements Action{
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+/*		
 		ModelAndView mv = new ModelAndView();
 		
 		//모델번호 받기
@@ -32,8 +32,8 @@ public class UserProductReadAction implements Action{
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());//뷰페이지 ${errorMsg}
 			mv.setPath("errorView/error.jsp");			
-		}	
-		return mv;
+		}	*/
+		return null;
 	}
 
 }
