@@ -349,14 +349,14 @@ public class UserDAOImpl implements UserDAO {
 
 	
 	@Override
-	public int userReviewDelete(String rIndexNo) {
+	public int userReviewDelete(int rIndexNo) {
 		Connection con= null;
 		PreparedStatement ps= null;
 		int re=0;
 		try {
 			con= DBUtil.getConnection();
 			ps= con.prepareStatement("delete review where r_indexNo=?");
-			ps.setString(1, rIndexNo);
+			ps.setInt(1, rIndexNo);
 			re=ps.executeUpdate();
 			
 		}catch(SQLException e) {

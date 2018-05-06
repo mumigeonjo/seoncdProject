@@ -94,7 +94,7 @@ public class MumiService {
 	public static int updateQA() throws SQLException{
 		return 0;
 	}
-	*/
+	
 	//1:1 문의 게시글 보기(로그인 한 유저의 글만)
 	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{
 		
