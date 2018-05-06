@@ -21,6 +21,7 @@ public class MumiService {
 	// 회원가입
 	public static int insertUser(MemberDTO memberDTO) throws SQLException {
 		int result = userDAO.insertMember(memberDTO);
+		if(result==0) {throw new SQLException();}
 		return result;
 	}
 
