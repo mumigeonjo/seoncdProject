@@ -249,7 +249,7 @@ public class MumiService {
 	 * }
 	 */
 
-	public int adminReviewDelete(int rIndexNo) throws SQLException {
+	public static int adminReviewDelete(int rIndexNo) throws SQLException {
 		int re = mumiDAO.adminReviewDelete(rIndexNo);
 		if (re == 0) {
 			throw new SQLException("삭제되지 않았습니다.");
@@ -292,5 +292,10 @@ public class MumiService {
 	public static int adminUserDelete(String memberID) throws SQLException {
 		int result=mumiDAO.adminUserDelete(memberID);
 		return result;
+	}
+
+	public static List<ReviewDTO> userReviewRead(String pCode) {
+		List<ReviewDTO> list = userDAO.userReviewRead(pCode);
+		return list;
 	}
 }

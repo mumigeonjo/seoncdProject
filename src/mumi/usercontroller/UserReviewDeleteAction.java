@@ -18,24 +18,33 @@ public class UserReviewDeleteAction implements Action{
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView();
-		int rIndexNo = (int)session.getAttribute("rIndexNo");
+		String memberId = (String)session.getAttribute("id");
+			if(memberId=="user") {
+				int rIndexNo = Integer.parseInt(request.getParameter("rIndexNo"));
+
+				try {
+					int result = MumiService.userReviewDelete(rIndexNo);
+					if(result>0) {
+						mv.setPath("???");
+						mv.setRedirect(false);
+					}else {
+						throw new SQLException("리뷰삭제에 실패했습니다.");
+
+					}
+				}catch(SQLException e){
+					e.printStackTrace();
+					request.setAttribute("errorMsg", e.getMessage());
+					mv.setPath("404.html");
+				}
+			}else {
+				mv.setPath("index.jsp");
+				mv.setRedirect(true);
+			}
 		
-		PrintWriter out = response.getWriter();
-		out.println(session);
-		
-		try {
-			int result = MumiService.userReviewDelete(rIndexNo);
-			session.setAttribute("result", result); 
-			
-			mv.setPath("???");
-			mv.setRedirect(false);
-			return mv;
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-			
-		return null;
 	
+
+		return mv;
+
 	}
 
 }

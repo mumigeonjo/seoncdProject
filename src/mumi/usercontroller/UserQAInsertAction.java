@@ -16,7 +16,7 @@ public class UserQAInsertAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int result =0;
+/*		int result =0;
 		HttpSession session = request.getSession();
 		ModelAndView mv=new ModelAndView();
 		
@@ -44,7 +44,7 @@ public class UserQAInsertAction implements Action{
 			
 			e.printStackTrace();
 			
-		}
+		}*/
 		
 		return null;
 	}

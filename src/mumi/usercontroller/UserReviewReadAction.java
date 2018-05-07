@@ -1,6 +1,7 @@
 package mumi.usercontroller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -19,33 +20,21 @@ public class UserReviewReadAction implements Action{
 			throws ServletException, IOException {
 		
 		ModelAndView mv = new ModelAndView();
-		HttpSession session = request.getSession();
-		String pcode =(String)session.getAttribute("pcode");
-		List<ReviewDTO> list;
+		String pCode = request.getParameter("pCode");
+		try {
+			List<ReviewDTO> list= MumiService.userReviewRead(pCode);
+			request.setAttribute("list", list);
+			mv.setPath("reviewResult.jsp");
+			mv.setRedirect(false);
+		}catch(Exception e) {
+			e.printStackTrace();
+			mv.setPath("404.html");
+			mv.setRedirect(true);
+		}
 		
-		if (userid.equals("admin")) {
-			list = MumiService.selectQAListAll();
-		} else {
-			list = MumiService.selectQAByQAIndex(userid);
-		}
-		request.setAttribute("list", list);
-
-		for (QADTO qaDTO : list) {
-			System.out.println(qaDTO);
-		}
-
-		mv.setPath("???");
-		mv.setRedirect(false);
 		return mv;
-
-	} catch (Exception e) {
-
-		e.printStackTrace();
-
 	}
-
-	return null;
-		return null;
-	}
-
 }
+	
+
+

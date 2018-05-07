@@ -342,10 +342,17 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(1, pCode);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				ReviewDTO dto = new ReviewDTO(rs.getInt("rIndexNo"), rs.getString("pCode"), rs.getString("memberID"),
-						rs.getString("rDate"), rs.getString("rContent"), rs.getString("rPhoto"), rs.getInt("rRate"));
+				ReviewDTO dto= new ReviewDTO(Integer.parseInt(rs.getString(1)),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getString(6),
+						Integer.parseInt(rs.getString(7)));
+				System.out.println(dto);
 				list.add(dto);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -388,7 +395,7 @@ public class UserDAOImpl implements UserDAO {
 		int re = 0;
 		try {
 			con = DBUtil.getConnection();
-			ps = con.prepareStatement("update review set pCode=?, sysdate, rContent=?, rPhoto=?, rRate=? ");
+			ps = con.prepareStatement("update review set pCode=?, sysdate, rContent=?, rPhoto=?, rRate=? where member_id=?");
 			ps.setString(1, reviewDTO.getpCode());
 			ps.setString(2, reviewDTO.getrContent());
 			ps.setString(3, reviewDTO.getrPhoto());
