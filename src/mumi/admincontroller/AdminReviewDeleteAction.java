@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import mumi.model.service.MumiService;
 import mumi.usercontroller.Action;
@@ -16,17 +17,23 @@ public class AdminReviewDeleteAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		MumiService service= new MumiService();
+		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView();
-		int rIndexNo = Integer.parseInt(request.getParameter("rIndexNo"));
+		int rIndexNo = (int)session.getAttribute("rIndexNo");
+		
 		
 		try {
-			int re= service.adminReviewDelete(rIndexNo);
+			int result = MumiService.adminReviewDelete(rIndexNo);
+			session.setAttribute("result", result); 
+			
+			mv.setPath("???");
+			mv.setRedirect(false);
+			return mv;
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
 			
-		return mv;
+		return null;
 		
 	}
 

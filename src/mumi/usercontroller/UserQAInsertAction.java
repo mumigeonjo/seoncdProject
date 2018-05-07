@@ -30,10 +30,10 @@ public class UserQAInsertAction implements Action{
 			
 			result = MumiService.(new QADTO(memberId,categoryNo,content,title));
 			request.setAttribute("result", result);
-			/*
-			for(QADTO qaDTO:list) {
-				System.out.println(qaDTO);
-			}*/
+			
+//			for(QADTO qaDTO:list) {
+//				System.out.println(qaDTO);
+//			}
 			
 			mv.setPath("???");
 			mv.setRedirect(false);

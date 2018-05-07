@@ -1,7 +1,7 @@
 package mumi.model.dto;
 
 public class ProductDTO {
-	private int pCode;
+	private String pCode;
 	private String pName;
 	private int pPrice;
 	private String pSize;
@@ -10,10 +10,9 @@ public class ProductDTO {
 	private String pImage;
 	private String pDetailImage;
 
-	public ProductDTO() {
-	}
+	public ProductDTO() {}
 
-	public ProductDTO(int pCode, String pName, int pPrice, String pSize, String pDate, int pEA, String pImage,
+	public ProductDTO(String pCode, String pName, int pPrice, String pSize, String pDate, int pEA, String pImage,
 			String pDetailImage) {
 		super();
 		this.pCode = pCode;
@@ -25,12 +24,22 @@ public class ProductDTO {
 		this.pImage = pImage;
 		this.pDetailImage = pDetailImage;
 	}
+	
+	//AdminProductUpdate
+	public ProductDTO(String pCode, int pPrice, int pEA, String pImage,	String pDetailImage) {
+		super();
+		this.pCode = pCode;
+		this.pPrice = pPrice;
+		this.pEA = pEA;
+		this.pImage = pImage;
+		this.pDetailImage = pDetailImage;
+	}
 
-	public int getpCode() {
+	public String getpCode() {
 		return pCode;
 	}
 
-	public void setpCode(int pCode) {
+	public void setpCode(String pCode) {
 		this.pCode = pCode;
 	}
 

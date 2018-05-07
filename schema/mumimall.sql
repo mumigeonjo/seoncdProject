@@ -6,7 +6,7 @@ drop table order_detail;
 drop table product;
 drop table member;
 
-commit;
+commit
 
 --create table
 create table member(
