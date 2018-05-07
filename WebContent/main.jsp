@@ -19,6 +19,7 @@
 </head>
 
 <body>
+${sessionScope.id }님 환영합니다.
 	<!-- Navigation 1 -->
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -35,14 +36,19 @@
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
+					<% if(session.getAttribute("id")==null){ %>
 					<li class="nav-item"><a class="nav-link" href="loginForm.jsp">Login</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="register.jsp">Register</a>
+					</li>
+					<%}else{  %>
+					<li class="nav-item"><a class="nav-link" href="./mumi?command=userLogout">LogOut</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="contact.html">Mypage</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="contact.html">Cart</a>
 					</li>
+					<%} %>
 
 					<!--             
             <li class="nav-item dropdown">

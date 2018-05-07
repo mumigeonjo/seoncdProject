@@ -23,13 +23,13 @@ public class UserJoinAction implements Action {
 			String phone = request.getParameter("phone");
 			String addr = request.getParameter("addr");
 
-			if (id == null || pwd == null || name == null || phone == null || addr == null ) {
+			if (id == null || pwd == null || name == null || phone == null || addr == null) {
 				throw new SQLException("입력값이 충분하지 않습니다.");
 			}
 
 			int result = MumiService.insertUser(new MemberDTO(id, pwd, name, phone, addr, 0));
-			System.out.println(result);
-			if(result>0) {
+
+			if (result > 0) {
 				mv.setPath("index.html");
 				mv.setRedirect(true);
 			}
