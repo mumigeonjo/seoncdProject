@@ -13,6 +13,7 @@ import mumi.model.dto.NoticeDTO;
 import mumi.model.dto.OrderDTO;
 import mumi.model.dto.ProductDTO;
 import mumi.model.dto.QADTO;
+import mumi.model.dto.QAReplyDTO;
 import mumi.model.dto.ReviewDTO;
 
 public class MumiService {
@@ -84,17 +85,26 @@ public class MumiService {
 	public static ProductDTO selectProductByProductCode() throws SQLException{
 		return null;
 	}
+	//////////////////////////////qa//////////////////////
 	
 	//1:1 문의 게시글 삭제(로그인 한 유저의 글만)
-	public static int deleteQA() throws SQLException{
-		return 0;
+	public static int deleteQA(int bIndexNo) throws SQLException{
+		int result = 0;
+		
+		result = userDAO.userQADelete(bIndexNo);
+		if(result==0)throw new SQLException("업데이트되지 않았습니다.");
+		return result;
 	}
 	
 	//1:1 문의 게시글 수정(로그인 한 유저의 글만)
-	public static int updateQA() throws SQLException{
-		return 0;
+	public static int updateQA(QADTO qaDTO) throws SQLException{
+		int result = 0;
+		
+		result = userDAO.userQAUpdate(qaDTO);
+		if(result==0)throw new SQLException("업데이트되지 않았습니다.");
+		return result;
 	}
-	*/
+	
 	//1:1 문의 게시글 보기(로그인 한 유저의 글만)
 	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{
 		
@@ -104,16 +114,26 @@ public class MumiService {
 		
 		return list;
 	}
-	/*
+	
 	//1:1 문의 게시글 상세보기(로그인 한 유저의 글만)
-	public static QADTO selectQADetailByQANO() throws SQLException{
-		return null;
+	public static QADTO selectQADetailByQANO(int bIndexNo) throws SQLException{
+		QADTO qaDTO = null;
+		qaDTO = userDAO.userQAReadForUpdate(bIndexNo);
+		
+		return qaDTO;
 	}
 	
-	//1:1 문의 게시글 수정(로그인 한 유저의 글만)
-	public static int updateQA() throws SQLException{
-		return 0;
-	}*/
+	//1:1문의 게시글 삽입하기 
+	public static int insertQA(QADTO qaDTO) throws SQLException{
+		int result = 0;
+		
+		result = userDAO.userQAInsert(qaDTO);
+		if(result==0)throw new SQLException("업데이트되지 않았습니다.");
+		return result;
+	}
+	
+	
+	///////////////////////////////review//////////////
 	
 	//리뷰 게시글 삭제(자기가 쓴 글만)
 	public static int userReviewDelete(int rIndexNo) throws SQLException{
@@ -178,17 +198,27 @@ public class MumiService {
 	public static int updateProduct() throws SQLException{
 		return 0;
 	}
-	
-	//QA 게시글 삭제
-	public static int deleteQA(QAindex) throws SQLException{
-		return 0;
+	*/
+	//QA답글조회
+	public static QAReplyDTO readAnswer(int bIndexNo) throws SQLException{
+		QAReplyDTO qaReplyDTO = null;
+		
+		qaReplyDTO = mumiDAO.adminQAReplyReadDetail(bIndexNo);
+		
+		return qaReplyDTO;
 	}
+	
+	
 	
 	//QA 답글 삽입
-	public static int insertAnswer() throws SQLException{
-		return 0;
+	public static int insertAnswer(QAReplyDTO qaReplyDTO) throws SQLException{
+		int result = 0;
+		
+		result = mumiDAO.adminQAReplyInsert(qaReplyDTO);
+		if(result==0)throw new SQLException("업데이트되지 않았습니다.");
+		return result;
 	}
-	*/
+	
 	//QA 게시글 모두 조회
 	public static List<QADTO> selectQAListAll() throws SQLException{
 		List<QADTO> list = null;
@@ -197,22 +227,26 @@ public class MumiService {
 		
 		return list;
 	}
-	/*
-	//QA 게시글 디테일 조회
-	public static QADTO selectQADetail() throws SQLException{
-		return null;
-	}
 	
 	//QA 답글 수정
-	public static int updateAnswer() throws SQLException{
-		return 0;
+	public static int updateAnswer(QAReplyDTO qaReplyDTO) throws SQLException{
+		int result = 0;
+		
+		result = mumiDAO.adminQAReplyUpdate(qaReplyDTO);
+		if(result==0)throw new SQLException("업데이트되지 않았습니다.");
+		return result;
 	}
 	
 	//QA 답글 삭제
-	public static int deleteAnswer() throws SQLException{
-		return 0;
+	public static int deleteAnswer(int qIndexNo) throws SQLException{
+		int result = 0;
+		
+		result = mumiDAO.adminQAReplyDelete(qIndexNo);
+		if(result==0)throw new SQLException("삭제되지 않았습니다.");
+		return result;
 	}
 	
+	/*
 	//회원정보 모두 보기
 	public List<MemberDTO> selectAllUser() throws SQLException{
 		return null;

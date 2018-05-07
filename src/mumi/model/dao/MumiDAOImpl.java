@@ -69,33 +69,116 @@ public class MumiDAOImpl implements MumiDAO {
 
 	@Override
 	public int adminQAReplyInsert(QAReplyDTO reply) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con=null;
+		PreparedStatement ps =null;
+		int re=0;
+		
+		try {
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("insert into qa_reply values(qa_reply_seq.nextval,?,sysdate,?)");
+			
+			ps.setInt(1, reply.getbIndexNo());
+			ps.setString(2, reply.getqContent());
+			
+			re=ps.executeUpdate();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		
+		
+		return re;
 	}
+
 
 	@Override
 	public int adminQAReplyUpdate(QAReplyDTO reply) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result=0;
+
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("update QA_Reply set q_date=sysdate,q_content=?) "
+					+ "  where q_indexNo=?");
+			
+			ps.setString(1, reply.getqContent());
+			ps.setInt(2, reply.getqIndexNo());
+			
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, ps);
+		}
+
+		return result;
 	}
 
 	@Override
 	public int adminQAReplyDelete(int qIndexNo) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		int result=0;
+
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("delete QA_reply where q_indexNo=?");
+			ps.setInt(1, qIndexNo);
+			// ??의 순서대로 개수만큼 setXxx( , ) 작성
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, ps);
+		}
+
+		return result;
 	}
 
+	
+/*user꺼로 사용한다.
 	@Override
 	public QADTO adminQAReadDetail() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	@Override
-	public QAReplyDTO adminQAReplyReadDetail() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public QAReplyDTO adminQAReplyReadDetail(int bIndexNo) throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		QAReplyDTO qReplyDTO=null;
+
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("select q_date, q_content from QA_Reply where b_indexNo=?");
+			ps.setInt(1, bIndexNo);
+			// ??의 순서대로 개수만큼 setXxx( , ) 작성
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				qReplyDTO = new QAReplyDTO(rs.getString(1), rs.getString(2));
+				
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, ps, rs);
+		}
+
+		return qReplyDTO;
 	}
+
 
 	@Override
 	public int adminReviewDelete(int rIndexNo) throws SQLException {
@@ -115,7 +198,7 @@ public class MumiDAOImpl implements MumiDAO {
 			DBUtil.dbClose(con, ps);
 		}
 		
-		return 0;
+		return re;
 	}
 
 	@Override

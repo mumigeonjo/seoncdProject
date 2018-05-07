@@ -28,7 +28,7 @@ public class UserQAInsertAction implements Action{
 		
 		try{
 			
-			result = MumiService.(new QADTO(memberId,categoryNo,content,title));
+			result = MumiService.insertQA(new QADTO(memberId,categoryNo,content,title));
 			request.setAttribute("result", result);
 			/*
 			for(QADTO qaDTO:list) {

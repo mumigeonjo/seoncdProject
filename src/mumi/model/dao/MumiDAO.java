@@ -72,7 +72,7 @@ public interface MumiDAO {
 	/**
 	 * QA 자세히 읽기- 리뷰 부분만 가져오는 메소드(추가)
 	 */
-	public QAReplyDTO adminQAReplyReadDetail() throws SQLException;
+	public QAReplyDTO adminQAReplyReadDetail(int bIndexNo) throws SQLException;
 	
 	/**
 	 * 리뷰 삭제하기

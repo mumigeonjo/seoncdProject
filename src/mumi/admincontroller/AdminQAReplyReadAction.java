@@ -14,6 +14,7 @@ public class AdminQAReplyReadAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//detail로 바로 읽는다.
 		return null;
 	}
 
