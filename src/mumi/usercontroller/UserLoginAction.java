@@ -19,12 +19,13 @@ public class UserLoginAction implements Action{
 		ModelAndView mv = new ModelAndView();
 		try {
 		HttpSession session = request.getSession();
-		String id = request.getParameter("memberID");
+		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-		
+
 		if(id==null || pwd==null) {
 			throw new SQLException("정보를 입력하고 이용하세요");
 		}
+		
 		
 		MemberDTO dto=MumiService.selectUserById(id, pwd);
 		
@@ -33,7 +34,7 @@ public class UserLoginAction implements Action{
 		}
 		
 		session.setAttribute("id", dto.getMemberID());
-		mv.setPath("index.html");
+		mv.setPath("main.jsp");
 		mv.setRedirect(false);
 		
 		

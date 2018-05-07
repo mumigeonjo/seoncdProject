@@ -442,8 +442,27 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public int insertMember(MemberDTO memberDTO) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("insert into member values(?,?,?,?,?,?)");
+			ps.setString(1, memberDTO.getMemberID());
+			ps.setString(2, memberDTO.getPwd());
+			ps.setString(3, memberDTO.getName());
+			ps.setString(4, memberDTO.getPhone());
+			ps.setString(5, memberDTO.getAddr());
+			ps.setInt(6, memberDTO.getIsMGR());
+			result=ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(con, ps);
+		}
+
+		return result;
 	}
 
 	
