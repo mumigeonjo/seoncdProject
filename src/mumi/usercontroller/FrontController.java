@@ -28,7 +28,7 @@ public class FrontController extends HttpServlet {
 		String key = request.getParameter("command");
 		if (key == null) {
 			key = "main";
-		}
+		} 
 
 		// map에서 key에 해당하는 클래스를 꺼내서 메소드를 호출하고 리턴값을 받는다.
 		ModelAndView mv = map.get(key).execute(request, response);

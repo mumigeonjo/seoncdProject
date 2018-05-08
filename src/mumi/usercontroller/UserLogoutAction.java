@@ -1,20 +1,23 @@
-package mumi.admincontroller;
+package mumi.usercontroller;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import mumi.usercontroller.Action;
-import mumi.usercontroller.ModelAndView;
-public class AdminProductAllInsertAction implements Action{
+public class UserLogoutAction implements Action{
 
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession();
+		session.invalidate();
+		mv.setPath("main.jsp");
+		mv.setRedirect(true);
+		return mv;
 	}
 
 }
