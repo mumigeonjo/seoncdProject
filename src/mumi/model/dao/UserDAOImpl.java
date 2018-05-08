@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-import com.sun.media.sound.PCMtoPCMCodec;
 
 import mumi.model.dto.CartDTO;
 import mumi.model.dto.MemberDTO;
@@ -285,10 +283,31 @@ public class UserDAOImpl implements UserDAO {
 		return updateResult;
 	}
 
-	@Override
+	@Override //Áö¾È
 	public List<NoticeDTO> noticeRead() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;	
+		List<NoticeDTO> list = new ArrayList<NoticeDTO>();
+		String sql="select * from notice";
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				NoticeDTO dto = new NoticeDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
+				System.out.println(rs.getString(1));
+				
+				list.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps, rs);
+		}
+		
+		return list;
 	}
 
 	@Override
@@ -461,7 +480,7 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps = null;
 		List<ReviewDTO> list = new ArrayList<>();
 		ResultSet rs = null;
-
+		
 		try {
 			con = DBUtil.getConnection();
 			ps = con.prepareStatement("select * from review where p_Code=?");
@@ -551,7 +570,12 @@ public class UserDAOImpl implements UserDAO {
 		return re;
 	}
 
+<<<<<<< HEAD
 	@Override
+=======
+
+	@Override
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	public int userLeave(String id) {
 		Connection con = null;
 		PreparedStatement ps = null;

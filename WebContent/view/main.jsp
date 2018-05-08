@@ -41,6 +41,7 @@
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
+<<<<<<< HEAD
 					<%
 						if (session.getAttribute("id") == null) {
 					%>
@@ -49,6 +50,10 @@
 						href="${pageContext.request.contextPath}/view/loginForm.jsp">로그인</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/view/register.jsp">회원가입</a>
+=======
+					<% if(session.getAttribute("id")==null){ %>
+					<li class="nav-item"><a class="nav-link" href="view/loginForm.jsp">Login</a>
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 					</li>
 					<%
 						} else {
@@ -175,7 +180,7 @@
 							Community </a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="blog-home-1.html">Notice</a> <a
+							<a class="dropdown-item" href="mumi?command=noticeRead">Notice</a> <a
 								class="dropdown-item" href="blog-home-2.html">Blog Home 2</a> <a
 								class="dropdown-item" href="blog-post.html">Blog Post</a>
 						</div></li>
