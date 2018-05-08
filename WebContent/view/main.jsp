@@ -158,7 +158,7 @@ ${sessionScope.id }님 환영합니다.
 							Customer Support </a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="full-width.html">Info</a> <a
+							<a class="dropdown-item" href="Info.html">Info</a> <a
 								class="dropdown-item" href="sidebar.html">Sidebar Page</a> <a
 								class="dropdown-item" href="faq.html">FAQ</a> <a
 								class="dropdown-item" href="404.html">404</a> <a
