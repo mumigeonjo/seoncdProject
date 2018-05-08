@@ -583,6 +583,7 @@ public class UserDAOImpl implements UserDAO {
 		return re;
 	}
 
+
 	@Override
 	public int userLeave(String id) {
 		Connection con = null;

@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post" action="./mumi?command=userReviewRead">
+<form method="post" action="../mumi?command=userReviewRead">
 <input type="text" id="pCode" name="pCode"/>
-<button>제출</button>
+<button>�젣異�</button>
 </form>
 
 
