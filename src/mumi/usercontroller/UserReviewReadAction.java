@@ -18,13 +18,13 @@ public class UserReviewReadAction implements Action{
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		ModelAndView mv = new ModelAndView();
 		String pCode = request.getParameter("pCode");
 		try {
 			List<ReviewDTO> list= MumiService.userReviewRead(pCode);
 			request.setAttribute("list", list);
-			mv.setPath("reviewResult.jsp");
+			mv.setPath("view/reviewResult.jsp");
 			mv.setRedirect(false);
 		}catch(Exception e) {
 			e.printStackTrace();

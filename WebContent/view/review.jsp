@@ -9,7 +9,7 @@
 <body>
 <form method="post" action="../mumi?command=userReviewRead">
 <input type="text" id="pCode" name="pCode"/>
-<button>�젣異�</button>
+<button>제출</button>
 </form>
 
 

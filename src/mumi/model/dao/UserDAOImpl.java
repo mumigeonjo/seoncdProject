@@ -489,7 +489,7 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps = null;
 		List<ReviewDTO> list = new ArrayList<>();
 		ResultSet rs = null;
-
+		
 		try {
 			con = DBUtil.getConnection();
 			ps = con.prepareStatement("select * from review where p_Code=?");
