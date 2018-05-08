@@ -12,7 +12,7 @@ public class MoveMainAction implements Action {
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ModelAndView mv = new ModelAndView();
-		mv.setPath("main.jsp");
+		mv.setPath("/view/main.jsp");
 		mv.setRedirect(false);
 		return mv;
 	}
