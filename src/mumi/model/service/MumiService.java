@@ -18,51 +18,50 @@ import mumi.model.dto.ReviewDTO;
 public class MumiService {
 	private static MumiDAO mumiDAO = new MumiDAOImpl();
 	private static UserDAO userDAO = new UserDAOImpl();
-<<<<<<< HEAD
+
 	
 	/**장바구니 삭제
 	 */
 	public static int deleteCart(int oIndexNo) throws SQLException{
-		if(userDAO.cartDelete(oIndexNo)==0)
+		int result=userDAO.cartDelete(oIndexNo);
+		if(result==0)
 			throw new SQLException("삭제 실패");
-=======
+		return result;
+	}
 
 	// 회원가입
 	public static int insertUser(MemberDTO memberDTO) throws SQLException {
 		int result = userDAO.insertMember(memberDTO);
 		if(result==0) {throw new SQLException();}
 		return result;
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	}
-<<<<<<< HEAD
 	
 	/**장바구니 삽입
 	 */
 	public static int insertCart(OrderDTO orderDTO) throws SQLException{
-		if(userDAO.cartInsert(orderDTO)==0)
+		int result = userDAO.cartInsert(orderDTO);
+		if(result==0)
 			throw new SQLException("장바구니 추가 실패");
-=======
+		return result;
+	}
 
 	// 로그인
 	public static MemberDTO selectUserById(String id, String pwd) throws SQLException {
 		MemberDTO memberDTO = userDAO.loginFunction(id, pwd);
 		return memberDTO;
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	}
-<<<<<<< HEAD
 	
 	/**장바구니 읽기
 	 */
 	public static List<CartDTO> readCart(String id) throws SQLException{
 		return userDAO.cartShowAll(id);
 		//널이어도 상관 없음. 아무것도 출력 안 할 거야.
-=======
+	}
 
 	// 회원탈퇴
 	public static int deleteUserById(String id) throws SQLException {
 		int result = userDAO.userLeave(id);
 		return result;
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	}
 
 	// 회원정보수정
@@ -256,8 +255,7 @@ public class MumiService {
 			throw new SQLException("삭제되지 않았습니다.");
 		return re;
 	}
-<<<<<<< HEAD
-	
+
 	//리뷰 게시글 삽입(로그인 한 유저의 글만)
 	public static int insertUserReview() throws SQLException{
 		return 0;
@@ -288,7 +286,7 @@ public class MumiService {
 	public static int updateNotice() throws SQLException{
 		return 0;
 	}
-	*/
+	
 	//모든 주문내역 보기
 	public static List<OrderDTO> selectOrderAll() throws SQLException{
 		return mumiDAO.adminOrderListRead();
@@ -315,10 +313,6 @@ public class MumiService {
 		return 0;
 	}
 	*/
-	//QA 게시글 모두 조회
-	public static List<QADTO> selectQAListAll() throws SQLException{
-=======
-
 	/*
 	 * //QA 게시글 삭제 public static int deleteQA(QAindex) throws SQLException{ return
 	 * 0; }
@@ -327,7 +321,7 @@ public class MumiService {
 	 */
 	// QA 게시글 모두 조회
 	public static List<QADTO> selectQAListAll() throws SQLException {
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
+
 		List<QADTO> list = null;
 		list = mumiDAO.adminQAReadAll();
 		return list;
