@@ -205,7 +205,9 @@ public interface UserDAO {
 	 * 
 	 * @return 리스트로 리턴해준다. 전역변수에 저장되어있는 MemberID를 불러와서 조회한다.
 	 */
+
 	public List<QADTO> userQARead(String memberID);
+
 
 	/**
 	 * Q&A게시판 등록 메소드
