@@ -249,7 +249,7 @@ ${sessionScope.id }님 환영합니다.
 			</div>
 			<br>
 			<div class="col-lg-6">
-				<img class="img-fluid rounded" src="img/P004.jpg" alt="">
+				<a href="${pageContext.request.contextPath}/view/productDetail.jsp"><img class="img-fluid rounded" src="img/P004.jpg" alt="" >></a>
 			</div>
 			<br>
 		</div>

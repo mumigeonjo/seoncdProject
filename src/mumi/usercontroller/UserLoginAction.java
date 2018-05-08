@@ -34,7 +34,7 @@ public class UserLoginAction implements Action{
 		}
 		
 		session.setAttribute("id", dto.getMemberID());
-		mv.setPath("main.jsp");
+		mv.setPath("view/main.jsp");
 		mv.setRedirect(false);
 		
 		

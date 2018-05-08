@@ -524,13 +524,12 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			con = DBUtil.getConnection();
-			ps = con.prepareStatement("insert into review values(?,?,?,sysdate,?,?,?,)");
-			ps.setInt(1, reviewDTO.getrIndexNo());
-			ps.setString(2, reviewDTO.getpCode());
-			ps.setString(3, reviewDTO.getMemberID());
-			ps.setString(4, reviewDTO.getrContent());
-			ps.setString(5, reviewDTO.getrPhoto());
-			ps.setInt(6, reviewDTO.getrRate());
+			ps = con.prepareStatement("insert into review values(review_seq.nextval,?,?,sysdate,?,?,?)");
+			ps.setString(1, reviewDTO.getpCode());
+			ps.setString(2, reviewDTO.getMemberID());
+			ps.setString(3, reviewDTO.getrContent());
+			ps.setString(4, reviewDTO.getrPhoto());
+			ps.setInt(5, reviewDTO.getrRate());
 			re = ps.executeUpdate();
 
 		} catch (SQLException e) {
