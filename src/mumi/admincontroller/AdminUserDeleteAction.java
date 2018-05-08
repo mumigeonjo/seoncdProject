@@ -23,11 +23,15 @@ public class AdminUserDeleteAction implements Action {
 			String id = (String) session.getAttribute("id");
 			String memberID=request.getParameter("memberID");
 
-			if (id != "admin") {
+			if (!id.equals("admin")) {
 				throw new Exception("관리자로 로그인하고 이용하세요");
 			}
 			
 			int result = MumiService.adminUserDelete(memberID);
+			
+			if(result>0) {
+				mv.setPath("mumi?command=adminSelectAllMember");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

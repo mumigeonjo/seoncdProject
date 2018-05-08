@@ -6,31 +6,31 @@ import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import mumi.model.dto.MemberDTO;
 import mumi.model.service.MumiService;
 
-public class UserUpdateAction implements Action {
+public class UserUpdateFormAction implements Action {
 
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		ModelAndView mv = new ModelAndView();
 		try {
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
-		String name = request.getParameter("name");
-		String phone = request.getParameter("phone");
-		String addr = request.getParameter("addr");
+			HttpSession session = request.getSession();
+			String id = (String) session.getAttribute("id");
 
-		if (id==null || pwd == null || name == null || phone == null || addr == null) {
-			throw new SQLException("입력값이 충분하지 않습니다.");
-		}
-		int result = MumiService.updateUser(new MemberDTO(id, pwd, name, phone, addr, 0));
-		System.out.println(result);
-		mv.setPath("index.html");
-		
-		}catch(Exception e) {
+			if (id == null) {
+				throw new SQLException("로그인하고 이용해주세요.");
+			}
+
+			MemberDTO dto = MumiService.userUpdateForm(id);
+			request.setAttribute("dto", dto);
+			mv.setPath("view/myPage.jsp");
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());
 			mv.setPath("404.html");

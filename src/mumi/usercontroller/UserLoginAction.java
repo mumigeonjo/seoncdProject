@@ -41,7 +41,7 @@ public class UserLoginAction implements Action{
 		}catch(Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());
-			mv.setPath("404.html");
+			mv.setPath("view/404.html");
 		}
 		return mv;
 	}
