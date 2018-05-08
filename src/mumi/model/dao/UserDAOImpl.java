@@ -128,10 +128,6 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
-	@Override
-	public List<QADTO> userQARead() {
-		// TODO Auto-generated method stub
-		return null;
 	public List<QADTO> userQARead(String memberid) {
 
 		Connection conn = null;
@@ -369,5 +365,15 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return re;
 	}
+
+
+	@Override
+	public int insertMember(MemberDTO memberDTO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
 
 }
