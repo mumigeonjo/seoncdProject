@@ -23,8 +23,9 @@ public class UserReviewReadAction implements Action{
 		String pCode = request.getParameter("pCode");
 		try {
 			List<ReviewDTO> list= MumiService.userReviewRead(pCode);
+			System.out.println(list);
 			request.setAttribute("list", list);
-			mv.setPath("view/reviewResult.jsp");
+			mv.setPath("view/productDetail.jsp");
 			mv.setRedirect(false);
 		}catch(Exception e) {
 			e.printStackTrace();
