@@ -107,5 +107,6 @@ public interface MumiDAO {
 	 * 회원 강퇴시키기 - cascade 옵션 추가해야 함
 	 */
 	public int adminUserDelete(String memberID) throws SQLException;
+	
 
 }

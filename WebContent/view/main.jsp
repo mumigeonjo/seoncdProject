@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,21 +11,25 @@
 <meta name="author" content="">
 
 <title>Modern Business - Start Bootstrap Template</title>
-
+<c:set var="path" value="${pageContext.request.contextPath}"
+	scope="application" />
 <!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="css/modern-business.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/modern-business.css"
+	rel="stylesheet">
 </head>
 
 <body>
-${sessionScope.id }님 환영합니다.
 	<!-- Navigation 1 -->
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">MuMiGeonJo-BACKPACKS</a>
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath}/index.html">MuMiGeonJo-BACKPACKS</a>
 
 
 			<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -36,19 +41,46 @@ ${sessionScope.id }님 환영합니다.
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
+<<<<<<< HEAD
+					<%
+						if (session.getAttribute("id") == null) {
+					%>
+
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/view/loginForm.jsp">로그인</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/view/register.jsp">회원가입</a>
+=======
 					<% if(session.getAttribute("id")==null){ %>
 					<li class="nav-item"><a class="nav-link" href="view/loginForm.jsp">Login</a>
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 					</li>
-					<li class="nav-item"><a class="nav-link" href="register.jsp">Register</a>
-					</li>
-					<%}else{  %>
-					<li class="nav-item"><a class="nav-link" href="./mumi?command=userLogout">LogOut</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="contact.html">Mypage</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="contact.html">Cart</a>
-					</li>
-					<%} %>
+					<%
+						} else {
+					%>
+					<h5>${sessionScope.id }님환영합니다.</h5>
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/mumi?command=userLogout">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/mumi?command=userUpdateForm">회원정보
+							수정</a></li>
+					<%
+						if (session.getAttribute("id").equals("admin")) {
+					%>
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/mumi?command=adminSelectAllMember">모든회원 조회</a></li>
+					<%
+						} else {
+					%>
+
+
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/cartRead">장바구니</a></li>
+
+					<%
+						}
+						}
+					%>
 
 					<!--             
             <li class="nav-item dropdown">
@@ -186,7 +218,7 @@ ${sessionScope.id }님 환영합니다.
 			<div class="carousel-inner" role="listbox">
 				<!-- Slide One - Set the background image for this slide in the line below -->
 				<div class="carousel-item active"
-					style="background-image: url('img/home2.PNG')">
+					style="background-image: url('${pageContext.request.contextPath}/img/home2.PNG')">
 					<div class="carousel-caption d-none d-md-block">
 						<h3>캠핑</h3>
 						<p>This is a description for the first slide.</p>
@@ -194,7 +226,7 @@ ${sessionScope.id }님 환영합니다.
 				</div>
 				<!-- Slide Two - Set the background image for this slide in the line below -->
 				<div class="carousel-item"
-					style="background-image: url('img/home3.png')">
+					style="background-image: url('${pageContext.request.contextPath}/img/home3.png')">
 					<div class="carousel-caption d-none d-md-block">
 						<h3>기차 여행</h3>
 						<p>This is a description for the second slide.</p>
@@ -202,7 +234,7 @@ ${sessionScope.id }님 환영합니다.
 				</div>
 				<!-- Slide Three - Set the background image for this slide in the line below -->
 				<div class="carousel-item"
-					style="background-image: url('img/home4.jpg')">
+					style="background-image: url('${pageContext.request.contextPath}/img/home4.jpg')">
 					<div class="carousel-caption d-none d-md-block">
 						<h3>집에 보관할때도 멋스럽게</h3>
 						<p>This is a description for the third slide.</p>
@@ -242,14 +274,17 @@ ${sessionScope.id }님 환영합니다.
 				</ul>
 			</div>
 			<div class="col-lg-6">
-				<img class="img-fluid rounded" src="img/P002.jpg" alt="">
+				<img class="img-fluid rounded"
+					src="${pageContext.request.contextPath}/img/P002.jpg" alt="">
 			</div>
 			<div class="col-lg-6">
-				<img class="img-fluid rounded" src="img/P003.jpg" alt="">
+				<img class="img-fluid rounded"
+					src="${pageContext.request.contextPath}/img/P003.jpg" alt="">
 			</div>
 			<br>
 			<div class="col-lg-6">
-				<img class="img-fluid rounded" src="img/P004.jpg" alt="">
+				<img class="img-fluid rounded"
+					src="${pageContext.request.contextPath}/img/P004.jpg" alt="">
 			</div>
 			<br>
 		</div>
