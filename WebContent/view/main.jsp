@@ -37,7 +37,7 @@ ${sessionScope.id }님 환영합니다.
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<% if(session.getAttribute("id")==null){ %>
-					<li class="nav-item"><a class="nav-link" href="loginForm.jsp">Login</a>
+					<li class="nav-item"><a class="nav-link" href="view/loginForm.jsp">Login</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="register.jsp">Register</a>
 					</li>
@@ -148,7 +148,7 @@ ${sessionScope.id }님 환영합니다.
 							Community </a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="blog-home-1.html">Notice</a> <a
+							<a class="dropdown-item" href="mumi?command=noticeRead">Notice</a> <a
 								class="dropdown-item" href="blog-home-2.html">Blog Home 2</a> <a
 								class="dropdown-item" href="blog-post.html">Blog Post</a>
 						</div></li>

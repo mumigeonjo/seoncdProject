@@ -1,6 +1,7 @@
 package mumi.model.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -95,8 +96,13 @@ public class MumiService {
 	}
 	
 	//공지사항 조회
-	public static List<NoticeDTO> selectNoticeAll() throws SQLException{
-		return null;
+	public static List<NoticeDTO> selectNoticeAll()throws SQLException{
+		
+		List<NoticeDTO> list = new ArrayList<NoticeDTO>();
+
+		list = userDAO.noticeRead();
+	
+		return list;
 	}
 	
 	//주문하기(UserOrderInsertAction)
@@ -240,18 +246,24 @@ public class MumiService {
 	
 	////////////////////////관리자 ////////////////////////////
 	//공지사항 삭제
-	public static int deleteNotice() throws SQLException{
-		return 0;
+	public static int deleteNotice(String nIndexNo) throws SQLException{
+		int re = mumiDAO.adminNoticeDelete(Integer.parseInt(nIndexNo));
+		
+		return re;
 	}
 	
 	//공지사항 삽입
-	public static int insertNotice() throws SQLException{
-		return 0;
+	public static int insertNotice(NoticeDTO dto) throws SQLException{
+		int re = mumiDAO.adminNoticeInsert(dto);
+		
+		return re;
 	}
 	
 	//공지사항 수정
-	public static int updateNotice() throws SQLException{
-		return 0;
+	public static int updateNotice(NoticeDTO dto) throws SQLException{
+		int re = mumiDAO.adminNoticeUpdate(dto);
+		
+		return re;
 	}
 	
 	//모든 주문내역 보기
