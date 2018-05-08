@@ -6,7 +6,7 @@ drop table order_detail;
 drop table product;
 drop table member;
 
-commit;
+commit
 
 --create table
 create table member(
@@ -91,7 +91,7 @@ insert into member values ('junyeong', '1234', 'Junyeong', '01012345678', '서울'
 
 --product table sample data
 insert into product values('P001S','GO에베레스트','100000','S', sysdate, '100');
-insert into product values('P001M','GO에베레스트','100000','M', sysdate, '100');
+insert into product values('P001M','GO에베레스트',100000,'M', sysdate, 100, null, null);
 insert into product values('P001L','GO에베레스트','100000','L', sysdate, '100');
 
 --notice table sample data
@@ -117,3 +117,6 @@ insert into qa_reply values(qa_reply_seq.nextval, '2', sysdate, '7일 이내로 Q&A�
 delete from qa where b_indexno='2';
 select * from qa;
 select * from qa_reply;
+select * from review;
+select * from member;
+select * from product;

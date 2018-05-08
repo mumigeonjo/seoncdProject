@@ -17,20 +17,19 @@ public class UserJoinAction implements Action {
 			throws ServletException, IOException {
 		ModelAndView mv = new ModelAndView();
 		try {
-			String id = request.getParameter("memberID");
+			String id = request.getParameter("id");
 			String pwd = request.getParameter("pwd");
 			String name = request.getParameter("name");
 			String phone = request.getParameter("phone");
 			String addr = request.getParameter("addr");
-			String isMgr = request.getParameter("isMgr");
 
-			if (id == null || pwd == null || name == null || phone == null || addr == null || isMgr == null) {
+			if (id == null || pwd == null || name == null || phone == null || addr == null) {
 				throw new SQLException("입력값이 충분하지 않습니다.");
 			}
 
-			int result = MumiService.insertUser(new MemberDTO(id, pwd, name, phone, addr, Integer.parseInt(isMgr)));
+			int result = MumiService.insertUser(new MemberDTO(id, pwd, name, phone, addr, 0));
 
-			if(result>0) {
+			if (result > 0) {
 				mv.setPath("index.html");
 				mv.setRedirect(true);
 			}
