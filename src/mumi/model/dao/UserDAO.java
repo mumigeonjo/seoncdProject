@@ -2,6 +2,7 @@ package mumi.model.dao;
 
 import java.util.List;
 
+import mumi.model.dto.CartDTO;
 import mumi.model.dto.MemberDTO;
 import mumi.model.dto.NoticeDTO;
 import mumi.model.dto.OrderDTO;
@@ -83,7 +84,7 @@ public interface UserDAO{
 	 * @return 리스트로 전체 리턴 
 	 * memberID는 전역변수에 저장되어 있는 값을 가져온다.
 	 */
-	public List<OrderDTO> cartShowAll();
+	public List<CartDTO> cartShowAll(String id);
 	
 	/**
 	 * 장바구니추가 
@@ -94,30 +95,32 @@ public interface UserDAO{
 	 * @param 위 값들 중에 pCode만 받아와서 해당하는 코드를 order테이블에 넣는다. 
 	 * @return 추가되었다(1)/안되었다(0)
 	 */
-	public int cartInsert(String pCode);
+	public int cartInsert(OrderDTO orderDTO);
 	
 	/**
 	 * 장바구니수정 
 	 * @param oIndexNo 주문인덱스넘버 
 	 * @param oEA 주문개수 
 	 * @param orderDTO에 들어올 값들을 인수로 받아온다. 
-	 * @return 수정됬다/안됬다.
+	 * @return 수정됬다/안됬다. 
+	 * (준영)필요없을듯?
 	 */
 	public int cartUpdate(OrderDTO orderDTO);
 	
 	/**
 	 * 장바구니수정용 정보조회메소드.
+	 * (준영)결제 시 정보 뿌려주는 역할.
 	 * @param oIndexNo
 	 * @return
 	 */
-	public OrderDTO cartDetailForUpdate(String oIndexNo);
+	public CartDTO cartDetailForUpdate(int oIndexNo);
 	
 	/**
 	 * 장바구니삭제 
 	 * @param oIndexNo
 	 * @return 삭제되었다/안되었다.
 	 */
-	public int cartDelete(String oIndexNo);
+	public int cartDelete(int oIndexNo);
 
 	/**
 	 * 소비자의 상세정보 가져오기(주문결제용) 
@@ -131,8 +134,9 @@ public interface UserDAO{
 	 * 결제완료메소드 
 	 * @param oIndexNo 해당하는 값들의 o_status를 업데이트해준다. 
 	 * @return 결제완료성공/실패.
+	 * 이걸로 결제함
 	 */
-	public int userOrderComplete(String oIndexNo);
+	public int userOrderComplete(OrderDTO orderDTO);
 	
 	/**
 	 * 전체공지조회 
@@ -148,10 +152,10 @@ public interface UserDAO{
 	public NoticeDTO noticeDetailRead(String nIndexNo);
 	
 	/**
-	 * 주문한(o_status값이 0인 자료들)내역 조회 
+	 * 주문한(o_status값이 1인 자료들)내역 조회 
 	 * @return
 	 */
-	public List<OrderDTO> orderListRead();
+	public List<CartDTO> orderListRead(String id);
 	
 	/**
 	 * QA조회메소드 

@@ -18,8 +18,27 @@ public class MumiDAOImpl implements MumiDAO {
 
 	@Override
 	public List<OrderDTO> adminOrderListRead() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con=null;
+		PreparedStatement ps = null;
+		List<OrderDTO> list = new ArrayList<>();
+		ResultSet rs = null;
+		try {
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("select member_id, p_code, o_ea, o_date"
+					+ "from order_detail"
+					+ "where o_status=1"
+					+ "order by o_date desc");
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				list.add(new OrderDTO(0, rs.getString(1), rs.getString(2), 
+						rs.getInt(3), rs.getString(4), 1, null, null));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps, rs);
+		}
+		return list;
 	}
 
 	@Override

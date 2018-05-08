@@ -7,6 +7,7 @@ import mumi.model.dao.MumiDAO;
 import mumi.model.dao.MumiDAOImpl;
 import mumi.model.dao.UserDAO;
 import mumi.model.dao.UserDAOImpl;
+import mumi.model.dto.CartDTO;
 import mumi.model.dto.MemberDTO;
 import mumi.model.dto.NoticeDTO;
 import mumi.model.dto.OrderDTO;
@@ -18,19 +19,25 @@ public class MumiService {
 	private static MumiDAO mumiDAO = new MumiDAOImpl();
 	private static UserDAO userDAO = new UserDAOImpl();
 	
-	//장바구니 삭제
-	public static int deleteCart() throws SQLException{
-		return 0;
+	/**장바구니 삭제
+	 */
+	public static int deleteCart(int oIndexNo) throws SQLException{
+		if(userDAO.cartDelete(oIndexNo)==0)
+			throw new SQLException("삭제 실패");
 	}
 	
-	//장바구니 삽입
-	public static int insertCart() throws SQLException{
-		return 0;
+	/**장바구니 삽입
+	 */
+	public static int insertCart(OrderDTO orderDTO) throws SQLException{
+		if(userDAO.cartInsert(orderDTO)==0)
+			throw new SQLException("장바구니 추가 실패");
 	}
 	
-	//장바구니 읽기
-	public static List<DTO> readCart() throws SQLException{
-		return null;
+	/**장바구니 읽기
+	 */
+	public static List<CartDTO> readCart(String id) throws SQLException{
+		return userDAO.cartShowAll(id);
+		//널이어도 상관 없음. 아무것도 출력 안 할 거야.
 	}
 	
 	//장바구니 업데이트
@@ -59,18 +66,26 @@ public class MumiService {
 	}
 	
 	//주문하기(UserOrderInsertAction)
-	public static int InsertOrder() throws SQLException{
-		return 0;
+	public static int insertOrder(OrderDTO orderDTO) throws SQLException{
+		int result = userDAO.userOrderComplete(orderDTO);
+		if(result==0)
+			throw new SQLException("결제 실패하였습니다.");
+		return result;
 	}
 	
 	//모든 결제내역 확인(로그인 한 유저의 글만)
-	public static List<OrderDTO> selectOrderAllById() throws SQLException{
-		return null;
+	public static List<CartDTO> selectOrderAllById(String id) throws SQLException{
+		return userDAO.orderListRead(id);
+		//널이어도 상관 없음. 출력 안 하면 그만.
 	}
 	
-	//결제 폼 뿌리기(UserOrderReadAction)
-	public static OrderDTO selectOrderByProductNum() throws SQLException{
-		return null;
+	/**결제 폼 뿌리기(UserOrderReadAction)
+	 */
+	public static CartDTO selectOrderByProductNum(int oIndexNo) throws SQLException{
+		CartDTO cartDTO = userDAO.cartDetailForUpdate(oIndexNo);
+		if(cartDTO==null)
+			throw new SQLException("장바구니 정보를 불러올 수 없습니다.");
+		return cartDTO;
 	}
 	
 	//상품 목록 보기(UserProductAllReadAction)
@@ -148,12 +163,13 @@ public class MumiService {
 	public static int updateNotice() throws SQLException{
 		return 0;
 	}
-	
+	*/
 	//모든 주문내역 보기
 	public static List<OrderDTO> selectOrderAll() throws SQLException{
-		return null;
+		return mumiDAO.adminOrderListRead();
+		//널이어도 괜찮아! 그냥 출력 안 하면 그만?
 	}
-	
+	/*
 	//상품 추가
 	public static int insertProduct() throws SQLException{
 		return 0;
