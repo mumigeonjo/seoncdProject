@@ -15,9 +15,8 @@ public class UserLogoutAction implements Action{
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
 		session.invalidate();
-		mv.setPath("main.jsp");
+		mv.setPath("view/main.jsp");
 		mv.setRedirect(true);
 		return mv;
 	}
-
 }

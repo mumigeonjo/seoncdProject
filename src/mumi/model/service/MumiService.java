@@ -391,4 +391,9 @@ public class MumiService {
 		List<ReviewDTO> list = userDAO.userReviewRead(pCode);
 		return list;
 	}
+
+	public static MemberDTO userUpdateForm(String id) {
+		MemberDTO dto = userDAO.userUpdateForm(id);
+		return dto;
+	}
 }
