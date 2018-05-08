@@ -7,7 +7,7 @@
 <title></title>
 </head>
 <body>
-<form method="post" action="./mumi?command=userLogin">
+<form method="post" action="../mumi?command=userLogin">
 <table>
 <tr>
 	<th>아이디</th>

@@ -41,22 +41,81 @@ public class MumiDAOImpl implements MumiDAO {
 		return list;
 	}
 
-	@Override
-	public int adminNoticeInsert(NoticeDTO notice) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	@Override //지안
+	public int adminNoticeInsert(NoticeDTO dto) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql="insert into notice values(notice_seq.nextval, ?, ?, sysdate)";
+		
+		System.out.println("수정");
+		int re =0;
+		
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, dto.getnTitle());
+			ps.setString(2, dto.getnContent());
+
+			re = ps.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		
+		return re;
 	}
 
-	@Override
+	@Override //지안
 	public int adminNoticeDelete(int nIndexNo) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql="delete from notice where n_indexno=?";
+		int re =0;
+		
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, nIndexNo);
+			
+			re = ps.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		
+		return re;
 	}
 
-	@Override
-	public int adminNoticeUpdate(NoticeDTO notice) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	@Override //지안
+	public int adminNoticeUpdate(NoticeDTO dto) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql="update notice set n_title=?, n_content=? where n_indexno=?";
+		int re =0;
+		
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, dto.getnTitle());
+			ps.setString(2, dto.getnContent());
+			ps.setInt(3, Integer.parseInt(dto.getnIndexNo()));
+
+			re = ps.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		
+		return re;
 	}
 
 	@Override
@@ -137,7 +196,7 @@ public class MumiDAOImpl implements MumiDAO {
 		return 0;
 	}
 
-	@Override
+	@Override 
 	public List<MemberDTO> adminSelectAllMember() throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
