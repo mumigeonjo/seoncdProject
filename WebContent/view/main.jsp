@@ -48,21 +48,15 @@
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/view/loginForm.jsp">로그인</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/view/register.jsp">회원가입</a>
-						<%
-							if (session.getAttribute("id") == null) {
-						%>
-					<li class="nav-item"><a class="nav-link"
-						href="view/loginForm.jsp">Login</a></li>
+						href="${pageContext.request.contextPath}/view/register.jsp">회원가입</a></li>
+
 					<%
 						} else {
 					%>
-					<h5>${sessionScope.id }님환영합니다.</h5>
+
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/mumi?command=userLogout">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/mumi?command=userUpdateForm">회원정보
-							수정</a></li>
+
 					<%
 						if (session.getAttribute("id").equals("admin")) {
 					%>
@@ -72,14 +66,15 @@
 					<%
 						} else {
 					%>
-
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/mumi?command=userUpdateForm">회원정보
+							수정</a></li>
 
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/cartRead">장바구니</a></li>
 
 					<%
 						}
-							}
 						}
 					%>
 

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import mumi.model.dto.CartDTO;
 import mumi.model.dto.MemberDTO;
 import mumi.model.dto.NoticeDTO;
@@ -23,7 +22,6 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<MemberDTO> list = new ArrayList<>();
 		MemberDTO memberDTO = null;
 		try {
 			con = DBUtil.getConnection();
@@ -59,7 +57,7 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(3, memberDTO.getPhone());
 			ps.setString(4, memberDTO.getAddr());
 			ps.setString(5, memberDTO.getMemberID());
-			result=ps.executeUpdate();
+			result = ps.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -242,71 +240,53 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
-	@Override
-	public int userOrderComplete(OrderDTO orderDTO) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		int updateResult = 0;
-		int minusResult = 0;
-		try {
-			con = DBUtil.getConnection();
-			con.setAutoCommit(false);
+	/*
+	 * @Override public int userOrderComplete(OrderDTO orderDTO) { Connection con =
+	 * null; PreparedStatement ps = null; int updateResult = 0; int minusResult = 0;
+	 * try { con = DBUtil.getConnection(); con.setAutoCommit(false);
+	 * 
+	 * ps = con.
+	 * prepareStatement("update order_detail set p_code=?, o_ea=?, o_date=sysdate, "
+	 * + "o_status=1, o_addr=?, o_phone=?" + "where o_indexno=?"); ps.setString(1,
+	 * orderDTO.getpCode()); ps.setInt(2, orderDTO.getoEA()); ps.setString(3,
+	 * orderDTO.getoAddr()); ps.setString(4, orderDTO.getoPhone()); ps.setInt(5,
+	 * orderDTO.getoIndexNo());
+	 * 
+	 * updateResult = ps.executeUpdate(); if (updateResult == 0) { con.rollback();
+	 * return updateResult; }
+	 * 
+	 * ps = con.prepareStatement("update product set p_ea=p_ea-1 where p_code=?");
+	 * ps.setString(1, orderDTO.getpCode());
+	 * 
+	 * minusResult = ps.executeUpdate(); if (minusResult == 0) { con.rollback();
+	 * return 0; } con.commit(); } catch (SQLException e) { e.printStackTrace(); }
+	 * finally { DBUtil.dbClose(con, ps); } return updateResult; }
+	 */
 
-			ps = con.prepareStatement("update order_detail set p_code=?, o_ea=?, o_date=sysdate, "
-					+ "o_status=1, o_addr=?, o_phone=?" + "where o_indexno=?");
-			ps.setString(1, orderDTO.getpCode());
-			ps.setInt(2, orderDTO.getoEA());
-			ps.setString(3, orderDTO.getoAddr());
-			ps.setString(4, orderDTO.getoPhone());
-			ps.setInt(5, orderDTO.getoIndexNo());
-
-			updateResult = ps.executeUpdate();
-			if (updateResult == 0) {
-				con.rollback();
-				return updateResult;
-			}
-
-			ps = con.prepareStatement("update product set p_ea=p_ea-1 where p_code=?");
-			ps.setString(1, orderDTO.getpCode());
-
-			minusResult = ps.executeUpdate();
-			if (minusResult == 0) {
-				con.rollback();
-				return 0;
-			}
-			con.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.dbClose(con, ps);
-		}
-		return updateResult;
-	}
-
-	@Override //지안
+	@Override // 지안
 	public List<NoticeDTO> noticeRead() {
 		Connection con = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;	
+		ResultSet rs = null;
 		List<NoticeDTO> list = new ArrayList<NoticeDTO>();
-		String sql="select * from notice";
+		String sql = "select * from notice";
 		try {
 			con = DBUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				NoticeDTO dto = new NoticeDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
+
+			while (rs.next()) {
+				NoticeDTO dto = new NoticeDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
 				System.out.println(rs.getString(1));
-				
+
 				list.add(dto);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBUtil.dbClose(con, ps, rs);
 		}
-		
+
 		return list;
 	}
 
@@ -480,7 +460,7 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps = null;
 		List<ReviewDTO> list = new ArrayList<>();
 		ResultSet rs = null;
-		
+
 		try {
 			con = DBUtil.getConnection();
 			ps = con.prepareStatement("select * from review where p_Code=?");
@@ -569,12 +549,7 @@ public class UserDAOImpl implements UserDAO {
 		return re;
 	}
 
-<<<<<<< HEAD
 	@Override
-=======
-
-	@Override
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	public int userLeave(String id) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -622,15 +597,14 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<MemberDTO> list = new ArrayList<>();
 		MemberDTO memberDTO = null;
 		try {
 			con = DBUtil.getConnection();
 			ps = con.prepareStatement("select * from member where member_id=?");
 			ps.setString(1, id);
 			rs = ps.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				memberDTO = new MemberDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getInt(6));
 			}
@@ -640,6 +614,12 @@ public class UserDAOImpl implements UserDAO {
 			DBUtil.dbClose(con, ps, rs);
 		}
 		return memberDTO;
+	}
+
+	@Override
+	public int userOrderComplete(OrderDTO orderDTO) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

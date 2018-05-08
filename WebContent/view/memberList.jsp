@@ -11,7 +11,7 @@
 <script>
 $(document).ready(function(){
 	$("#historyback").click(function(){
-		window.history.back();
+		location.href='mumi';
 	})
 })
 </script>

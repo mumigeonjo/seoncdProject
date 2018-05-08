@@ -12,8 +12,8 @@ public class MoveMainAction implements Action {
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ModelAndView mv = new ModelAndView();
-		mv.setPath("/view/main.jsp");
-		mv.setRedirect(false);
+		mv.setPath("view/main.jsp");
+		mv.setRedirect(true);
 		return mv;
 	}
 

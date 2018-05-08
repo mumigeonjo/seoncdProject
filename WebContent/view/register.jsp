@@ -7,7 +7,7 @@
 <title></title>
 </head>
 <body>
-	<form method="post" action="./mumi?command=userJoin">
+	<form method="post" action="${pageContext.request.contextPath}/mumi?command=userJoin">
 		<table>
 			<tr>
 				<th>아이디</th>
