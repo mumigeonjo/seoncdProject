@@ -36,7 +36,7 @@ public class ActionMappingListener implements ServletContextListener {
 			String key = it.next();
 			String className = rb.getString(key);
 			try {
-				Action action = (Action) Class.forName(className).newInstance();
+				Action action = (Action)Class.forName(className).newInstance();
 				map.put(key, action);
 			} catch (Exception ex) {
 				ex.printStackTrace();

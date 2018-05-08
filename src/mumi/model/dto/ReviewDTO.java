@@ -3,7 +3,7 @@ package mumi.model.dto;
 public class ReviewDTO {
 	private int rIndexNo;
 	private String pCode;
-	private String memberID;
+	private String memberId;
 	private String rDate;
 	private String rContent;
 	private String rPhoto;
@@ -11,12 +11,12 @@ public class ReviewDTO {
 	
 	public ReviewDTO() {}
 
-	public ReviewDTO(int rIndexNo, String pCode, String memberID, String rDate, String rContent, String rPhoto,
+	public ReviewDTO(int rIndexNo, String pCode, String memberId, String rDate, String rContent, String rPhoto,
 			int rRate) {
 		super();
 		this.rIndexNo = rIndexNo;
 		this.pCode = pCode;
-		this.memberID = memberID;
+		this.memberId = memberId;
 		this.rDate = rDate;
 		this.rContent = rContent;
 		this.rPhoto = rPhoto;
@@ -40,11 +40,11 @@ public class ReviewDTO {
 	}
 
 	public String getMemberID() {
-		return memberID;
+		return memberId;
 	}
 
 	public void setMemberID(String memberID) {
-		this.memberID = memberID;
+		this.memberId = memberID;
 	}
 
 	public String getrDate() {
