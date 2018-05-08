@@ -72,7 +72,7 @@ public class MumiService {
 	}
 	
 	//로그인
-	public static UserDTO selectUserById() throws SQLException{
+	public static MemberDTO selectUserById() throws SQLException{
 		return null;
 	}
 
@@ -176,16 +176,8 @@ public class MumiService {
 		result = userDAO.userQAInsert(qaDTO);
 		if(result==0)throw new SQLException("업데이트되지 않았습니다.");
 		return result;
-	 * ////////////////////////관리자 //////////////////////////// //공지사항 삭제 public
-	 * static int deleteNotice() throws SQLException{ return 0; }
-	 * 
-	 * //공지사항 삽입 public static int insertNotice() throws SQLException{ return 0; }
-	 * 
-	 * //공지사항 수정 public static int updateNotice() throws SQLException{ return 0; }
-	 * 
-	 * //모든 주문내역 보기 public static List<OrderDTO> selectOrderAll() throws
-	 * SQLException{ return null; }
-	 */
+	}
+	
 	// 상품 추가 -다영
 	public static int adminProductInsert(ProductDTO productDTO) throws SQLException {
 		int re = mumiDAO.adminProductInsert(productDTO);
@@ -210,6 +202,7 @@ public class MumiService {
 		 int re = userDAO.userReviewDelete(rIndexNo);
 		 if(re==0)throw new SQLException("삭제되지 않았습니다.");
 		 return re;
+	}
 
 	// 상품 삭제 -다영
 	public static int adminProductDelete(String pCode) throws SQLException {
@@ -218,7 +211,7 @@ public class MumiService {
 			throw new SQLException("삭제되지 않았습니다.");
 		return re;
 	}
-	
+	/*
 	//리뷰 게시글 삽입(로그인 한 유저의 글만)
 	public static int userReviewInsert(ReviewDTO reviewDTO) throws SQLException{
 		 int re = userDAO.userReviewInsert(reviewDTO);
@@ -233,7 +226,7 @@ public class MumiService {
 		  if(re==0)throw new SQLException("수정되지 않았습니다.");
 		  return re;
 		
-	}
+	}*/
 	
 	//모든 리뷰 게시글 읽기(로그인 한 유저의 글만)
 	public static List<ReviewDTO> userReviewRead(String pCode) throws SQLException{
@@ -313,6 +306,7 @@ public class MumiService {
 		result = mumiDAO.adminQAReplyUpdate(qaReplyDTO);
 		if(result==0)throw new SQLException("업데이트되지 않았습니다.");
 		return result;
+	}
 
 	public static ProductDTO userProductRead(String pCode) {
 		// TODO Auto-generated method stub
@@ -326,6 +320,7 @@ public class MumiService {
 		result = mumiDAO.adminQAReplyDelete(qIndexNo);
 		if(result==0)throw new SQLException("삭제되지 않았습니다.");
 		return result;
+	}
 
 	
 	
@@ -344,7 +339,7 @@ public class MumiService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	*/
 	public static List<MemberDTO> adminSelectAllMember() throws SQLException {
 		List<MemberDTO> list = mumiDAO.adminSelectAllMember();
 		return list;
@@ -355,8 +350,4 @@ public class MumiService {
 		return result;
 	}
 
-	public static List<ReviewDTO> userReviewRead(String pCode) {
-		List<ReviewDTO> list = userDAO.userReviewRead(pCode);
-		return list;
-	}
 }
