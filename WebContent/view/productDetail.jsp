@@ -135,6 +135,7 @@
           <div class="media mb-4">
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
             <div class="media-body">
+<<<<<<< HEAD
               	<c:forEach items="${requestScope.list}" var="list" >
               	
               	
@@ -142,6 +143,10 @@
               	
               	
               	
+=======
+              	<%="pCode"%>
+              	<c:forEach items="${requestScope.list}" var="list" >
+>>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
               	
                 <div>${list.pCode}</div>
                 <div>${list.rIndexNo}</div>

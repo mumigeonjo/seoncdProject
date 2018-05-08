@@ -209,13 +209,13 @@
         <li class="breadcrumb-item active">Notice</li>
       </ol>
       
-        <%session.setAttribute("id", "admin");  %>   
+<%--         <%session.setAttribute("id", "admin");  %>  --%>  
       <%String id = (String)session.getAttribute("id"); %> 
       <c:set var="id" value="<%=id%>" />
      
-      <script type="text/javascript">
+<%--       <script type="text/javascript">
     	  alert(<%=id%>)
-      </script>
+      </script> --%>
 
       <div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">
         

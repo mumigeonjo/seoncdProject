@@ -250,6 +250,10 @@ ${sessionScope.id }님 환영합니다.
 			<br>
 			<div class="col-lg-6">
 				<a href="${pageContext.request.contextPath}/view/productDetail.jsp"><img class="img-fluid rounded" src="img/P004.jpg" alt="" >></a>
+				<a href="${pageContext.request.contextPath}/view/productDetail.jsp"><img
+					class="img-fluid rounded" src="img/P004.jpg" alt="">></a> <img
+					class="img-fluid rounded"
+					src="${pageContext.request.contextPath}/img/P004.jpg" alt="">
 			</div>
 			<br>
 		</div>

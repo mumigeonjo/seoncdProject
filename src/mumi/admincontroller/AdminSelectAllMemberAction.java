@@ -24,13 +24,13 @@ public class AdminSelectAllMemberAction implements Action {
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");
 
-			if (id != "admin") {
+			if (!id.equals("admin")) {
 				throw new Exception("관리자로 로그인하고 이용하세요");
 			}
 			
 			List<MemberDTO> list = MumiService.adminSelectAllMember();
-			request.setAttribute("memberList", list);
-			
+			request.setAttribute("list", list);
+			mv.setPath("view/memberList.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());

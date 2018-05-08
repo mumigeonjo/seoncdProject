@@ -276,6 +276,11 @@ public interface UserDAO {
 	 */
 	public int userReviewDelete(int rIndexNo);
 
+	/*
+	 * 회원정보 수정 폼 가기
+	 */
+	public MemberDTO userUpdateForm(String id);
+
 	
 
 }
