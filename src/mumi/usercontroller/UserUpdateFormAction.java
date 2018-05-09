@@ -16,7 +16,6 @@ public class UserUpdateFormAction implements Action {
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		ModelAndView mv = new ModelAndView();
 		try {
 			HttpSession session = request.getSession();
@@ -29,7 +28,7 @@ public class UserUpdateFormAction implements Action {
 			MemberDTO dto = MumiService.userUpdateForm(id);
 			request.setAttribute("dto", dto);
 			mv.setPath("view/myPage.jsp");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());

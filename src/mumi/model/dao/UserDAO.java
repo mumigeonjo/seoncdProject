@@ -67,7 +67,7 @@ public interface UserDAO {
 	 * @param pCode
 	 * @return
 	 */
-	public ProductDTO userProductRead(String pCode);
+	public List<ProductDTO> userProductRead(String pName);
 
 	/**
 	 * 가격별 정렬

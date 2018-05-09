@@ -1,50 +1,76 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<c:set var="path" value="${pageContext.request.contextPath}" scope="application"/>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>무미건조</title>
 
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="css/modern-business.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <link href="../css/modern-business.css" rel="stylesheet">
+    
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvsV0CL4-t6fpUa8aguBEXhszVvaTKqNA&callback=initMap" type="text/javascript"></script>
+	<script>
+		function initialize() {
 
-    <script type="text/javascript">
-    	function sendUpdate() {
-    	    var f = window.document.noticeUpdateForm;
-    		
-    		if ( f.nTitle.value == "") {
-    		    alert( "공지사항 제목을 입력해주세요" );
-    		    f.nTitle.focus();
-    			return false;
-    	    }
-    		if ( f.nContent.value == "" ) {
-    			alert( "공지사항 내용을 입력해주세요" );
-    			f.nContent.focus();
-    			return false;
-    		}
+			/*
+				http://openapi.map.naver.com/api/geocode.php?key=f32441ebcd3cc9de474f8081df1e54e3&encoding=euc-kr&coord=LatLng&query=서울특별시 강남구 강남대로 456
+                위의 링크에서 뒤에 주소를 적으면 x,y 값을 구할수 있습니다.
+                37.402711, 127.105898
+			*/
+			var Y_point			= 37.402711;		// Y 좌표
+			var X_point			= 127.105898;		// X 좌표
+
+			var zoomLevel		= 16;						// 지도의 확대 레벨 : 숫자가 클수록 확대정도가 큼
+
+			var markerTitle		= "무미건조";				// 현재 위치 마커에 마우스를 오버을때 나타나는 정보
+			var markerMaxWidth	= 300;						// 마커를 클릭했을때 나타나는 말풍선의 최대 크기
+
+			// 말풍선 내용
+			var contentString	= '<div>' +
+			'<h2>무미건조</h2>'+
+			'<p>Kosta출신의 인력으로 구성된 등산가방 전문 기업입니다.<br/>' +
+			'<p>다른 등산용품도 업로드할 예정입니다.<br/>' +
+            '많은 이용 부탁드립니다.</p>' +
+			//'<a href="http://www.daegu.go.kr" target="_blank">http://www.daegu.go.kr</a>'+ //링크도 넣을 수 있음
+			'</div>'; 
+
+			var myLatlng = new google.maps.LatLng(Y_point, X_point);
+			var mapOptions = {
+								zoom: zoomLevel,
+								center: myLatlng,
+								mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+			var map = new google.maps.Map(document.getElementById('map_view'), mapOptions);
+
+			var marker = new google.maps.Marker({
+													position: myLatlng,
+													map: map,
+													title: markerTitle
+			});
+
+			var infowindow = new google.maps.InfoWindow(
+														{
+															content: contentString,
+															maxWidth: markerMaxWidth
+														}
+			);
+
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.open(map, marker);
+			});
 		}
-    	
-    </script>
-
-  </head>
-
-   <!-- Navigation 1 -->
+	</script>
+	
+	<!-- Navigation 1 -->
    <nav
       class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -208,44 +234,49 @@
    </nav>
    <!-- Navigation 2 end -->
 
+  </head>
+
+  <body onload="initialize()">
+
+   
+
     <!-- Page Content -->
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">공시사항 수정하기
-      </h1>
-
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
-        </li>
-        <li class="breadcrumb-item active">
-          Notice
-        </li>
-      </ol>
 
       <div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">
- 		
-  	 	<form name="noticeUpdateForm" method="post" action="mumi?command=noticeUpdate" onSubmit='return sendUpdate()'>
-  	 	  <fieldset style="text-align: center;">
-  	 	    <font style = "vertical-align : inherit; font-size:20pt;"> 양식 </font>
-   			  <div>
-			    <label for="exampleTextarea">공지사항 제목</label>
-			    <textarea class="form-control" id="nTitle" name="nTitle" rows="1">${noticeUpdate.nTitle}</textarea>
-			  </div>
-			  
-			  <div style="margin:0px 0px 10px">
-			    <label for="exampleTextarea">공지사항 내용</label>
-			    <textarea class="form-control" id="nContent" name="nContent" rows="3">${noticeUpdate.nContent}</textarea>
-			  </div>
-  	 	  	  <input type=hidden name="nIndexNo" value="${noticeUpdate.nIndexNo}">
-  	 	  	  <button type = "submit" class = "btn btn-primary" style = "vertical-align : inherit;">수정하기</button>
-  	 	  	   	
+  
+  	 	<form>
+   	 	  <fieldset style="text-align: left;"><br/><br/>
+	   	 	   <div id="map_view" style="width:500px; height:300px; float:left;  margin: 0px 20px 0px 0px;"></div>
+				<div>
+				<h4 style="text-align: left;"><strong><span style="font-size:18pt;" ><u>Info</u></span></strong></h4>
+				<h4 style="text-align: left;"><br></h4><h4 style="text-align: left;">
+   	 	  		 <strong><span style="font-size: 16px;">주소</span></strong>
+   	 	  		 <span style="font-size: 16px;">&nbsp;: 경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층</span>
+   	 	  		</h4>
+   	 	  		<h4 style="text-align: left;">
+   	 	  		 <strong><span style="font-size: 16px;">대표번호</span></strong>
+   	 	  		 <span style="font-size: 16px;">&nbsp;: 031-606-9320</span>
+   	 	  		</h4>
+   	 	  		<h4 style="text-align: left;">
+   	 	  		 <strong><span style="font-size: 16px;">배송</span></strong>
+   	 	  		 <span style="font-size: 16px;">&nbsp;: 4시 이전 결제시 당일배송 원칙(화-수-목-금)</span>
+   	 	  		</h4>
+   	 	  		<h4 style="text-align: left;">
+   	 	  		 <strong><span style="font-size: 16px;">운영시간</span></strong>
+   	 	  		 <span style="font-size: 16px;">&nbsp;: 연중무휴</span>
+   	 	  		</h4>   	 	  		
+				</div>
+ 
   	 	  </fieldset>
+
   	 	</form>
   
-      </div>
+     </div>
     </div>
+
     <!-- /.container -->
 
     <!-- Footer -->
@@ -259,9 +290,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
-
 </html>

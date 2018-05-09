@@ -22,9 +22,11 @@
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
+<link
+   href="${path}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
 <!-- Custom styles for this template -->
-<link href="${path}/css/modern-business.css"
-   rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -280,6 +282,15 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 			<div class="col-lg-6">
 				<a href="mumi?command=userReviewRead&pCode=P001M">
 				          <img class="img-fluid rounded" src="img/P004.jpg" alt=""></a>
+         <div class="col-lg-6">
+            <img class="img-fluid rounded"
+               src="${path}/img/P003.jpg" alt="">
+         </div>
+         <br>
+         <div class="col-lg-6">
+            <img class="img-fluid rounded"
+               src="${path}/img/P004.jpg" alt="">
+         </div>
          <br>
       </div>
       <!-- img Section end -->

@@ -28,7 +28,7 @@ public class UserJoinAction implements Action {
 			}
 
 			int result = MumiService.insertUser(new MemberDTO(id, pwd, name, phone, addr, 0));
-
+			System.out.println(result+"=result");
 			if (result > 0) {
 				mv.setPath("index.html");
 				mv.setRedirect(true);
