@@ -10,17 +10,13 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>무미건조</title>
+<title>Modern Business - Start Bootstrap Template</title>
 <c:set var="path" value="${pageContext.request.contextPath}"
    scope="application" />
 <!-- Bootstrap core CSS -->
-<<<<<<< HEAD
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-=======
 <link
    href="${path}/vendor/bootstrap/css/bootstrap.min.css"
    rel="stylesheet">
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 
 <!-- Custom styles for this template -->
 <link href="${path}/css/modern-business.css"
@@ -28,25 +24,14 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-=======
    <!-- Navigation 1 -->
    <nav
       class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
          <a class="navbar-brand"
             href="${path}/index.html">MuMiGeonJo-BACKPACKS</a>
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 
 
-<<<<<<< HEAD
-   <!-- Navigation 1 -->
-   <nav
-      class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-         <a class="navbar-brand"
-            href="${path}/index.html">MuMiGeonJo-BACKPACKS</a>
-=======
          <button class="navbar-toggler navbar-toggler-right" type="button"
             data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false"
@@ -93,60 +78,8 @@
                   }
                   }
                %>
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 
 
-<<<<<<< HEAD
-         <button class="navbar-toggler navbar-toggler-right" type="button"
-            data-toggle="collapse" data-target="#navbarResponsive"
-            aria-controls="navbarResponsive" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-         </button>
-
-		  <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-               <%
-                  if (session.getAttribute("id") == null) {
-               %>
-
-               <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/view/loginForm.jsp">로그인</a></li>
-               <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/view/register.jsp">회원가입</a></li>
-
-               <%
-                  } else {
-               %>
-
-               <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/mumi?command=userLogout">로그아웃</a></li>
-
-               <%
-                  if (session.getAttribute("id").equals("admin")) {
-               %>
-               <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/mumi?command=adminSelectAllMember">모든회원
-                     조회</a></li>
-               <%
-                  } else {
-               %>
-               <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/mumi?command=userOrderlistRead">주문내역</a></li>
-
-               <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/mumi?command=cartRead">장바구니</a></li>
-                  
-               <li class="nav-item"><a class="nav-link"
-                  href="${pageContext.request.contextPath}/mumi?command=userUpdateForm">회원정보수정</a></li>
-               <%
-                  }
-                  }
-               %>
-
-
-=======
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
                <!--             
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

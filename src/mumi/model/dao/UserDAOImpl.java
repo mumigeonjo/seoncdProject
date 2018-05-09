@@ -635,10 +635,10 @@ public class UserDAOImpl implements UserDAO {
 		return memberDTO;
 	}
 
-	@Override
+/*	@Override
 	public int userOrderComplete(OrderDTO orderDTO) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
+	}*/
 
 }
