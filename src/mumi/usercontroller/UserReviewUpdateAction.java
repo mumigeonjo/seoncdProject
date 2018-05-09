@@ -30,7 +30,7 @@ public class UserReviewUpdateAction implements Action{
 			int result=MumiService.userReviewUpdate(new ReviewDTO(0, null, null,new Date().toLocaleString(), rContent,  rPhoto,
 			 rRate));
 			if(result>0) {
-			mv.setPath("");
+			mv.setPath("view/review.jsp");
 			mv.setRedirect(true);
 			}else {
 				throw new SQLException("수정에 실패했습니다.");

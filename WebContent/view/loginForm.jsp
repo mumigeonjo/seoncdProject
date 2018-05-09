@@ -16,11 +16,8 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<<<<<<< HEAD
-<form method="post" action="${pageContext.request.contextPath}/mumi?command=userLogin">
-=======
+
 <form method="post" action="../mumi?command=userLogin">
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 <table>
 <tr>
 	<th>아이디</th>

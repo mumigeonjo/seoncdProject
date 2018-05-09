@@ -297,8 +297,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			while(rs.next()) {
 				NoticeDTO dto = new NoticeDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
-				System.out.println(rs.getString(1));
-				
+			
 				list.add(dto);
 			}
 		}catch(Exception e) {
@@ -489,7 +488,7 @@ public class UserDAOImpl implements UserDAO {
 			while (rs.next()) {
 				ReviewDTO dto = new ReviewDTO(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3),
 						rs.getString(4), rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)));
-				System.out.println(rs.getString(2));
+				
 				list.add(dto);
 			}
 
@@ -498,7 +497,7 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			DBUtil.dbClose(con, ps, rs);
 		}
-		System.out.println("dao="+list);
+		
 		return list;
 	}
 

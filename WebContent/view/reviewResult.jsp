@@ -9,7 +9,7 @@
 </head>
 <body>
 
-${requestScope.list}
+
 
 	<c:forEach items="${requestScope.list}" var="review">
 		    <tr onmouseover="this.style.background='#eaeaea'"

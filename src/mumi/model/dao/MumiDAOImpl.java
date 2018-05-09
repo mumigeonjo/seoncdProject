@@ -191,7 +191,7 @@ public class MumiDAOImpl implements MumiDAO {
 			DBUtil.dbClose(con, ps);
 		}
 
-		return 0;
+		return re;
 	}
 
 	@Override 
@@ -303,6 +303,7 @@ public class MumiDAOImpl implements MumiDAO {
 		} finally {
 			DBUtil.dbClose(con, ps);
 		}
+		System.out.println("ado"+memberID);
 		return result;
 	}
 

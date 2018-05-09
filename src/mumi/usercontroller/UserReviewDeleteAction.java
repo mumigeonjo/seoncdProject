@@ -16,6 +16,7 @@ public class UserReviewDeleteAction implements Action{
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView();
 		String memberId = (String)session.getAttribute("id");
@@ -25,7 +26,7 @@ public class UserReviewDeleteAction implements Action{
 				try {
 					int result = MumiService.userReviewDelete(rIndexNo);
 					if(result>0) {
-						mv.setPath("???");
+						mv.setPath("view/productDetail.jsp");
 						mv.setRedirect(false);
 					}else {
 						throw new SQLException("리뷰삭제에 실패했습니다.");
