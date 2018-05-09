@@ -1,31 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
 
-<title>Modern Business - Start Bootstrap Template</title>
-<c:set var="path" value="${pageContext.request.contextPath}"
-   scope="application" />
-<!-- Bootstrap core CSS -->
-<link
-   href="${path}/vendor/bootstrap/css/bootstrap.min.css"
-   rel="stylesheet">
-<!-- Custom styles for this template -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<link href="${path}/css/modern-business.css"
-   rel="stylesheet">
+    <title>무미건조</title>
 
-</head>
+    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-<body>
-   <!-- Navigation 1 -->
+    <!-- Custom styles for this template -->
+    <link href="../css/modern-business.css" rel="stylesheet">
+    
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvsV0CL4-t6fpUa8aguBEXhszVvaTKqNA&callback=initMap" type="text/javascript"></script>
+	<script>
+		function initialize() {
+
+			/*
+				http://openapi.map.naver.com/api/geocode.php?key=f32441ebcd3cc9de474f8081df1e54e3&encoding=euc-kr&coord=LatLng&query=서울특별시 강남구 강남대로 456
+                위의 링크에서 뒤에 주소를 적으면 x,y 값을 구할수 있습니다.
+                37.402711, 127.105898
+			*/
+			var Y_point			= 37.402711;		// Y 좌표
+			var X_point			= 127.105898;		// X 좌표
+
+			var zoomLevel		= 16;						// 지도의 확대 레벨 : 숫자가 클수록 확대정도가 큼
+
+			var markerTitle		= "무미건조";				// 현재 위치 마커에 마우스를 오버을때 나타나는 정보
+			var markerMaxWidth	= 300;						// 마커를 클릭했을때 나타나는 말풍선의 최대 크기
+
+			// 말풍선 내용
+			var contentString	= '<div>' +
+			'<h2>무미건조</h2>'+
+			'<p>Kosta출신의 인력으로 구성된 등산가방 전문 기업입니다.<br/>' +
+			'<p>다른 등산용품도 업로드할 예정입니다.<br/>' +
+            '많은 이용 부탁드립니다.</p>' +
+			//'<a href="http://www.daegu.go.kr" target="_blank">http://www.daegu.go.kr</a>'+ //링크도 넣을 수 있음
+			'</div>'; 
+
+			var myLatlng = new google.maps.LatLng(Y_point, X_point);
+			var mapOptions = {
+								zoom: zoomLevel,
+								center: myLatlng,
+								mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+			var map = new google.maps.Map(document.getElementById('map_view'), mapOptions);
+
+			var marker = new google.maps.Marker({
+													position: myLatlng,
+													map: map,
+													title: markerTitle
+			});
+
+			var infowindow = new google.maps.InfoWindow(
+														{
+															content: contentString,
+															maxWidth: markerMaxWidth
+														}
+			);
+
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.open(map, marker);
+			});
+		}
+	</script>
+	
+	<!-- Navigation 1 -->
    <nav
       class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -40,7 +85,7 @@
             <span class="navbar-toggler-icon"></span>
          </button>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+		  <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                <%
                   if (session.getAttribute("id") == null) {
@@ -189,135 +234,64 @@
    </nav>
    <!-- Navigation 2 end -->
 
+  </head>
 
+  <body onload="initialize()">
 
-   <!-- header -->
-   <header>
-      <div id="carouselExampleIndicators" class="carousel slide"
-         data-ride="carousel">
-         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0"
-               class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-         </ol>
-         <div class="carousel-inner" role="listbox">
-            <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active"
-               style="background-image: url('${path}/img/home2.PNG')">
-               <div class="carousel-caption d-none d-md-block">
-                  <h3>캠핑</h3>
-                  <p>This is a description for the first slide.</p>
-               </div>
-            </div>
-            <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item"
-               style="background-image: url('${path}/img/home3.png')">
-               <div class="carousel-caption d-none d-md-block">
-                  <h3>기차 여행</h3>
-                  <p>This is a description for the second slide.</p>
-               </div>
-            </div>
-            <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item"
-               style="background-image: url('${path}/img/home4.jpg')">
-               <div class="carousel-caption d-none d-md-block">
-                  <h3>집에 보관할때도 멋스럽게</h3>
-                  <p>This is a description for the third slide.</p>
-               </div>
-            </div>
-         </div>
-         <a class="carousel-control-prev" href="#carouselExampleIndicators"
-            role="button" data-slide="prev"> <span
-            class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-            class="sr-only">Previous</span>
-         </a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-            role="button" data-slide="next"> <span
-            class="carousel-control-next-icon" aria-hidden="true"></span> <span
-            class="sr-only">Next</span>
-         </a>
-      </div>
-   </header>
-   <!-- header end -->
+   
 
+    <!-- Page Content -->
+    <div class="container">
 
+      <!-- Page Heading/Breadcrumbs -->
 
-   <!-- Page Content -->
-   <div class="container">
-      <h1 class="my-4"></h1>
+      <div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">
+  
+  	 	<form>
+   	 	  <fieldset style="text-align: left;"><br/><br/>
+	   	 	   <div id="map_view" style="width:500px; height:300px; float:left;  margin: 0px 20px 0px 0px;"></div>
+				<div>
+				<h4 style="text-align: left;"><strong><span style="font-size:18pt;" ><u>Info</u></span></strong></h4>
+				<h4 style="text-align: left;"><br></h4><h4 style="text-align: left;">
+   	 	  		 <strong><span style="font-size: 16px;">주소</span></strong>
+   	 	  		 <span style="font-size: 16px;">&nbsp;: 경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층</span>
+   	 	  		</h4>
+   	 	  		<h4 style="text-align: left;">
+   	 	  		 <strong><span style="font-size: 16px;">대표번호</span></strong>
+   	 	  		 <span style="font-size: 16px;">&nbsp;: 031-606-9320</span>
+   	 	  		</h4>
+   	 	  		<h4 style="text-align: left;">
+   	 	  		 <strong><span style="font-size: 16px;">배송</span></strong>
+   	 	  		 <span style="font-size: 16px;">&nbsp;: 4시 이전 결제시 당일배송 원칙(화-수-목-금)</span>
+   	 	  		</h4>
+   	 	  		<h4 style="text-align: left;">
+   	 	  		 <strong><span style="font-size: 16px;">운영시간</span></strong>
+   	 	  		 <span style="font-size: 16px;">&nbsp;: 연중무휴</span>
+   	 	  		</h4>   	 	  		
+				</div>
+ 
+  	 	  </fieldset>
 
-      <!-- img Section -->
-      <div class="row">
-         <div class="col-lg-6" style="text-align:center; padding:50px 0px 0px 0px">
-            <h2></h2>
-            <h2><strong>여행하는 즐거움</strong></h2>
-            <p><strong><span style="font-size: 20px;"><u>우리가 무미건조를 선택하는 이유</u></span></strong></p>
-            
- <!--            <ul>
-               <li>장기간 여행에 최적화</li>
-               <li>다양한 착용법</li>
-               <li>최고급 품질</li>
-               <li>킬리만의 멋스러운 디자인</li>
-            </ul> -->
-               장기간 여행에 최적화<br>
-               다양한 착용법<br>
-               최고급 품질<br>
-               킬리만의 멋스러운 디자인<br>
-            
-         </div>
-         <div class="col-lg-6">
-            <img class="img-fluid rounded"
-               src="${path}/img/P002.jpg" alt="">
-         </div>
-         <div class="col-lg-6">
-            <img class="img-fluid rounded"
-               src="${path}/img/P003.jpg" alt="">
-         </div>
-         <br>
-         <div class="col-lg-6">
-            <img class="img-fluid rounded"
-               src="${path}/img/P004.jpg" alt="">
-         </div>
-         <br>
-      </div>
-      <!-- img Section end -->
+  	 	</form>
+  
+     </div>
+    </div>
 
-      <hr>
+    <!-- /.container -->
 
-      <!-- Call to Action Section -->
-      <div class="row mb-4">
-         <!--       
-        <div class="col-md-8">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-        </div>
-       -->
-         <div style="text-align:right; width:100%; padding:0px 20px 0px 0px">
-            <a class="btn btn-lg btn-secondary" href="#">Top</a>
-         </div>
-      </div>
-      <!-- Call to Action Section end-->
-
-   </div>
-   <!-- Page Content end -->
-
-
-   <!-- Footer -->
-   <footer class="py-5 bg-dark">
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white"><strong>Copyright</strong> &copy; 무미건조 &nbsp;</p>
         <p class="m-0 text-center text-white"><strong>주소</strong> : 경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층 &nbsp;</p>
         <p class="m-0 text-center text-white"><strong>대표번호</strong> : 031-606-9320 &nbsp;</p>
       </div>
       <!-- /.container -->
-   </footer>
-   <!-- Footer end -->
+    </footer>
 
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-   <!-- Bootstrap core JavaScript -->
-   <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
-   <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-   <!-- Bootstrap core JavaScript end -->
-
-
-</body>
+  </body>
 </html>

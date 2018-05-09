@@ -102,10 +102,23 @@ public interface MumiDAO {
 	 * 상품 삭제하기
 	 */
 	public int adminProductDelete(String pCode) throws SQLException;
+
+	/**
+	 * 상품 목록 보기
+	 * p_code, p_name, p_price, p_size, p_date, p_ea, p_image, p_detail_image
+	 */
+	public List<ProductDTO> adminProductAllRead() throws SQLException;
+
+	/**
+	 * 상품 디테일보기
+	 * p_code, p_name, p_price, p_size, p_date, p_ea, p_image, p_detail_image
+	 */
+	public ProductDTO adminProductRead(String pCode) throws SQLException;	
 	
 	/**
 	 * 회원 강퇴시키기 - cascade 옵션 추가해야 함
 	 */
 	public int adminUserDelete(String memberID) throws SQLException;
+	
 
 }

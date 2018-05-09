@@ -1,44 +1,47 @@
 package mumi.admincontroller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import mumi.model.dto.ProductDTO;
 import mumi.model.service.MumiService;
 import mumi.usercontroller.Action;
 import mumi.usercontroller.ModelAndView;
 
-public class AdminUserDeleteAction implements Action {
 
+
+public class AdminProductUpdateFormAction implements Action {
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		ModelAndView mv = new ModelAndView();
-
-		try {
-			HttpSession session = request.getSession();
-			String id = (String) session.getAttribute("id");
-			String memberID=request.getParameter("memberID");
-
-			if (!id.equals("admin")) {
-				throw new Exception("관리자로 로그인하고 이용하세요");
+		mv.setPath("errorView/error.jsp");
+		
+		String pCode = request.getParameter("pCode");
+		try{
+			if(pCode==null){
+				throw new SQLException("pCode가 없습니다.");
 			}
-			
-			int result = MumiService.adminUserDelete(memberID);
-			
-			if(result>0) {
-				mv.setPath("mumi?command=adminSelectAllMember");
+			ProductDTO proDto = MumiService.adminProductRead(pCode);
+			if(proDto==null){
+				throw new SQLException("해당하는 상품이 없습니다.");
+			}else{
+				request.setAttribute("proDto", proDto);
+				mv.setPath("adminProductUpdate.jsp");
 			}
-
-		} catch (Exception e) {
+		}catch(SQLException e){
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());
-			mv.setPath("404.html");
 		}
 		return mv;
 	}
 
 }
+
+
+

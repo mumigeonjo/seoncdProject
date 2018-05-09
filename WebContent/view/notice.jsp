@@ -1,30 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="path" value="${pageContext.request.contextPath}" scope="application"/>
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
 
-<title>Modern Business - Start Bootstrap Template</title>
-<c:set var="path" value="${pageContext.request.contextPath}"
-   scope="application" />
-<!-- Bootstrap core CSS -->
-<link
-   href="${path}/vendor/bootstrap/css/bootstrap.min.css"
-   rel="stylesheet">
-<!-- Custom styles for this template -->
+  <head>
 
-<link href="${path}/css/modern-business.css"
-   rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-</head>
+    <title>무미건조</title>
 
-<body>
+    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="${path}/css/modern-business.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+<!-- 	<SCRIPT language=javascript> -->
+	<SCRIPT  type="text/javascript">
+	
+		function sendUpdate(nIndexNo){
+			
+			$("#command"+nIndexNo).val("noticeUpdateForm");
+			$("#requestForm"+nIndexNo).submit();	
+		}
+			
+		function sendDelete(nIndexNo){	
+
+			if (confirm("정말 삭제하시겠습니까?")==true){
+				$("#command"+nIndexNo).val("noticeDelete");
+				$("#requestForm"+nIndexNo).submit();
+			}
+			return;	 	
+		}	
+				
+	</script>
+
+  </head>
+
+  <body>
+
    <!-- Navigation 1 -->
    <nav
       class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -40,7 +64,7 @@
             <span class="navbar-toggler-icon"></span>
          </button>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+		  <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                <%
                   if (session.getAttribute("id") == null) {
@@ -189,135 +213,81 @@
    </nav>
    <!-- Navigation 2 end -->
 
+    <!-- Page Content -->
+    <div class="container">
 
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">공지사항   
+    	<small><small>자주 묻는 질문 및 이벤트</small></small>
+      </h1>
+        
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item active">Notice</li>
+      </ol>
 
-   <!-- header -->
-   <header>
-      <div id="carouselExampleIndicators" class="carousel slide"
-         data-ride="carousel">
-         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0"
-               class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-         </ol>
-         <div class="carousel-inner" role="listbox">
-            <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active"
-               style="background-image: url('${path}/img/home2.PNG')">
-               <div class="carousel-caption d-none d-md-block">
-                  <h3>캠핑</h3>
-                  <p>This is a description for the first slide.</p>
-               </div>
-            </div>
-            <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item"
-               style="background-image: url('${path}/img/home3.png')">
-               <div class="carousel-caption d-none d-md-block">
-                  <h3>기차 여행</h3>
-                  <p>This is a description for the second slide.</p>
-               </div>
-            </div>
-            <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item"
-               style="background-image: url('${path}/img/home4.jpg')">
-               <div class="carousel-caption d-none d-md-block">
-                  <h3>집에 보관할때도 멋스럽게</h3>
-                  <p>This is a description for the third slide.</p>
-               </div>
-            </div>
-         </div>
-         <a class="carousel-control-prev" href="#carouselExampleIndicators"
-            role="button" data-slide="prev"> <span
-            class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-            class="sr-only">Previous</span>
-         </a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-            role="button" data-slide="next"> <span
-            class="carousel-control-next-icon" aria-hidden="true"></span> <span
-            class="sr-only">Next</span>
-         </a>
-      </div>
-   </header>
-   <!-- header end -->
-
-
-
-   <!-- Page Content -->
-   <div class="container">
-      <h1 class="my-4"></h1>
-
-      <!-- img Section -->
-      <div class="row">
-         <div class="col-lg-6" style="text-align:center; padding:50px 0px 0px 0px">
-            <h2></h2>
-            <h2><strong>여행하는 즐거움</strong></h2>
-            <p><strong><span style="font-size: 20px;"><u>우리가 무미건조를 선택하는 이유</u></span></strong></p>
-            
- <!--            <ul>
-               <li>장기간 여행에 최적화</li>
-               <li>다양한 착용법</li>
-               <li>최고급 품질</li>
-               <li>킬리만의 멋스러운 디자인</li>
-            </ul> -->
-               장기간 여행에 최적화<br>
-               다양한 착용법<br>
-               최고급 품질<br>
-               킬리만의 멋스러운 디자인<br>
-            
-         </div>
-         <div class="col-lg-6">
-            <img class="img-fluid rounded"
-               src="${path}/img/P002.jpg" alt="">
-         </div>
-         <div class="col-lg-6">
-            <img class="img-fluid rounded"
-               src="${path}/img/P003.jpg" alt="">
-         </div>
-         <br>
-         <div class="col-lg-6">
-            <img class="img-fluid rounded"
-               src="${path}/img/P004.jpg" alt="">
-         </div>
-         <br>
-      </div>
-      <!-- img Section end -->
-
-      <hr>
-
-      <!-- Call to Action Section -->
-      <div class="row mb-4">
-         <!--       
-        <div class="col-md-8">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-        </div>
-       -->
-         <div style="text-align:right; width:100%; padding:0px 20px 0px 0px">
-            <a class="btn btn-lg btn-secondary" href="#">Top</a>
-         </div>
-      </div>
-      <!-- Call to Action Section end-->
-
-   </div>
-   <!-- Page Content end -->
-
-
-   <!-- Footer -->
-   <footer class="py-5 bg-dark">
+      <div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">
+        
+        <c:forEach items="${requestScope.noticeRead}" var="noticeRead" varStatus="status">
+	        <div class="card">
+	          <div class="card-header" role="tab" id="headingOne">
+	          	<div style="float:left">
+	          	 <h5 class="mb-0">
+	               <a data-toggle="collapse" data-parent="#accordion" href="#${noticeRead.nIndexNo}" aria-expanded="true" aria-controls="collapseOne">
+	               	${status.count}. ${noticeRead.nTitle} 
+	               </a>
+	             </h5>	          	
+	          	</div>            
+	            <div style="text-align:right; float:left">&nbsp;&nbsp;${noticeRead.nDate}&nbsp;&nbsp;</div>
+	            <!-- ------------------------------------------------------------------------ -->
+	            <!-- -----로그인시 session으로 값받아와서 관리자만 버튼 보여줌 -->	           
+	           	 <c:if test="${sessionScope.id eq 'admin'}"> 
+		            <form name ="requestForm" id="requestForm${noticeRead.nIndexNo}" method=post action="${path}/mumi" >
+			          <input type=hidden name="nIndexNo" value="${noticeRead.nIndexNo}">
+			          <input type=hidden name="nTitle" value="${noticeRead.nTitle}">
+			          <input type=hidden name="nContent" value="${noticeRead.nContent}">		          
+			          <input type=hidden id="command${noticeRead.nIndexNo}" name="command" value="">
+	 				  <input type=button value="수정" class = "btn btn-primary" style = "vertical-align : inherit;" onClick="javascript:sendUpdate(${noticeRead.nIndexNo});">
+					  <input type=button value="삭제" class = "btn btn-primary" style = "vertical-align : inherit;" onClick="javascript:sendDelete(${noticeRead.nIndexNo});">	 
+					  
+		            </form>
+				 </c:if> 
+	            <!-- ------------------------------------------------------------------------ -->
+	          </div>
+	
+	          <div id="${noticeRead.nIndexNo}" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+	            <div class="card-body">
+	              ${noticeRead.nContent}
+	            </div>
+	          </div>
+	        </div>      
+        </c:forEach>
+        <!-- -----로그인시 session으로 값받아와서 관리자만 버튼 보여줌 -->
+        <c:if test="${id eq 'admin'}"> 
+	        <div align=right><span style="font-size:15pt;">&lt;<a href="${path}/view/noticeForm.jsp">글쓰기</a>&gt;</span></div>
+        </c:if> 
+        <!-- ------------------------------------------------------------------------ -->
+      </div>  	
+    </div>
+    
+    <!-- /.container -->
+	
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white"><strong>Copyright</strong> &copy; 무미건조 &nbsp;</p>
         <p class="m-0 text-center text-white"><strong>주소</strong> : 경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층 &nbsp;</p>
         <p class="m-0 text-center text-white"><strong>대표번호</strong> : 031-606-9320 &nbsp;</p>
       </div>
       <!-- /.container -->
-   </footer>
-   <!-- Footer end -->
+    </footer>
 
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-   <!-- Bootstrap core JavaScript -->
-   <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
-   <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-   <!-- Bootstrap core JavaScript end -->
+  </body>
 
-
-</body>
 </html>

@@ -34,14 +34,14 @@ public class UserLoginAction implements Action{
 		}
 		
 		session.setAttribute("id", dto.getMemberID());
-		mv.setPath("main.jsp");
+		mv.setPath("view/main.jsp");
 		mv.setRedirect(false);
 		
 		
 		}catch(Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());
-			mv.setPath("404.html");
+			mv.setPath("view/404.html");
 		}
 		return mv;
 	}

@@ -1,30 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+ <head>
 
-<title>Modern Business - Start Bootstrap Template</title>
-<c:set var="path" value="${pageContext.request.contextPath}"
-   scope="application" />
-<!-- Bootstrap core CSS -->
-<link
-   href="${path}/vendor/bootstrap/css/bootstrap.min.css"
-   rel="stylesheet">
-<!-- Custom styles for this template -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<link href="${path}/css/modern-business.css"
-   rel="stylesheet">
+    <title>무미건조</title>
 
-</head>
+    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-<body>
+    <!-- Custom styles for this template -->
+    <link href="../css/modern-business.css" rel="stylesheet">
+
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	
+
+  </head>
+
+  <body>
    <!-- Navigation 1 -->
    <nav
       class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -40,7 +38,7 @@
             <span class="navbar-toggler-icon"></span>
          </button>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+		  <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                <%
                   if (session.getAttribute("id") == null) {
@@ -189,135 +187,88 @@
    </nav>
    <!-- Navigation 2 end -->
 
+ <!-- Page Content -->
+    <div class="container">
 
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3"></h1>
 
-   <!-- header -->
-   <header>
-      <div id="carouselExampleIndicators" class="carousel slide"
-         data-ride="carousel">
-         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0"
-               class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-         </ol>
-         <div class="carousel-inner" role="listbox">
-            <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active"
-               style="background-image: url('${path}/img/home2.PNG')">
-               <div class="carousel-caption d-none d-md-block">
-                  <h3>캠핑</h3>
-                  <p>This is a description for the first slide.</p>
-               </div>
-            </div>
-            <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item"
-               style="background-image: url('${path}/img/home3.png')">
-               <div class="carousel-caption d-none d-md-block">
-                  <h3>기차 여행</h3>
-                  <p>This is a description for the second slide.</p>
-               </div>
-            </div>
-            <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item"
-               style="background-image: url('${path}/img/home4.jpg')">
-               <div class="carousel-caption d-none d-md-block">
-                  <h3>집에 보관할때도 멋스럽게</h3>
-                  <p>This is a description for the third slide.</p>
-               </div>
-            </div>
-         </div>
-         <a class="carousel-control-prev" href="#carouselExampleIndicators"
-            role="button" data-slide="prev"> <span
-            class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-            class="sr-only">Previous</span>
-         </a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-            role="button" data-slide="next"> <span
-            class="carousel-control-next-icon" aria-hidden="true"></span> <span
-            class="sr-only">Next</span>
-         </a>
-      </div>
-   </header>
-   <!-- header end -->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item active">About Us</li>
+      </ol>
 
-
-
-   <!-- Page Content -->
-   <div class="container">
-      <h1 class="my-4"></h1>
-
-      <!-- img Section -->
+      <!-- Portfolio Item Row -->
       <div class="row">
-         <div class="col-lg-6" style="text-align:center; padding:50px 0px 0px 0px">
-            <h2></h2>
-            <h2><strong>여행하는 즐거움</strong></h2>
-            <p><strong><span style="font-size: 20px;"><u>우리가 무미건조를 선택하는 이유</u></span></strong></p>
-            
- <!--            <ul>
-               <li>장기간 여행에 최적화</li>
-               <li>다양한 착용법</li>
-               <li>최고급 품질</li>
-               <li>킬리만의 멋스러운 디자인</li>
-            </ul> -->
-               장기간 여행에 최적화<br>
-               다양한 착용법<br>
-               최고급 품질<br>
-               킬리만의 멋스러운 디자인<br>
-            
-         </div>
-         <div class="col-lg-6">
-            <img class="img-fluid rounded"
-               src="${path}/img/P002.jpg" alt="">
-         </div>
-         <div class="col-lg-6">
-            <img class="img-fluid rounded"
-               src="${path}/img/P003.jpg" alt="">
-         </div>
-         <br>
-         <div class="col-lg-6">
-            <img class="img-fluid rounded"
-               src="${path}/img/P004.jpg" alt="">
-         </div>
-         <br>
-      </div>
-      <!-- img Section end -->
 
-      <hr>
-
-      <!-- Call to Action Section -->
-      <div class="row mb-4">
-         <!--       
         <div class="col-md-8">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+          <img id="imagediv" class="img-fluid" src="../img/CEO.jpg" alt="">
         </div>
-       -->
-         <div style="text-align:right; width:100%; padding:0px 20px 0px 0px">
-            <a class="btn btn-lg btn-secondary" href="#">Top</a>
-         </div>
+
+        <div class="col-md-4">
+          <h3 class="my-3"><strong>안녕하세요.<br> 무미건조대표 유준입니다.</strong></h3>
+          <p>2010년, 저는 다른 배낭여행객들과 마찬가지로 등산용 배낭을 매고 세계를 여행하고 있었습니다.&nbsp;</span><span style="font-size: 16px;">그때 당시 대부분의 여행자들이 메고 있던 등산용 배낭은 비싼 가격만큼 튼튼하긴 했지만 결코 ‘<strong>장기간 배낭여행</strong>’에 최적화된 가방은 아니었습니다. 또한 여행 중 만난 몇몇 분들은 제대로 된 배낭 착용법을 몰라 불편함을 겪고 있기도 했습니다.</p>
+          <p>아웃도어 장비와 관련된 일을 했던 저는 그것이 여행자의 잘못이 아니라 <u>그들이 메고 있던 배낭이 결코 여행에 적합하지 않다</u>는 생각을 했습니다.</p>
+        </div>
+
       </div>
-      <!-- Call to Action Section end-->
+      <!-- /.row -->
 
-   </div>
-   <!-- Page Content end -->
+      <!-- Related Projects Row -->
+      <h3 class="my-4"><strong>동업자들</strong></h3>
 
+      <div class="row">
 
-   <!-- Footer -->
-   <footer class="py-5 bg-dark">
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="../img/P002.jpg" alt="">
+          </a>
+        </div>
+        <script>
+
+        
+        </script>
+       
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="../img/P004.jpg" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="../img/P003.jpg" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="../img/P002.jpg" alt="">
+          </a>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white"><strong>Copyright</strong> &copy; 무미건조 &nbsp;</p>
         <p class="m-0 text-center text-white"><strong>주소</strong> : 경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층 &nbsp;</p>
         <p class="m-0 text-center text-white"><strong>대표번호</strong> : 031-606-9320 &nbsp;</p>
       </div>
       <!-- /.container -->
-   </footer>
-   <!-- Footer end -->
+    </footer>
 
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-   <!-- Bootstrap core JavaScript -->
-   <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
-   <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-   <!-- Bootstrap core JavaScript end -->
-
-
-</body>
+  </body>
 </html>

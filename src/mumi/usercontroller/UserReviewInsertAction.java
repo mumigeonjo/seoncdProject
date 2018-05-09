@@ -22,23 +22,21 @@ public class UserReviewInsertAction implements Action {
 		int result = 0;
 		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView();
-		String pCode = "P001M";//나중에 삭제
+		
 
-		int rIndexNo = Integer.parseInt(request.getParameter("rIndexNo"));
-		/* String pCode= request.getParameter("pCode"); */
+		
+		String pCode= request.getParameter("pCode");
 		String memberId = request.getParameter("memberId");
-		String rDate = request.getParameter("rDate");
-		String rcontent = request.getParameter("rcontent");
-		String rphoto = request.getParameter("rphoto");
+		String rContent = request.getParameter("rContent");
+		String rPhoto = request.getParameter("rPhoto");
 		int rRate = Integer.parseInt(request.getParameter("rRate"));
-
 		try {
-			ReviewDTO reviewDTO = new ReviewDTO(rIndexNo, pCode, memberId, rDate, rcontent, rphoto, rRate);
+			ReviewDTO reviewDTO = new ReviewDTO(0, pCode, memberId, null, rContent, rPhoto, rRate);
 			result = MumiService.userReviewInsert(reviewDTO);
-
+			System.out.println("result"+result);
 			if (result > 0) {
 				request.setAttribute("result", result);
-				mv.setPath("???");
+				mv.setPath("view/productDetail.jsp");
 				mv.setRedirect(false);
 			} else {
 				throw new SQLException("리뷰작성에 실패했습니다.");
@@ -47,7 +45,7 @@ public class UserReviewInsertAction implements Action {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());
-			mv.setPath("404.html");
+			mv.setPath("view/404.html");
 		}
 		return mv;
 

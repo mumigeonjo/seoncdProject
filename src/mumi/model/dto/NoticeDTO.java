@@ -8,6 +8,19 @@ public class NoticeDTO {
 	
 	public NoticeDTO() {}
 	
+	public NoticeDTO(String nTitle, String nContent) {
+		super();
+		this.nTitle = nTitle;
+		this.nContent = nContent;
+	}
+	
+	public NoticeDTO(String nIndexNo, String nTitle, String nContent) {
+		super();
+		this.nIndexNo = nIndexNo;
+		this.nTitle = nTitle;
+		this.nContent = nContent;
+	}
+	
 	public NoticeDTO(String nIndexNo, String nTitle, String nContent, String nDate) {
 		super();
 		this.nIndexNo = nIndexNo;
