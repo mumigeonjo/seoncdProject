@@ -1,32 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<c:set var="path" value="${pageContext.request.contextPath}" scope="application"/>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>무미건조</title>
 
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="css/modern-business.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-
+    <link href="../css/modern-business.css" rel="stylesheet">
+    
     <script type="text/javascript">
-    	function sendUpdate() {
-    	    var f = window.document.noticeUpdateForm;
+    	function sendInsert() {
+    	    var f = window.document.noticeForm;
     		
     		if ( f.nTitle.value == "") {
     		    alert( "공지사항 제목을 입력해주세요" );
@@ -43,6 +35,8 @@
     </script>
 
   </head>
+
+  <body>
 
    <!-- Navigation 1 -->
    <nav
@@ -212,12 +206,12 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">공시사항 수정하기
+      <h1 class="mt-4 mb-3">공시사항 글쓰기
       </h1>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
+          <a href="../index.html">Home</a>
         </li>
         <li class="breadcrumb-item active">
           Notice
@@ -225,21 +219,21 @@
       </ol>
 
       <div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">
- 		
-  	 	<form name="noticeUpdateForm" method="post" action="mumi?command=noticeUpdate" onSubmit='return sendUpdate()'>
+  
+  	 	<form name="noticeForm" method="post" action="../mumi?command=noticeInsert" onSubmit='return sendInsert()'>
   	 	  <fieldset style="text-align: center;">
   	 	    <font style = "vertical-align : inherit; font-size:20pt;"> 양식 </font>
    			  <div>
 			    <label for="exampleTextarea">공지사항 제목</label>
-			    <textarea class="form-control" id="nTitle" name="nTitle" rows="1">${noticeUpdate.nTitle}</textarea>
+			    <textarea class="form-control" id="nTitle" name="nTitle" rows="1"></textarea>
 			  </div>
 			  
 			  <div style="margin:0px 0px 10px">
 			    <label for="exampleTextarea">공지사항 내용</label>
-			    <textarea class="form-control" id="nContent" name="nContent" rows="3">${noticeUpdate.nContent}</textarea>
+			    <textarea class="form-control" id="nContent" name="nContent" rows="3"></textarea>
 			  </div>
-  	 	  	  <input type=hidden name="nIndexNo" value="${noticeUpdate.nIndexNo}">
-  	 	  	  <button type = "submit" class = "btn btn-primary" style = "vertical-align : inherit;">수정하기</button>
+  	 	  	
+  	 	  	  <button type = "submit" class = "btn btn-primary" style = "vertical-align : inherit;">저장하기</button>
   	 	  	   	
   	 	  </fieldset>
   	 	</form>
@@ -259,9 +253,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
-
 </html>
