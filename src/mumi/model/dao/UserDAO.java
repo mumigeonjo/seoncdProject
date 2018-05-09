@@ -266,7 +266,7 @@ public interface UserDAO {
 	 * @param reviewDTO
 	 * @return
 	 */
-	public int userReviewUpdate(ReviewDTO reviewDTO);
+	
 
 	/**
 	 * 리뷰 삭제메소드
@@ -280,6 +280,22 @@ public interface UserDAO {
 	 * 회원정보 수정 폼 가기
 	 */
 	public MemberDTO userUpdateForm(String id);
+
+	/*
+	 * 리뷰 수정 폼 가기
+	 * */
+	public ReviewDTO userReviewUpdateForm(String rIndexNo);
+
+	
+	/***
+	 * 
+	 * @param reviewDTO
+	 * @return 리뷰 수정하기
+	 */
+	public int userReviewUpdate(ReviewDTO reviewDTO);
+	
+	
+	
 
 	
 

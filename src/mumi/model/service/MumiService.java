@@ -145,14 +145,6 @@ public class MumiService {
 
 	}
 
-	// 리뷰 게시글 수정(로그인 한 유저의 글만)
-	public static int userReviewUpdate(ReviewDTO reviewDTO) throws SQLException {
-		int re = userDAO.userReviewUpdate(reviewDTO);
-		if (re == 0)
-			throw new SQLException("수정되지 않았습니다.");
-		return re;
-
-	}
 	
 	//공지사항 조회
 	public static List<NoticeDTO> selectNoticeAll()throws SQLException{
@@ -274,11 +266,7 @@ public class MumiService {
 		return 0;
 	}
 	
-	//리뷰 게시글 수정(로그인 한 유저의 글만)
-	public static int updateUserReview() throws SQLException{
-		return 0;
-	}
-	
+
 	//모든 리뷰 게시글 읽기(로그인 한 유저의 글만)
 	public static List<ReviewDTO> selectUserReview() throws SQLException{
 		return null;
@@ -396,4 +384,16 @@ public class MumiService {
 		MemberDTO dto = userDAO.userUpdateForm(id);
 		return dto;
 	}
+
+	public static ReviewDTO userReviewUpdateForm(String rIndexNo) {
+		ReviewDTO dto= userDAO.userReviewUpdateForm(rIndexNo);
+		return dto;
+	}
+
+	public static int updateUserReview(ReviewDTO reviewDTO) {
+		int result = userDAO.userReviewUpdate(reviewDTO);
+		return result;
+	}
+
+	
 }

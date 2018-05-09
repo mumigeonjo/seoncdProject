@@ -7,7 +7,7 @@ drop table product;
 drop table member;
 
 commit
-select * from product;
+select * from review;
 --create table
 create table member(
     member_id varchar2(20) not null constraint mid_pk PRIMARY KEY,

@@ -28,12 +28,13 @@
 <SCRIPT type="text/javascript">
 	
 		function sendUpdate(rIndexNo){
-			
-			$("#command"+rIndexNo).val("userReiveUpdate");
+			if (confirm("정말 수정하시겠습니까?")==true){
+			$("#command"+rIndexNo).val("userReviewUpdateForm");
 			$("#requestForm"+rIndexNo).submit();	
+		 }
+			return;
 		}
-			
-		function UserSendDelete(rIndexNo){	
+		function userSendDelete(rIndexNo){	
 	
 			if (confirm("정말 삭제하시겠습니까?")==true){
 				$("#command"+rIndexNo).val("userReviewDelete");
@@ -188,34 +189,46 @@
 						<c:forEach items="${requestScope.list}" var="list"	varStatus="status">
 
 
-
 							<div data-toggle="collapse" data-parent="#accordion"
 								href="#${list.rIndexNo}" aria-expanded="true"
 								aria-controls="collapseOne">${status.count}
 								
-								제목 : ${list.rContent} 글쓴이 : ${list.memberID} 별점 :${list.rRate}</div>
+								제목 : ${list.rContent} 글쓴이 : ${list.memberID} 별점 :${list.rRate}
+								날짜 : ${list.rDate} 
+								</div>
 
-							<!-- 유저 수정삭제 -->
+							<!-- 유저 수정 -->
 							<c:if test="${sessionScope.id eq list.memberID}">
-								<form name="requestForm" id="requestForm${list.rIndexNo}"
-									method=post action="${path}/mumi?command=userReviewDelete&rIndexNo="+${list.rIndexNo}>
-									<input type=hidden id="command${list.nIndexNo}"
-										name="command" value=""> <input type=button value="수정"
-										class="btn btn-primary" style="vertical-align: inherit;"
-										onClick="javascript:userSendUpdate(${list.rIndexNo});">
-									<input type=button value="삭제" class="btn btn-primary"
-										style="vertical-align: inherit;"
+								<form style="float:left" name="requestForm" id="requestForm${list.rIndexNo}"
+									method=post action="${path}/mumi?command=userReviewUpdateForm&rIndexNo=${list.rIndexNo}&pCode=${list.pCode}">
+							 <input type=button value="수정" class="btn btn-primary" style="vertical-align: inherit;"
+										onClick="javascript:sendUpdate(${list.rIndexNo});">
+								</form>
+								
+							<!-- 유저 삭제 -->	
+								<form   name="requestForm" id="requestForm${list.rIndexNo}"
+									method=post action="${path}/mumi?command=userReviewDelete&rIndexNo=${list.rIndexNo}&pCode=${list.pCode}">
+									
+									<%-- <input type=hidden id="command${list.rIndexNo}"
+										name="command" value=""> --%> 
+								
+								<input type=button value="삭제" class="btn btn-primary"	style="vertical-align: inherit;"
 										onClick="javascript:userSendDelete(${list.rIndexNo});">
 								</form>
+							
 							</c:if>
-
+							
+							
+							
+							
+							
 							<!-- 관리자 삭제버튼! -->
 							<c:if test="${id eq 'admin'}">
 								<form name="requestForm" id="requestForm${list.rIndexNo}"
-									method=post action="${path}/mumi?command=adminReviewDelete&rIndexNo=${list.rIndexNo}">
-									<input type=hidden id="command${list.rIndexNo}"
-										name="command" value=""> <input type=button value="삭제"
-										class="btn btn-primary" style="vertical-align: inherit;"
+									method=post action="${path}/mumi?command=adminReviewDelete&rIndexNo=${list.rIndexNo}&pCode=${list.pCode}">
+<%-- 									<input type=hidden id="command${list.rIndexNo}"
+										name="command" value="">  --%>
+									<input type=button value="삭제" class="btn btn-primary" style="vertical-align: inherit;"
 										onClick="javascript:adminSendDelete(${list.rIndexNo});">
 
 								</form>
@@ -225,27 +238,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<!-- Sidebar Widgets Column -->
-		<div class="col-md-4">
-
-			<!-- Search Widget -->
-			<div class="card mb-4">
-				<h5 class="card-header">Search</h5>
-				<div class="card-body">
-					<div class="input-group">
-						<input type="text" class="form-control"
-							placeholder="Search for..."> <span
-							class="input-group-btn">
-							<button class="btn btn-secondary" type="button">Go!</button>
-						</span>
-					</div>
-				</div>
-			</div>
-
-
-
 		</div>
 
 	</div>

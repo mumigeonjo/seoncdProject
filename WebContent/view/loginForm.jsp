@@ -6,32 +6,31 @@ pageEncoding="UTF-8"%>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Insert title here</title>
 <c:set var="path" value="${pageContext.request.contextPath}"
-	scope="application" />
+   scope="application" />
 <!-- Bootstrap core CSS -->
-<link
-	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath}/css/modern-business.css"
-	rel="stylesheet">
-	
+   rel="stylesheet">
+   
 <style>
 #footer {
-	position: fixed;
-	left: 0px;
-	bottom: 0px;
-	width: 100%;
-	text-align: center;
+   position: fixed;
+   left: 0px;
+   bottom: 0px;
+   width: 100%;
+   text-align: center;
 }
 #loginForm {
-	  padding:20px;
-	  text-align: center;
+     padding:20px;
+     text-align: center;
 }
 table {
     width: 400px;
@@ -48,72 +47,68 @@ table {
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#historyback").click(function(){
-		window.history.back();
-	})
+   $("#historyback").click(function(){
+      window.history.back();
+   })
 })
 </script>
 </head>
 <body>
-
-
-<form method="post" action="../mumi?command=userLogin">
-
 <!-- Navigation 1 -->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/index.html">MuMiGeonJo-BACKPACKS</a>
+   <nav
+      class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+         <a class="navbar-brand"
+            href="${pageContext.request.contextPath}/index.html">MuMiGeonJo-BACKPACKS</a>
 
 
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+         <button class="navbar-toggler navbar-toggler-right" type="button"
+            data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
 
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<%
-						if (session.getAttribute("id") == null) {
-					%>
+         <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+               <%
+                  if (session.getAttribute("id") == null) {
+               %>
 
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/view/loginForm.jsp">로그인</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/view/register.jsp">회원가입</a></li>
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/view/loginForm.jsp">로그인</a></li>
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/view/register.jsp">회원가입</a></li>
 
-					<%
-						} else {
-					%>
+               <%
+                  } else {
+               %>
 
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/mumi?command=userLogout">로그아웃</a></li>
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/mumi?command=userLogout">로그아웃</a></li>
 
-					<%
-						if (session.getAttribute("id").equals("admin")) {
-					%>
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/mumi?command=adminSelectAllMember">모든회원
-							조회</a></li>
-					<%
-						} else {
-					%>
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/mumi?command=userUpdateForm">회원정보
-							수정</a></li>
+               <%
+                  if (session.getAttribute("id").equals("admin")) {
+               %>
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/mumi?command=adminSelectAllMember">모든회원
+                     조회</a></li>
+               <%
+                  } else {
+               %>
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/mumi?command=userUpdateForm">회원정보
+                     수정</a></li>
 
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/cartRead">장바구니</a></li>
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/cartRead">장바구니</a></li>
 
-					<%
-						}
-						}
-					%>
+               <%
+                  }
+                  }
+               %>
 
-					<!--             
+               <!--             
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Online Shop
@@ -151,28 +146,28 @@ $(document).ready(function(){
             
              -->
 
-				</ul>
-			</div>
-		</div>
-		<br>
-	</nav>
+            </ul>
+         </div>
+      </div>
+      <br>
+   </nav>
 <form method="post" action="${pageContext.request.contextPath}/mumi?command=userLogin" id="loginForm">
 <table>
 <tr>
-	<th>아이디</th>
-	<th><input type="text" id="id" name="id"></th>
+   <th>아이디</th>
+   <th><input type="text" id="id" name="id"></th>
 </tr>
 <tr>
-	<th>비밀번호</th>
-	<th><input type="text" id="pwd" name="pwd"></th>
+   <th>비밀번호</th>
+   <th><input type="text" id="pwd" name="pwd"></th>
 </tr>
 <tr>
-	<th><button>로그인</button></th>
-	<th><button type="button" id="historyback" name="historyback">뒤로 가기</button></th>
+   <th><button>로그인</button></th>
+   <th><button type="button" id="historyback" name="historyback">뒤로 가기</button></th>
 </tr>
 </table>
 </form>
-	  <!-- Footer -->
+     <!-- Footer -->
    <footer class="py-5 bg-dark" id="footer" >
       <div class="container">
         <p class="m-0 text-center text-white"><strong>Copyright</strong> &copy; 무미건조 &nbsp;</p>

@@ -525,28 +525,7 @@ public class UserDAOImpl implements UserDAO {
 		return re;
 	}
 
-	@Override
-	public int userReviewUpdate(ReviewDTO reviewDTO) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		int re = 0;
-		try {
-			con = DBUtil.getConnection();
-			ps = con.prepareStatement(
-					"update review set pCode=?, sysdate, rContent=?, rPhoto=?, rRate=? where member_id=?");
-			ps.setString(1, reviewDTO.getpCode());
-			ps.setString(2, reviewDTO.getrContent());
-			ps.setString(3, reviewDTO.getrPhoto());
-			ps.setInt(4, reviewDTO.getrRate());
-			re = ps.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.dbClose(con, ps);
-		}
-		return re;
-	}
 
 	@Override
 	public int userReviewDelete(int rIndexNo) {
@@ -633,6 +612,57 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return memberDTO;
 	}
+
+	@Override
+	public ReviewDTO userReviewUpdateForm(String rIndexNo) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ReviewDTO dto = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("select * from review where r_indexNo=?");
+			ps.setString(1, rIndexNo);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+			dto = new ReviewDTO(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)));
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(con, ps, rs);
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public int userReviewUpdate(ReviewDTO reviewDTO) {
+		Connection con = null;
+		PreparedStatement ps= null;
+		int result=0;
+		
+		try {
+			con= DBUtil.getConnection();
+			ps= con.prepareStatement("update review set r_date=sysdate, r_content=?, r_Rate=? where R_indexNo=?");
+			ps.setString(1, reviewDTO.getrContent());
+			ps.setInt(2, reviewDTO.getrRate());
+			ps.setInt(3, reviewDTO.getrIndexNo());
+			result =ps.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+
 
 /*	@Override
 	public int userOrderComplete(OrderDTO orderDTO) {
