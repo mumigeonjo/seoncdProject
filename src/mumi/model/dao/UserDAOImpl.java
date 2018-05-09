@@ -77,7 +77,31 @@ public class UserDAOImpl implements UserDAO {
 		List<ProductDTO> list = new ArrayList<>();
 		try {
 			con = DBUtil.getConnection();
-			ps = con.prepareStatement("select * from product");
+			ps = con.prepareStatement("select p_name, p_image, p_size, min(p_price) from product where p_size='M' GROUP BY p_name, p_image, p_size");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO(null, rs.getString("p_name"), rs.getInt("min(p_price)"),
+						rs.getString("p_size"), null, 0, rs.getString("p_image"), null);
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(con, ps, rs);
+		}
+		return list;
+	}
+
+	@Override // 다영
+	public List<ProductDTO> userProductRead(String pName) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ProductDTO> list = new ArrayList<>();
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("select * from product where p_name = ?");
+			ps.setString(1, pName);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ProductDTO dto = new ProductDTO(rs.getString("p_code"), rs.getString("p_name"), rs.getInt("p_price"),
@@ -91,30 +115,6 @@ public class UserDAOImpl implements UserDAO {
 			DBUtil.dbClose(con, ps, rs);
 		}
 		return list;
-	}
-
-	@Override // 다영
-	public ProductDTO userProductRead(String pCode) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		ProductDTO productDTO = new ProductDTO();
-		try {
-			con = DBUtil.getConnection();
-			ps = con.prepareStatement("select * from product where p_code = ?");
-			ps.setString(1, pCode);
-			rs = ps.executeQuery();
-			if (rs.next()) {
-				productDTO = new ProductDTO(rs.getString("p_code"), rs.getString("p_name"), rs.getInt("p_price"),
-						rs.getString("p_size"), rs.getString("p_date"), rs.getInt("p_ea"), rs.getString("p_image"),
-						rs.getString("p_detail_image"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.dbClose(con, ps, rs);
-		}
-		return productDTO;
 	}
 
 	@Override
