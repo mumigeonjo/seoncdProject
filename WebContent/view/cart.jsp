@@ -16,7 +16,9 @@
 				url:"${pageContext.request.contextPath}/mumi",
 				data:"command=cartDelete&oIndexNo="+$(this).attr("class"),
 				success:function(){
-					//$(this:parent:parent)
+					alert($(this).parents().parents());
+					$(this).parents().parents().css("color", "blue");
+					$(this).parents().parents().remove();
 				},
 				error:function(){
 					alert("error");
