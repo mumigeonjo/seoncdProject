@@ -34,10 +34,10 @@ public class UserJoinAction implements Action {
 				mv.setRedirect(true);
 			}
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("errorMsg", e.getMessage());
-			mv.setPath("404.html");
+			request.setAttribute("errorMsg", "동일한 아이디가 있습니다.");
+			mv.setPath("view/register.jsp");
 		}
 		return mv;
 	}
