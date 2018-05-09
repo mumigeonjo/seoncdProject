@@ -47,6 +47,26 @@ table {
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+
+function check(){
+	var forms = document.getElementById("loginForm");
+	var id=loginForm.id.value;
+	var password=loginForm.pwd.value;
+	
+	if(id.length == 0){
+		alert("아이디를 입력하세요.");
+		loginForm.id.focus();
+		return false;
+	}
+	if(password.length == 0){
+		alert("비밀번호를 입력하세요.");
+		loginForm.pwd.focus();
+		return false;
+	} 
+	
+	return true;
+}
+
 $(document).ready(function(){
 	$("#historyback").click(function(){
 		window.history.back();
@@ -152,8 +172,9 @@ $(document).ready(function(){
 		</div>
 		<br>
 	</nav>
-<form method="post" action="${pageContext.request.contextPath}/mumi?command=userLogin" id="loginForm">
+<form method="post" action="${pageContext.request.contextPath}/mumi?command=userLogin" id="loginForm" onsubmit="return check()">
 <table>
+
 <tr>
 	<th>아이디</th>
 	<th><input type="text" id="id" name="id"></th>
@@ -167,6 +188,8 @@ $(document).ready(function(){
 	<th><button type="button" id="historyback" name="historyback">뒤로 가기</button></th>
 </tr>
 </table>
+<br>
+<h4> ${requestScope.errorMsg}</h4>
 </form>
 	  <!-- Footer -->
    <footer class="py-5 bg-dark" id="footer" >
