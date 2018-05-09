@@ -1,49 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<c:set var="path" value="${pageContext.request.contextPath}" scope="application"/>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
-  <head>
+ <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>무미건조</title>
 
     <!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="css/modern-business.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <link href="../css/modern-business.css" rel="stylesheet">
 
-    <script type="text/javascript">
-    	function sendUpdate() {
-    	    var f = window.document.noticeUpdateForm;
-    		
-    		if ( f.nTitle.value == "") {
-    		    alert( "공지사항 제목을 입력해주세요" );
-    		    f.nTitle.focus();
-    			return false;
-    	    }
-    		if ( f.nContent.value == "" ) {
-    			alert( "공지사항 내용을 입력해주세요" );
-    			f.nContent.focus();
-    			return false;
-    		}
-		}
-    	
-    </script>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	
 
   </head>
 
+  <body>
    <!-- Navigation 1 -->
    <nav
       class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -208,43 +187,72 @@
    </nav>
    <!-- Navigation 2 end -->
 
-    <!-- Page Content -->
+ <!-- Page Content -->
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">공시사항 수정하기
-      </h1>
+      <h1 class="mt-4 mb-3"></h1>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="index.html">Home</a>
         </li>
-        <li class="breadcrumb-item active">
-          Notice
-        </li>
+        <li class="breadcrumb-item active">About Us</li>
       </ol>
 
-      <div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">
- 		
-  	 	<form name="noticeUpdateForm" method="post" action="mumi?command=noticeUpdate" onSubmit='return sendUpdate()'>
-  	 	  <fieldset style="text-align: center;">
-  	 	    <font style = "vertical-align : inherit; font-size:20pt;"> 양식 </font>
-   			  <div>
-			    <label for="exampleTextarea">공지사항 제목</label>
-			    <textarea class="form-control" id="nTitle" name="nTitle" rows="1">${noticeUpdate.nTitle}</textarea>
-			  </div>
-			  
-			  <div style="margin:0px 0px 10px">
-			    <label for="exampleTextarea">공지사항 내용</label>
-			    <textarea class="form-control" id="nContent" name="nContent" rows="3">${noticeUpdate.nContent}</textarea>
-			  </div>
-  	 	  	  <input type=hidden name="nIndexNo" value="${noticeUpdate.nIndexNo}">
-  	 	  	  <button type = "submit" class = "btn btn-primary" style = "vertical-align : inherit;">수정하기</button>
-  	 	  	   	
-  	 	  </fieldset>
-  	 	</form>
-  
+      <!-- Portfolio Item Row -->
+      <div class="row">
+
+        <div class="col-md-8">
+          <img id="imagediv" class="img-fluid" src="../img/CEO.jpg" alt="">
+        </div>
+
+        <div class="col-md-4">
+          <h3 class="my-3"><strong>안녕하세요.<br> 무미건조대표 유준입니다.</strong></h3>
+          <p>2010년, 저는 다른 배낭여행객들과 마찬가지로 등산용 배낭을 매고 세계를 여행하고 있었습니다.&nbsp;</span><span style="font-size: 16px;">그때 당시 대부분의 여행자들이 메고 있던 등산용 배낭은 비싼 가격만큼 튼튼하긴 했지만 결코 ‘<strong>장기간 배낭여행</strong>’에 최적화된 가방은 아니었습니다. 또한 여행 중 만난 몇몇 분들은 제대로 된 배낭 착용법을 몰라 불편함을 겪고 있기도 했습니다.</p>
+          <p>아웃도어 장비와 관련된 일을 했던 저는 그것이 여행자의 잘못이 아니라 <u>그들이 메고 있던 배낭이 결코 여행에 적합하지 않다</u>는 생각을 했습니다.</p>
+        </div>
+
       </div>
+      <!-- /.row -->
+
+      <!-- Related Projects Row -->
+      <h3 class="my-4"><strong>동업자들</strong></h3>
+
+      <div class="row">
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="../img/P002.jpg" alt="">
+          </a>
+        </div>
+        <script>
+
+        
+        </script>
+       
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="../img/P004.jpg" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="../img/P003.jpg" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="../img/P002.jpg" alt="">
+          </a>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
     </div>
     <!-- /.container -->
 
@@ -259,9 +267,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
-
 </html>

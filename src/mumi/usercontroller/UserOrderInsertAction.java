@@ -24,20 +24,21 @@ public class UserOrderInsertAction implements Action{
 			throws ServletException, IOException {
 		//나중에 수정할 필요 있을듯
 		ModelAndView mv = new ModelAndView();
-		Cookie [] cookies = request.getCookies();
+		
 		HttpSession session = request.getSession();
 		int oIndexNo=0;
 		OrderDTO orderDTO;
 		
-		for(Cookie cookie:cookies) {
-			if(cookie.getName().equals("oIndexNo")) {
-				oIndexNo=Integer.parseInt(cookie.getValue());
-				break;
-			}
-		}
-		String pCode = (String)request.getAttribute("pCode");
-		
-		switch((char)request.getAttribute("size")) {
+		oIndexNo = Integer.parseInt(request.getParameter("oIndexNo"));
+		String pCode = request.getParameter("pCode");
+		String size = request.getParameter("size");
+		if(size.equals("S"))
+			pCode.replace(pCode.charAt(pCode.length()-1), 'S');
+		else if(size.equals("L"))
+			pCode.replace(pCode.charAt(pCode.length()-1), 'L');
+		System.out.println("pCode : "+pCode);
+		/*
+		switch(request.getParameter("size")) {
 		case 'S':
 			pCode.replace(pCode.charAt(pCode.length()-1), 'S');
 			break;
@@ -46,14 +47,15 @@ public class UserOrderInsertAction implements Action{
 			break;
 		default:
 		}
+		*/
 		
 		orderDTO = new OrderDTO(oIndexNo, pCode,
-				null, (int)request.getAttribute("oEA"),
-				null, 1, (String)request.getAttribute("oAddr"), (String)request.getAttribute("oPhone"));
-		
+				null, Integer.parseInt(request.getParameter("oEA")),
+				null, 1, request.getParameter("oAddr"), request.getParameter("oPhone"));
+		System.out.println(orderDTO.getoEA()+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		try {
 			MumiService.insertOrder(orderDTO);
-			mv.setPath("");
+			mv.setPath("view/cart.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

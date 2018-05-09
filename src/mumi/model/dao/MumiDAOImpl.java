@@ -18,24 +18,22 @@ public class MumiDAOImpl implements MumiDAO {
 
 	@Override
 	public List<OrderDTO> adminOrderListRead() throws SQLException {
-		Connection con=null;
+		Connection con = null;
 		PreparedStatement ps = null;
 		List<OrderDTO> list = new ArrayList<>();
 		ResultSet rs = null;
 		try {
-			con=DBUtil.getConnection();
-			ps=con.prepareStatement("select member_id, p_code, o_ea, o_date"
-					+ "from order_detail"
-					+ "where o_status=1"
-					+ "order by o_date desc");
-			rs=ps.executeQuery();
-			while(rs.next()) {
-				list.add(new OrderDTO(0, rs.getString(1), rs.getString(2), 
-						rs.getInt(3), rs.getString(4), 1, null, null));
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("select member_id, p_code, o_ea, o_date" + "from order_detail"
+					+ "where o_status=1" + "order by o_date desc");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				list.add(new OrderDTO(0, rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), 1, null,
+						null));
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBUtil.dbClose(con, ps, rs);
 		}
 		return list;
@@ -292,6 +290,54 @@ public class MumiDAOImpl implements MumiDAO {
 		return 0;
 	}
 
+	@Override // 다영
+	public List<ProductDTO> adminProductAllRead() {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ProductDTO> list = new ArrayList<>();
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("select * from product");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO(rs.getString("p_code"), rs.getString("p_name"), rs.getInt("p_price"),
+						rs.getString("p_size"), rs.getString("p_date"), rs.getInt("p_ea"), rs.getString("p_image"),
+						rs.getString("p_detail_image"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(con, ps, rs);
+		}		
+		return list;
+	}
+	
+	@Override // 다영
+	public ProductDTO adminProductRead(String pCode) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ProductDTO productDTO = new ProductDTO();
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("select * from product where p_code = ?");
+			ps.setString(1, pCode);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				productDTO = new ProductDTO(rs.getString("p_code"), rs.getString("p_name"), rs.getInt("p_price"),
+						rs.getString("p_size"), rs.getString("p_date"), rs.getInt("p_ea"), rs.getString("p_image"),
+						rs.getString("p_detail_image"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(con, ps, rs);
+		}
+		return productDTO;
+	}
+	
 	@Override
 	public int adminProductAllUpdate(ProductDTO product) throws SQLException {
 		// TODO Auto-generated method stub

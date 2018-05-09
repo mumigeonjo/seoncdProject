@@ -24,14 +24,13 @@ public class UserReviewReadAction implements Action{
 		try {
 			List<ReviewDTO> list= MumiService.userReviewRead(pCode);
 			request.setAttribute("list", list);
-			mv.setPath("view/reviewResult.jsp");
+			mv.setPath("view/productDetail.jsp");
 			mv.setRedirect(false);
 		}catch(Exception e) {
 			e.printStackTrace();
 			mv.setPath("404.html");
 			mv.setRedirect(true);
 		}
-		
 		return mv;
 	}
 }

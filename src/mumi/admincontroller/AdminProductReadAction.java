@@ -2,40 +2,40 @@ package mumi.admincontroller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mumi.model.dto.OrderDTO;
+import mumi.model.dto.ProductDTO;
 import mumi.model.service.MumiService;
 import mumi.usercontroller.Action;
 import mumi.usercontroller.ModelAndView;
-import net.sf.json.JSONArray;
 
-/**
- * 모든 사용자의 결제 내역 확인
- */
+public class AdminProductReadAction implements Action{
 
-public class AdminOrderListReadAction implements Action{
-
-	@Override
+	//http://localhost:8000/second_PJ/mumi?command=userProductRead
+	
+	@Override //다영
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+	
 		ModelAndView mv = new ModelAndView();
-		List<OrderDTO> customerOrderList = new ArrayList<>();
+		
+		//모델번호 받기
+		String pCode = request.getParameter("pCode");
+				
 		try {
-			customerOrderList = MumiService.selectOrderAll();
-			JSONArray orderList = JSONArray.fromObject(customerOrderList);
-			request.setAttribute("orderList", orderList);
-			mv.setPath("/view/adminOrderList.jsp");
+			ProductDTO productDTO = MumiService.adminProductRead(pCode);
+			request.setAttribute("proDto", productDTO);//viewpage에서 ${proDTO}
+			mv.setPath("adminProductRead.jsp"); 
+			
+			//System.out.println(list);	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			request.setAttribute("errorMsg", e.getMessage());//뷰페이지 ${errorMsg}
+			mv.setPath("errorView/error.jsp");			
 		}
 		return mv;
 	}
-
 }

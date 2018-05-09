@@ -67,7 +67,7 @@ public interface UserDAO {
 	 * @param pCode
 	 * @return
 	 */
-	public ProductDTO userProductRead(String pCode);
+	public List<ProductDTO> userProductRead(String pName);
 
 	/**
 	 * 가격별 정렬
@@ -275,6 +275,11 @@ public interface UserDAO {
 	 * @return
 	 */
 	public int userReviewDelete(int rIndexNo);
+
+	/*
+	 * 회원정보 수정 폼 가기
+	 */
+	public MemberDTO userUpdateForm(String id);
 
 	
 

@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
 <title>Insert title here</title>
-<c:set var="path" value="${pageContext.request.contextPath}"
-	scope="application" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#historyback").click(function(){
+		location.href='mumi';
+	})
+})
+</script>
 <!-- Bootstrap core CSS -->
 <link
 	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
@@ -20,59 +23,33 @@ pageEncoding="UTF-8"%>
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath}/css/modern-business.css"
 	rel="stylesheet">
-	
 <style>
 #footer {
-	position: fixed;
-	left: 0px;
-	bottom: 0px;
-	width: 100%;
-	text-align: center;
-}
-#loginForm {
-	  padding:20px;
-	  text-align: center;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:70px;   
+    background:#ccc;
 }
 table {
-    width: 400px;
+    width: 80%;
     height: 200px;
     margin-left: auto;
     margin-right: auto;
-    margin-top:180px;
+    margin-top:30px;
+    padding:20px;
+    
   }
    table, th, td {
     border: 1px solid #bcbcbc;
   }
-</style>
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-
-function check(){
-	var forms = document.getElementById("loginForm");
-	var id=loginForm.id.value;
-	var password=loginForm.pwd.value;
+  
+button{
+	color:black;
+	text-decoration:none;
 	
-	if(id.length == 0){
-		alert("아이디를 입력하세요.");
-		loginForm.id.focus();
-		return false;
-	}
-	if(password.length == 0){
-		alert("비밀번호를 입력하세요.");
-		loginForm.pwd.focus();
-		return false;
-	} 
-	
-	return true;
 }
-
-$(document).ready(function(){
-	$("#historyback").click(function(){
-		window.history.back();
-	})
-})
-</script>
+</style>
 </head>
 <body>
 <!-- Navigation 1 -->
@@ -172,41 +149,42 @@ $(document).ready(function(){
 		</div>
 		<br>
 	</nav>
-<form method="post" action="${pageContext.request.contextPath}/mumi?command=userLogin" id="loginForm" onsubmit="return check()">
-<table>
+	<table>
+		<tr>
+			<th>아이디</th>
+			<th>비밀번호</th>
+			<th>이름</th>
+			<th>핸드폰번호</th>
+			<th>주소</th>
+			<th><button type="button" id="historyback" name="historyback">뒤로가기</button></th>
+		</tr>
+		<c:forEach var="dto" items="${requestScope.list}">
+			<tr>
+				<th>${dto.memberID}</th>
+				<th>${dto.pwd }</th>
+				<th>${dto.name }</th>
+				<th>${dto.phone }</th>
+				<th>${dto.addr }</th>
+				<th><a href="${pageContext.request.contextPath}/mumi?command=adminUserDelete&memberID=${dto.memberID}">
+				<button type="button" id="deleteUser" name="deleteUser">회원삭제</button></a></th>
+			</tr>
+		</c:forEach>
+	</table>
+	
+	<!-- Footer -->
+	<footer class="py-5 bg-dark" id="footer">	
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; 무미건조</p>
+			
+		</div>
+		<!-- /.container -->
+	</footer>
+	<!-- Footer end -->
 
-<tr>
-	<th>아이디</th>
-	<th><input type="text" id="id" name="id"></th>
-</tr>
-<tr>
-	<th>비밀번호</th>
-	<th><input type="text" id="pwd" name="pwd"></th>
-</tr>
-<tr>
-	<th><button>로그인</button></th>
-	<th><button type="button" id="historyback" name="historyback">뒤로 가기</button></th>
-</tr>
-</table>
-<br>
-<h4> ${requestScope.errorMsg}</h4>
-</form>
-	  <!-- Footer -->
-   <footer class="py-5 bg-dark" id="footer" >
-      <div class="container">
-        <p class="m-0 text-center text-white"><strong>Copyright</strong> &copy; 무미건조 &nbsp;</p>
-        <p class="m-0 text-center text-white"><strong>주소</strong> : 경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층 &nbsp;</p>
-        <p class="m-0 text-center text-white"><strong>대표번호</strong> : 031-606-9320 &nbsp;</p>
-      </div>
-      <!-- /.container -->
-   </footer>
-   <!-- Footer end -->
 
-
-   <!-- Bootstrap core JavaScript -->
-   <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
-   <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-   <!-- Bootstrap core JavaScript end -->
-
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Bootstrap core JavaScript end -->
 </body>
 </html>

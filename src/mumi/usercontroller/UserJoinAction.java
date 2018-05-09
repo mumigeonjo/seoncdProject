@@ -28,16 +28,16 @@ public class UserJoinAction implements Action {
 			}
 
 			int result = MumiService.insertUser(new MemberDTO(id, pwd, name, phone, addr, 0));
-
+			System.out.println(result+"=result");
 			if (result > 0) {
 				mv.setPath("index.html");
 				mv.setRedirect(true);
 			}
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("errorMsg", e.getMessage());
-			mv.setPath("404.html");
+			request.setAttribute("errorMsg", "동일한 아이디가 있습니다.");
+			mv.setPath("view/register.jsp");
 		}
 		return mv;
 	}

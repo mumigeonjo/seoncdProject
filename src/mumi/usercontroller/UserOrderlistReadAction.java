@@ -29,13 +29,14 @@ public class UserOrderlistReadAction implements Action{
 		HttpSession session = request.getSession();
 		//세션에 저장된 아이디를 읽어옴
 		try {
-			list=MumiService.selectOrderAllById((String)session.getAttribute("id"));
-			session.setAttribute("list", list);
+			//list=MumiService.selectOrderAllById((String)session.getAttribute("id"));
+			list=MumiService.selectOrderAllById("aaa");
+			request.setAttribute("list", list);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		mv.setPath("");
+		mv.setPath("/view/userOrderList.jsp");
 		
 		return mv;
 	}

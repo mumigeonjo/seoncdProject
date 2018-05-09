@@ -71,10 +71,69 @@ public class MumiService {
 		int result = userDAO.userInfoUpdate(memberDTO);
 		return result;
 	}
-	
-	//로그인
-	public static MemberDTO selectUserById() throws SQLException{
-		return null;
+	/*
+	 * //장바구니 삭제 ======= =======
+	 * 
+	 * >>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
+	 * //장바구니 삭제 >>>>>>> branch 'master' of
+	 * https://github.com/mumigeonjo/seoncdProject.git public static int
+	 * deleteCart() throws SQLException{ return 0; }
+	 * 
+	 * //장바구니 삽입 public static int insertCart() throws SQLException{ return 0; }
+	 * 
+	 * //장바구니 읽기 public static List<DTO> readCart() throws SQLException{ return
+	 * null; }
+	 * 
+	 * //장바구니 업데이트 public static int updateCart() throws SQLException{ return 0; }
+	 * 
+	 * 
+	 * 
+	 * //회원가입 public static int insertUser() throws SQLException{ return 0; }
+	 * 
+	 * 
+	 * 
+	 * //공지사항 조회 public static List<NoticeDTO> selectNoticeAll() throws
+	 * SQLException{ return null; }
+	 * 
+	 * //주문하기(UserOrderInsertAction) public static int InsertOrder() throws
+	 * SQLException{ return 0; }
+	 * 
+	 * //모든 결제내역 확인(로그인 한 유저의 글만) public static List<OrderDTO> selectOrderAllById()
+	 * throws SQLException{ return null; }
+	 * 
+	 * //결제 폼 뿌리기(UserOrderReadAction) public static OrderDTO
+	 * selectOrderByProductNum() throws SQLException{ return null; }
+	 * 
+	 * //1:1 문의 게시글 삭제(로그인 한 유저의 글만) public static int deleteQA() throws
+	 * SQLException{ return 0; }
+	 * 
+	 * //1:1 문의 게시글 수정(로그인 한 유저의 글만) public static int updateQA() throws
+	 * SQLException{ return 0; }
+	 * 
+	 * //1:1 문의 게시글 보기(로그인 한 유저의 글만) <<<<<<< HEAD /* public static List<QADTO>
+	 * selectQAByQAIndex(String userid) throws SQLException{
+	 * 
+	 * List<QADTO> list = null;
+	 * 
+	 * ======= public static List<QADTO> selectQAByQAIndex(String userid) throws
+	 * SQLException{ List<QADTO> list = null; >>>>>>> branch 'master' of
+	 * https://github.com/mumigeonjo/seoncdProject.git list =
+	 * userDAO.userQARead(userid); return list; }
+	 */
+	/*
+	 * //1:1 문의 게시글 상세보기(로그인 한 유저의 글만) public static QADTO selectQADetailByQANO()
+	 * throws SQLException{ return null; }
+	 * 
+	 * //1:1 문의 게시글 수정(로그인 한 유저의 글만) public static int updateQA() throws
+	 * SQLException{ return 0; }
+	 */
+
+	// 리뷰 게시글 삭제(자기가 쓴 글만)
+	public static int userReviewDelete(int rIndexNo) throws SQLException {
+		int re = userDAO.userReviewDelete(rIndexNo);
+		if (re == 0)
+			throw new SQLException("삭제되지 않았습니다.");
+		return re;
 	}
 
 	// 리뷰 게시글 삽입(로그인 한 유저의 글만)
@@ -107,6 +166,7 @@ public class MumiService {
 	
 	//주문하기(UserOrderInsertAction)
 	public static int insertOrder(OrderDTO orderDTO) throws SQLException{
+		System.out.println("from insertOrder Service");
 		int result = userDAO.userOrderComplete(orderDTO);
 		if(result==0)
 			throw new SQLException("결제 실패하였습니다.");
@@ -115,7 +175,8 @@ public class MumiService {
 	
 	//모든 결제내역 확인(로그인 한 유저의 글만)
 	public static List<CartDTO> selectOrderAllById(String id) throws SQLException{
-		return userDAO.orderListRead(id);
+		List<CartDTO> list = userDAO.orderListRead(id);
+		return list;
 		//널이어도 상관 없음. 출력 안 하면 그만.
 	}
 	
@@ -241,7 +302,33 @@ public class MumiService {
 			throw new SQLException("삭제되지 않았습니다.");
 		return re;
 	}
-	/*
+	
+	// 사용자 - 상품 목록 보기 -다영
+	public static List<ProductDTO> userProductAllRead() {
+		List<ProductDTO> list = userDAO.userProductAllRead();
+		return list;
+	}
+	
+	// 사용자 - 상품 디테일보기 -다영
+	public static List<ProductDTO> userProductRead(String pName) throws SQLException {
+		List<ProductDTO> list = userDAO.userProductRead(pName);
+		if(list==null)throw new SQLException(pName+"에 해당하는 상품정보는 없습니다.");
+		return list;
+	}
+
+	// 관리자 - 상품 목록 보기 -다영 
+	public static List<ProductDTO> adminProductAllRead() throws SQLException{
+		List<ProductDTO> list = mumiDAO.adminProductAllRead();
+		return list;
+	}
+	 
+	// 관리자 - 상품 디테일보기 -다영 
+	public static ProductDTO adminProductRead(String pCode) throws SQLException{
+		ProductDTO productDTO = mumiDAO.adminProductRead(pCode);
+		if(productDTO==null)throw new SQLException(pCode+"에 해당하는 상품정보는 없습니다.");
+		return productDTO;
+	}
+		/*
 	//리뷰 게시글 삽입(로그인 한 유저의 글만)
 	public static int userReviewInsert(ReviewDTO reviewDTO) throws SQLException{
 		 int re = userDAO.userReviewInsert(reviewDTO);
@@ -292,7 +379,8 @@ public class MumiService {
 	
 	//모든 주문내역 보기
 	public static List<OrderDTO> selectOrderAll() throws SQLException{
-		return mumiDAO.adminOrderListRead();
+		List<OrderDTO> list = mumiDAO.adminOrderListRead();
+		return list;
 		//널이어도 괜찮아! 그냥 출력 안 하면 그만?
 	}
 	
@@ -358,11 +446,10 @@ public class MumiService {
 		return result;
 	}
 
-	
-	
-	/*
-	//회원정보 모두 보기
-	public List<MemberDTO> selectAllUser() throws SQLException{
+	public static int deleteQA(int bIndexNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 
@@ -386,4 +473,13 @@ public class MumiService {
 		return result;
 	}
 
+
+	public static MemberDTO userUpdateForm(String id) {
+		MemberDTO dto = userDAO.userUpdateForm(id);
+		return dto;
+	}
+	public static List<ReviewDTO> userReviewRead(String pCode) {
+		List<ReviewDTO> list = userDAO.userReviewRead(pCode);
+		return list;
+	}
 }
