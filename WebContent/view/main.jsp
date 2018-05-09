@@ -11,16 +11,14 @@
 <meta name="author" content="">
 
 <title>Modern Business - Start Bootstrap Template</title>
-<c:set var="path" value="${pageContext.request.contextPath}"
-   scope="application" />
+<c:set var="path" value="${pageContext.request.contextPath}"  scope="application" />
+
 <!-- Bootstrap core CSS -->
-<link
-   href="${path}/vendor/bootstrap/css/bootstrap.min.css"
-   rel="stylesheet">
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
 <!-- Custom styles for this template -->
-<link href="${path}/css/modern-business.css"
-   rel="stylesheet">
+<link href="css/modern-business.css"  rel="stylesheet">
+
 </head>
 
 <body>
