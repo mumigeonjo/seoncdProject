@@ -20,22 +20,30 @@ public class AdminProductUpdateAction implements Action{
 		ModelAndView mv = new ModelAndView();
 		
 		String pCode = request.getParameter("pCode");
-		int pPrice = Integer.parseInt(request.getParameter("pPrice"));
-		int pEA = Integer.parseInt(request.getParameter("pEA"));
-		String pImage = request.getParameter("pImage");
-		String pDetailImage = request.getParameter("pDetailImage");
+		String pPrice = request.getParameter("pPrice");
+		String pEA = request.getParameter("pEA");
 		
-		ProductDTO productDTO = new ProductDTO(pCode, pPrice, pEA, pImage, pDetailImage);
+		//String pImage = request.getParameter("pImage");
+		//String pDetailImage = request.getParameter("pDetailImage");
 		
-		try {
-			int result = MumiService.adminProductUpdate(productDTO);
-			mv.setPath("?");
-			mv.setRedirect(true);
+		//유효성 검사
+		try{
+		  if(pCode==null || pPrice==null || pEA==null){
+			
+			  throw new SQLException("입력값이 충분하지 않습니다.");
+		  }
+		
+		   ProductDTO productDTO = new ProductDTO(pCode, Integer.parseInt(pPrice), Integer.parseInt(pEA));
+		
+		   int result = MumiService.adminProductUpdate(productDTO);
+		   // commmand=detailView , modelNum=? , flag=?
+		   mv.setPath("mumi?command=userProductRead&pCode="+pCode);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());
 		}
+		
 		return mv;
+		
 	}
-
 }

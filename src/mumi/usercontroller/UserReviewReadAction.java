@@ -31,7 +31,6 @@ public class UserReviewReadAction implements Action{
 			mv.setPath("404.html");
 			mv.setRedirect(true);
 		}
-		
 		return mv;
 	}
 }

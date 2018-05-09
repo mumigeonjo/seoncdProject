@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<c:set var="path" value="${pageContext.request.contextPath}" scope="application"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath}" scope="application"/>    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,15 +16,15 @@
     <title>Modern Business - Start Bootstrap Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="${path}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="${path}/css/modern-business.css" rel="stylesheet">
+    <link href="css/modern-business.css" rel="stylesheet">
 
   </head>
 
   <body>
-  ${requestScope.list }
+
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -97,15 +96,52 @@
         <li class="breadcrumb-item">
           <a href="index.html">Home</a>
         </li>
-        <li class="breadcrumb-item active">Blog Home 2</li>
+        <!-- <li class="breadcrumb-item active">Blog Home 2</li> -->
       </ol>
 
+      <!-- Portfolio Item Row -->
+      <div class="row">
+        <div class="col-md-8">
+          <img class="img-fluid" src="${path}/saveImg/${list[1].pImage}" alt="">
+        </div>
+
+        <div class="col-md-4">
+          <h1 class="my-3">${list[1].pName}</h1>
+          <h4 class="my-3">상품 정보</h4>
+          <ul>
+            <li>${list[0].pSize} / <fmt:formatNumber value="${list[0].pPrice}"/></li>
+            <li>${list[1].pSize} / <fmt:formatNumber value="${list[1].pPrice}"/></li>
+            <li>${list[2].pSize} / <fmt:formatNumber value="${list[2].pPrice}"/></li>
+            <li>제작일 : ${list[1].pDate}</li>
+          </ul>
+          <h6>상품설명<p>
+          상품설명<p>
+          </h6>
+          <a class="btn btn-primary" href="#">장바구니
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>          
+        </div>
+      </div>
+      <!-- /.row -->
+  
+      <hr>
+  
+      <!-- Portfolio Item Row -->
+      <div class="row">
+        <div class="col-md-12">
+          <img class="img-fluid" src="${path}/saveImg/${list[1].pDetailImage}" alt="">
+        </div>
+      </div>
+      <!-- /.row -->
+      	  
       <div class="row">
 
         <!-- Post Content Column -->
-        <div class="col-lg-8">
+        <div class="col-lg-12">
+
 
           <!-- Preview Image -->
+<%-- 
           <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
 
           <hr>
@@ -118,7 +154,9 @@
           <!-- Post Content -->
           <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
 
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
 
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
 
           <blockquote class="blockquote">
             <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
@@ -127,39 +165,70 @@
             </footer>
           </blockquote>
 
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
 
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+ --%>
 
           <hr>
 
-          
-              	         	<!-- Comments Form -->
+          <!-- Comments Form -->
           <div class="card my-4">
-            <h5 class="card-header">review</h5>
+            <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
               <form>
-              <a href="${pageContext.request.contextPath}/view/review.jsp">등록하기</a>
+                <div class="form-group">
+                  <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
               </form>
-               <c:forEach items="${requestScope.list}" var="list" varStatus="status">
-	        
-	        
-	    
-	               <div data-toggle="collapse" data-parent="#accordion" href="#${list.rIndexNo}" aria-expanded="true" aria-controls="collapseOne">
-	               ${status.count} 제목 : ${list.rContent} 글쓴이 : ${list.memberID}
-	               </div>
-	                 <input type=button value="수정" class = "btn btn-primary" style = "vertical-align : inherit;" onClick="javascript:sendUpdate(${list.rIndexNo});">
-					 <input type=button value="삭제" class = "btn btn-primary" style = "vertical-align : inherit;" onClick="javascript:sendDelete(${list.rIndexNo});">	 
-					  
-              	</c:forEach>
-          
             </div>
           </div>
+
+          <!-- Single Comment -->
+          <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">Commenter Name</h5>
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
             </div>
-          </div> 
+          </div>
+
+          <!-- Comment with nested comments -->
+          <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">Commenter Name</h5>
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+              <div class="media mt-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                  <h5 class="mt-0">Commenter Name</h5>
+                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+              </div>
+
+              <div class="media mt-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                  <h5 class="mt-0">Commenter Name</h5>
+                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
 
         <!-- Sidebar Widgets Column -->
+<!--       
         <div class="col-md-4">
 
           <!-- Search Widget -->
+<!--           
           <div class="card mb-4">
             <h5 class="card-header">Search</h5>
             <div class="card-body">
@@ -171,8 +240,10 @@
               </div>
             </div>
           </div>
+ -->
 
           <!-- Categories Widget -->
+  <!--         
           <div class="card my-4">
             <h5 class="card-header">Categories</h5>
             <div class="card-body">
@@ -206,17 +277,22 @@
               </div>
             </div>
           </div>
+ -->
 
           <!-- Side Widget -->
+<!--           
           <div class="card my-4">
             <h5 class="card-header">Side Widget</h5>
             <div class="card-body">
               You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
             </div>
-          </div>
-
+          </div>  
+        
+          
         </div>
-
+   -->
+   
+           
       </div>
       <!-- /.row -->
 
@@ -226,7 +302,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; 무미건조</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
       </div>
       <!-- /.container -->
     </footer>

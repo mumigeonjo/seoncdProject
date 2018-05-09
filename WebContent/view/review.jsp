@@ -26,7 +26,7 @@
 <!-- Custom styles for this template -->
 <link href="../css/modern-business.css" rel="stylesheet">
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     	function sendInsert() {
     	    var f = window.document.noticeForm;
     		
@@ -42,7 +42,7 @@
     		}
 		}
     	
-    </script>
+    </script> -->
 
 </head>
 

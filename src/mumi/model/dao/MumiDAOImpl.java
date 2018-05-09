@@ -286,6 +286,54 @@ public class MumiDAOImpl implements MumiDAO {
 		return re;
 	}
 
+	@Override // 다영
+	public List<ProductDTO> adminProductAllRead() {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ProductDTO> list = new ArrayList<>();
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("select * from product");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ProductDTO dto = new ProductDTO(rs.getString("p_code"), rs.getString("p_name"), rs.getInt("p_price"),
+						rs.getString("p_size"), rs.getString("p_date"), rs.getInt("p_ea"), rs.getString("p_image"),
+						rs.getString("p_detail_image"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(con, ps, rs);
+		}		
+		return list;
+	}
+	
+	@Override // 다영
+	public ProductDTO adminProductRead(String pCode) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ProductDTO productDTO = new ProductDTO();
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("select * from product where p_code = ?");
+			ps.setString(1, pCode);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				productDTO = new ProductDTO(rs.getString("p_code"), rs.getString("p_name"), rs.getInt("p_price"),
+						rs.getString("p_size"), rs.getString("p_date"), rs.getInt("p_ea"), rs.getString("p_image"),
+						rs.getString("p_detail_image"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(con, ps, rs);
+		}
+		return productDTO;
+	}
+	
 	@Override
 	public int adminUserDelete(String memberID) throws SQLException {
 		Connection con = null;
