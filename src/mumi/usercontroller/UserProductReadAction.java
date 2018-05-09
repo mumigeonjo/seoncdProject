@@ -13,27 +13,26 @@ import mumi.model.service.MumiService;
 
 public class UserProductReadAction implements Action{
 
-	@Override
+	//http://localhost:8000/second_PJ/mumi?command=userProductRead
+	
+	@Override //다영
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-/*		
+	
 		ModelAndView mv = new ModelAndView();
 		
 		//모델번호 받기
-		String pCode = request.getParameter("pCode");
+		String pName = request.getParameter("pName");
 				
 		try {
-			ProductDTO productDTO = MumiService.userProductRead(pCode);
-			request.setAttribute("productDTO", productDTO);//viewpage에서 ${list}
-			mv.setPath("?"); 
-			
-			//System.out.println(list);	
+			List<ProductDTO> list = MumiService.userProductRead(pName);
+			request.setAttribute("list", list);//viewpage에서 ${proDTO}
+			mv.setPath("view/userProductRead.jsp"); 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());//뷰페이지 ${errorMsg}
 			mv.setPath("errorView/error.jsp");			
-		}	*/
-		return null;
+		}
+		return mv;
 	}
-
 }

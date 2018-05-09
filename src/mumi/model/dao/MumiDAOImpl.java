@@ -226,7 +226,7 @@ public class MumiDAOImpl implements MumiDAO {
 		int re = 0;
 		try {
 			con = DBUtil.getConnection();
-			ps = con.prepareStatement("insert into product values(?,?,?,?,?,?)");
+			ps = con.prepareStatement("insert into product values(?,?,?,?,?,?,?,?)");
 			ps.setString(1, productDTO.getpCode());
 			ps.setString(2, productDTO.getpName());
 			ps.setInt(3, productDTO.getpPrice());

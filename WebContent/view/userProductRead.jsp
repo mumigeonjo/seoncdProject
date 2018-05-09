@@ -4,10 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" scope="application"/>    
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -15,86 +13,135 @@
 
     <title>Modern Business - Start Bootstrap Template</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/modern-business.css" rel="stylesheet">
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+	<!-- Custom styles for this template -->
+	<link href="${path}/css/modern-business.css"  rel="stylesheet">
 
   </head>
 
   <body>
 
-    <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <!-- Navigation 1 -->
+   <nav
+      class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="services.html">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Portfolio
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                <a class="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
-                <a class="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
-                <a class="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
-                <a class="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
-                <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
-              </div>
-            </li>
-            <li class="nav-item active dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Blog
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
-                <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
-                <a class="dropdown-item active" href="blog-post.html">Blog Post</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Other Pages
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="full-width.html">Full Width Page</a>
-                <a class="dropdown-item" href="sidebar.html">Sidebar Page</a>
-                <a class="dropdown-item" href="faq.html">FAQ</a>
-                <a class="dropdown-item" href="404.html">404</a>
-                <a class="dropdown-item" href="pricing.html">Pricing Table</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+         <a class="navbar-brand"
+            href="${path}/index.html">MuMiGeonJo-BACKPACKS</a>
 
+
+         <button class="navbar-toggler navbar-toggler-right" type="button"
+            data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+               <%
+                  if (session.getAttribute("id") == null) {
+               %>
+
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/view/loginForm.jsp">로그인</a></li>
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/view/register.jsp">회원가입</a></li>
+
+               <%
+                  } else {
+               %>
+
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/mumi?command=userLogout">로그아웃</a></li>
+
+               <%
+                  if (session.getAttribute("id").equals("admin")) {
+               %>
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/mumi?command=adminSelectAllMember">모든회원
+                     조회</a></li>
+               <%
+                  } else {
+               %>
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/mumi?command=userOrderlistRead">주문내역</a></li>
+
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/mumi?command=cartRead">장바구니</a></li>
+                  
+               <li class="nav-item"><a class="nav-link"
+                  href="${pageContext.request.contextPath}/mumi?command=userUpdateForm">회원정보수정</a></li>
+               <%
+                  }
+                  }
+               %>
+            </ul>
+         </div>
+      </div>
+      <br>
+   </nav>
+   <!--Navigation 1 end -->
+
+
+
+   <!--Navigation 2 -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="top: 0px; height: 80px;">
+
+      <div class="container ml-auto" >
+
+         <!--logo image-->
+         <div>
+         </div>
+
+         <div class="collapse navbar-collapse" id="navbarResponsive" >
+            <ul class="nav navbar-nav" style="position: absolute; left: 50%; transform: translatex(-50%);z-index:100">  
+               <li class="nav-item"><a class="nav-link" href="${path}/view/aboutUs.jsp">About Us</a></li>
+               <li class="nav-item dropdown"><a
+                  class="nav-link dropdown-toggle" href="#"
+                  id="navbarDropdownPortfolio" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false"> Online Shop </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                    <a class="dropdown-item" href="${path}/mumi?command=userProductAllRead"> Backpacks</a> 
+                  </div></li>
+               <li class="nav-item dropdown"><a
+                  class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Community </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                     <a class="dropdown-item" href="${path}/mumi?command=noticeRead">Notice</a> 
+                  </div></li>
+               <li class="nav-item dropdown"><a
+                  class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Customer Support </a>
+                  <div class="dropdown-menu dropdown-menu-right"
+                     aria-labelledby="navbarDropdownBlog">
+                     <a class="dropdown-item" href="${pageContext.request.contextPath}/view/Info.jsp">Info</a> 
+                     <a class="dropdown-item" href="${pageContext.request.contextPath}/mumi?command=userQARead">Q&A</a>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <br>
+   </nav>
+   <!-- Navigation 2 end -->
+   
+   
+   
     <!-- Page Content -->
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Post Title
-        <small>by
-          <a href="#">Start Bootstrap</a>
-        </small>
+      <h1 class="mt-4 mb-3">BACKPACK
+        <small>detail view</small>
       </h1>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
+          <a href="mumi?command=userProductAllRead">backpacks</a>
         </li>
         <!-- <li class="breadcrumb-item active">Blog Home 2</li> -->
       </ol>
@@ -102,20 +149,30 @@
       <!-- Portfolio Item Row -->
       <div class="row">
         <div class="col-md-8">
-          <img class="img-fluid" src="${path}/saveImg/${list[1].pImage}" alt="">
+          <img class="img-fluid" src="${path}/saveImg/${list[0].pImage}" alt="">
         </div>
 
         <div class="col-md-4">
-          <h1 class="my-3">${list[1].pName}</h1>
+          <h1 class="my-3">${list[0].pName}</h1>
           <h4 class="my-3">상품 정보</h4>
+ 
+    
           <ul>
-            <li>${list[0].pSize} / <fmt:formatNumber value="${list[0].pPrice}"/></li>
-            <li>${list[1].pSize} / <fmt:formatNumber value="${list[1].pPrice}"/></li>
-            <li>${list[2].pSize} / <fmt:formatNumber value="${list[2].pPrice}"/></li>
-            <li>제작일 : ${list[1].pDate}</li>
+      <c:choose>
+      <c:when test="${empty requestScope.list}">
+      </c:when>
+      <c:otherwise>
+      <c:forEach items="${requestScope.list}" var="proDto">  
+            <li><fmt:formatNumber value="${proDto.pPrice}"/> / ${proDto.pSize}</li>
+
+ 	  </c:forEach>
+	  </c:otherwise>
+	  </c:choose>  
+	        <li>제작일 : ${list[0].pDate}</li>
           </ul>
-          <h6>상품설명<p>
-          상품설명<p>
+          <h6>
+          상품을 구매하시려면 장바구니를 클릭해주세요<p>
+          수량, 사이즈 옵션을 선택할 수 있습니다.<p>
           </h6>
           <a class="btn btn-primary" href="#">장바구니
             <span class="glyphicon glyphicon-chevron-right"></span>
@@ -129,7 +186,7 @@
       <!-- Portfolio Item Row -->
       <div class="row">
         <div class="col-md-12">
-          <img class="img-fluid" src="${path}/saveImg/${list[1].pDetailImage}" alt="">
+          <img class="img-fluid" src="${path}/saveImg/${list[0].pDetailImage}" alt="">
         </div>
       </div>
       <!-- /.row -->
@@ -299,13 +356,16 @@
     </div>
     <!-- /.container -->
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
+   <!-- Footer -->
+   <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+        <p class="m-0 text-center text-white"><strong>Copyright</strong> &copy; 무미건조 &nbsp;</p>
+        <p class="m-0 text-center text-white"><strong>주소</strong> : 경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층 &nbsp;</p>
+        <p class="m-0 text-center text-white"><strong>대표번호</strong> : 031-606-9320 &nbsp;</p>
       </div>
       <!-- /.container -->
-    </footer>
+   </footer>
+   <!-- Footer end -->
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>

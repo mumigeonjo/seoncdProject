@@ -14,10 +14,10 @@
 <c:set var="path" value="${pageContext.request.contextPath}"  scope="application" />
 
 <!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <!-- Custom styles for this template -->
-<link href="css/modern-business.css"  rel="stylesheet">
+<link href="${path}/css/modern-business.css"  rel="stylesheet">
 
 </head>
 
@@ -155,7 +155,7 @@
                   id="navbarDropdownPortfolio" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false"> Online Shop </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                    <a class="dropdown-item" href="${pageContext.request.contextPath}/mumi?command=userProductAllRead"> Backpacks</a> 
+                    <a class="dropdown-item" href="${path}/mumi?command=userProductAllRead"> Backpacks</a> 
                   </div></li>
                <!--             
             <li class="nav-item">
@@ -273,7 +273,7 @@
          <br>
          <div class="col-lg-6">
             <img class="img-fluid rounded"
-               src="${path}/img/P004.jpg" alt="">
+               src="${path}/img/window.jpg" alt="">
          </div>
          <br>
       </div>

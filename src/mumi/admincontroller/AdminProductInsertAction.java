@@ -20,6 +20,8 @@ public class AdminProductInsertAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String path = request.getServletContext().getContextPath();
+		
 		//파일첨부때문에 multipartRequst필요.
 		String saveDir = request.getSession().getServletContext().getRealPath("/saveImg/");
 		int maxSize=1024*1024*100;//100m

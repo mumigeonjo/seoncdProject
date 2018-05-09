@@ -32,7 +32,7 @@ public class AdminProductUpdateFormAction implements Action {
 				throw new SQLException("해당하는 상품이 없습니다.");
 			}else{
 				request.setAttribute("proDto", proDto);
-				mv.setPath("adminProductUpdate.jsp");
+				mv.setPath("view/adminProductUpdate.jsp");
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

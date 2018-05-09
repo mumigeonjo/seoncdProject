@@ -37,7 +37,7 @@ public class AdminProductUpdateAction implements Action{
 		
 		   int result = MumiService.adminProductUpdate(productDTO);
 		   // commmand=detailView , modelNum=? , flag=?
-		   mv.setPath("mumi?command=userProductRead&pCode="+pCode);
+		   mv.setPath("mumi?command=adminProductRead&pCode="+pCode);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());

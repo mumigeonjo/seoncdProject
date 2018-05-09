@@ -28,7 +28,7 @@ public class AdminProductReadAction implements Action{
 		try {
 			ProductDTO productDTO = MumiService.adminProductRead(pCode);
 			request.setAttribute("proDto", productDTO);//viewpage¿¡¼­ ${proDTO}
-			mv.setPath("adminProductRead.jsp"); 
+			mv.setPath("view/adminProductRead.jsp"); 
 			
 			//System.out.println(list);	
 		} catch (SQLException e) {

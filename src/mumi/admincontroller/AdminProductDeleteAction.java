@@ -23,7 +23,7 @@ public class AdminProductDeleteAction implements Action {
 		
 		try {
 			int result = MumiService.adminProductDelete(pCode);
-			mv.setPath("mumi?command=userProductAllRead");
+			mv.setPath("mumi?command=adminProductAllRead");
 			mv.setRedirect(true);
 		} catch (SQLException e) {
 			e.printStackTrace();

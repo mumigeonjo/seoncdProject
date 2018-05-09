@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" scope="application"/>
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -19,16 +19,73 @@
     <!-- Custom styles for this template -->
     <link href="${path}/css/modern-business.css"  rel="stylesheet">
 	
-	<SCRIPT  type="text/javascript">
+	<style>
+	table {
+	    border-collapse: collapse;
+	    width: 100%;
+	}
 	
-		function adminProductAllRead(){
-			$("#requestForm").submit();	
+	th, td {
+	    padding: 8px;
+	    text-align: left;
+	    border-bottom: 1px solid #ddd;
+	    font-size: 15px;
+	}
+	
+	tr:hover {background-color:#f5f5f5;}
+	</style>
+	
+	<script language=javascript>
+	function checkValid() {
+	    var f = window.document.writeForm;
+			
+		if (f.pCode.value=="") {
+		    alert( "상품코드를 입력해 주세요." );
+		    f.pCode.focus();
+			return false;
+	    }
+		if (f.pName.value=="") {
+			alert( "상품명을 입력해 주세요." );
+			f.pName.focus();
+			return false;
 		}
-					
+		if (f.pPrice.value=="") {
+			alert( "가격을 입력해 주세요." );
+			f.pPrice.focus();
+			return false;
+		}
+		if (f.pSize.value=="") {
+	        alert( "사이즈를 입력해 주세요." );
+	        f.pSize.focus();
+	        return false;
+	    }
+		if (f.pDate.value=="") {
+	        alert( "입고일을 입력해 주세요" );
+	        f.pDate.focus();
+	        return false;
+	    }
+		if (f.pEA.value=="") {
+	        alert( "입고수량을 입력해 주세요" );
+	        f.pEA.focus();
+	        return false;
+	    }
+		if (f.pImage.value=="") {
+	        alert( "메인이미지를 등록해 주세요" );
+	        f.pImage.focus();
+	        return false;
+	    }
+		if (f.pDetailImage.value=="") {
+	        alert( "디테일이미지를 등록해 주세요" );
+	        f.pDetailImage.focus();
+	        return false;
+	    }
+		
+	    return true;
+	}
 	</script>
-  </head>
+</head>
 
-  <body>
+<body>
 
    <!-- Navigation 1 -->
    <nav
@@ -90,7 +147,7 @@
       <br>
    </nav>
    <!--Navigation 1 end -->
-
+   
 
 
    <!--Navigation 2 -->
@@ -137,89 +194,112 @@
    <!-- Navigation 2 end -->
 
 
-
-    <!-- Page Content -->
-    <div class="container">
-
+   <!-- Page Content -->
+   <div class="container">   
+	
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">BACKPACKS
-        <small>          
-            <!-- ------------------------------------------------------------------------ -->
-            <!-- -----로그인시 session으로 값받아와서 관리자만 버튼 보여줌 -->	           
-           	 <c:if test="${sessionScope.id eq 'admin'}"> 
-	            <form name ="requestForm" id="requestForm" method=post action="${path}/mumi" >	          
-		          <input type=hidden id="command" name="command" value="adminProductAllRead">
- 				  <input type=button value="상품 관리" class = "btn btn-primary" style = "vertical-align : inherit;" onClick="javascript:adminProductAllRead();">
-	            </form>
-			 </c:if> 
-            <!-- ------------------------------------------------------------------------ -->                               
-        </small>
+      <h1 class="mt-4 mb-3">상품관리
+        <small> </small>
       </h1>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
+          <a href="${path}/mumi?command=adminProductAllRead">리스트로 돌아가기</a>
         </li>
-		<!-- <li class="breadcrumb-item active">Portfolio 2</li> -->
-      </ol>
+        <!-- <li class="breadcrumb-item active">Blog Home 2</li> -->
+      </ol>	
+	
+	<hr>
 
-      <div class="row">
-      
-      <c:choose>
-      <c:when test="${empty requestScope.list}">
-      </c:when>
-      <c:otherwise>
-      <c:forEach items="${requestScope.list}" var="proDto">  
-      
-        <div class="col-lg-6 portfolio-item">
-          <div class="card h-100">
-            <a href="${path}/mumi?command=userProductRead&pName=${proDto.pName}">
-            <img class="card-img-top" src="${path}/saveImg/${proDto.pImage}" alt="">
-            </a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="${path}/mumi?command=userProductRead&pName=${proDto.pName}">${proDto.pName}</a>
-              </h4>              
-              <p class="card-text"><fmt:formatNumber value="${proDto.pPrice}"/> / ${proDto.pSize}</p>
-            </div>
-          </div>
-        </div>
-           
-	  </c:forEach>
-	  </c:otherwise>
-	  </c:choose>        
+	
+	<form name="writeForm" method="post" action="${path}/mumi?command=adminProductInsert" 
+	  onSubmit='return checkValid()' enctype="multipart/form-data">
+	
+	<table align="center" cellpadding="5" cellspacing="2" width="600">
+	    
+	    <tr>
+	        <td width="1220" height="20" colspan="2" bgcolor="#e9ecef">
+	            <p align="center"><font color="black" size="3"><b> 상품 등록 </b></font></p>
+	        </td>
+	    </tr>
+	    <tr>
+	        <td width="200" height="20" >
+	            <p align="right"><span>상품코드</span></p>
+	        </td>
+	        <td width="300" height="20"><b><span>
+			<input type=text name="pCode" size="50"></span></b></td>
+	    </tr>
+	    <tr>
+	        <td width="200" height="20">
+	            <p align="right"><span>상품명</span></p>
+	        </td>
+	        <td width="300" height="20"><b><span>
+			<input type=text name="pName" size="50"></span></b></td>
+	    </tr>
+	    <tr>
+	        <td width="150" height="20">
+	            <p align="right"><span>가격</span></p>
+	        </td>
+	        <td width="450" height="20" ><b><span>
+			<input type=text name="pPrice" size="50"></span></b></td>
+	    </tr>
+	    <tr>
+	        <td width="150" height="20">
+	            <p align="right"><span>사이즈 (S/M/L)</span></p>
+	        </td>
+	        <td width="450" height="20"><b><span>
+	        <input type=text name="pSize" size="50"></textarea></span></b></td>
+	    </tr>
+	    <tr>
+	        <td width="150" height="20">
+	            <p align="right"><span>입고일 (YYYYMMDD)</span></p>
+	        </td>
+	        <td width="450" height="20"><b><span>
+	        <input type=text name="pDate" size="50"></textarea></span></b></td>
+	    </tr>    
+	    <tr>
+	        <td width="150" height="20">
+	            <p align="right"><span>입고수량</span></p>
+	        </td>
+	        <td width="450" height="20" ><b><span>
+			<input type=text name="pEA" size="50"></span></b></td>
+	    </tr> 
+	    <tr>
+	        <td width="150" height="20">
+	            <p align="right"><span>메인이미지</span></p>
+	        </td>
+	        <td width="450" height="20">
+	        	<b><span>
+	        		 <input type="file" name="pImage" maxlength="60" size="40">
+	        	   </span></b>
+	        </td>
+	    </tr>
+	    <tr>
+	        <td width="150" height="20">
+	            <p align="right"><span>디테일이미지</span></p>
+	        </td>
+	        <td width="450" height="20">
+	        	<b><span>
+	        		 <input type="file" name="pDetailImage" maxlength="60" size="40">
+	        	   </span></b>
+	        </td>
+	    </tr>
+	 
+	    
+	    <tr>
+	        <td width="450" height="20" colspan="2" align="center">
+	        <b><span>
+	        <input type=submit value="상품 등록" class = "btn btn-primary" style = "vertical-align : inherit;"> 
+	        <input type=reset value=다시쓰기 class = "btn btn-primary" style = "vertical-align : inherit;"></span>
+	        </b></td>
+	    </tr>
+	</table>
+	
+	</form>
 
-      </div>
-      <!-- /.row -->
 
-      <!-- Pagination -->
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-      </ul>
-
-    </div>
-    <!-- /.container -->
-
+   </div>
+   <!-- /.container -->	
 
    <!-- Footer -->
    <footer class="py-5 bg-dark">
@@ -232,11 +312,10 @@
    </footer>
    <!-- Footer end -->
 
-
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+</BODY>
+</HTML>
 
-  </body>
-</html>

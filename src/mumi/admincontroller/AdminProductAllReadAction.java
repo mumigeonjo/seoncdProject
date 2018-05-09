@@ -1,6 +1,8 @@
 package mumi.admincontroller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,9 +24,16 @@ public class AdminProductAllReadAction implements Action{
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<ProductDTO> list = MumiService.userProductAllRead();
+		List<ProductDTO> list = new ArrayList<>();
+		
+		try {
+			list = MumiService.adminProductAllRead();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		request.setAttribute("list", list);//viewpage¿¡¼­ ${list}
-		mv.setPath("adminProductList.jsp");
+		mv.setPath("view/adminProductList.jsp");
 		
 		return mv;
 	}
