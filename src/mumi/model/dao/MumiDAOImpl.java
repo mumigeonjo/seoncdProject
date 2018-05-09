@@ -397,4 +397,16 @@ public class MumiDAOImpl implements MumiDAO {
 
 		return result;
 	}
+
+	@Override
+	public List<ProductDTO> adminProductAllRead() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProductDTO adminProductRead(String pCode) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
