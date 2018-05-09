@@ -157,12 +157,30 @@ public class MumiService {
 		return result;
 	}
 	
+	public static int updateHasAnswer(int bIndexNo) throws SQLException{
+		int result = 0;
+		
+		result = mumiDAO.adminQAHasAnswerUpdate(bIndexNo);
+		
+		return result;
+	}
+	
+	
 	//1:1 문의 게시글 보기(로그인 한 유저의 글만)
 	public static List<QADTO> selectQAByQAIndex(String userid) throws SQLException{
 		
 		List<QADTO> list = null;
 		
-		list = userDAO.userQARead(userid);
+		
+		if(userid.equals(null)) {
+			throw new SQLException("아이디가 없습니다.");
+		}else {
+			if(userid.equals("admin")) {
+				list = mumiDAO.adminQAReadAll();
+			}else {
+				list = userDAO.userQARead(userid);
+			}
+		}
 		
 		return list;
 	}
@@ -206,6 +224,12 @@ public class MumiService {
 	//리뷰 게시글 삭제(자기가 쓴 글만)
 	public static int userReviewDelete(int rIndexNo) throws SQLException{
 		 int re = userDAO.userReviewDelete(rIndexNo);
+		 if(re==0)throw new SQLException("삭제되지 않았습니다.");
+		 return re;
+	}
+	
+	public static int adminReviewDelete(int rIndexNo) throws SQLException{
+		 int re = mumiDAO.adminReviewDelete(rIndexNo);
 		 if(re==0)throw new SQLException("삭제되지 않았습니다.");
 		 return re;
 	}

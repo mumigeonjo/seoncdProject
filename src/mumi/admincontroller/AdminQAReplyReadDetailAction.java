@@ -21,20 +21,27 @@ public class AdminQAReplyReadDetailAction implements Action {
 		
 		HttpSession session = request.getSession();
 		ModelAndView mv=new ModelAndView();
-		int bIndexNo =(int)session.getAttribute("b_indexno");
+		int bIndexNo =Integer.parseInt(request.getParameter("bIndexNo"));
+		String memberId =(String)session.getAttribute("id");
+		int categoryNo=Integer.parseInt(request.getParameter("bCategory"));
+		String content=request.getParameter("bContent");
+		String title=request.getParameter("bTitle");
 		
 		try{
 			
+			QADTO qDTO = new QADTO(bIndexNo,memberId,categoryNo,content,title);
 			QAReplyDTO qaReplyDTO = MumiService.readAnswer(bIndexNo);
-			request.setAttribute("qaReplyDTO", qaReplyDTO);
+			
+			request.setAttribute("userQAread", qDTO); //forward방식 이동
+			request.setAttribute("readAnswer", qaReplyDTO);
 			/*
 			for(QADTO qaDTO:list) {
 				System.out.println(qaDTO);
 			}*/
 			
-			mv.setPath("???");
-			mv.setRedirect(false);
-			return mv;
+			mv.setPath("view/UserQAReplyReadForm.jsp");
+			//mv.setRedirect(false);
+			
 			
 			
 		}catch(Exception e) {
@@ -43,7 +50,7 @@ public class AdminQAReplyReadDetailAction implements Action {
 			
 		}
 		
-		return null;
+		return mv;
 	}
 
 }

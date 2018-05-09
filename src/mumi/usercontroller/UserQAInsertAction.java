@@ -16,15 +16,15 @@ public class UserQAInsertAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-/*		int result =0;
+		int result =0;
 		HttpSession session = request.getSession();
 		ModelAndView mv=new ModelAndView();
 		
-		String memberId =(String)session.getAttribute("memberid");
-		int categoryNo=(int)session.getAttribute("categoryNo");
-		String content=(String)session.getAttribute("content");
-		String title=(String)session.getAttribute("title");
-
+		String memberId = (String)session.getAttribute("id");
+		int categoryNo=Integer.parseInt(request.getParameter("bCategory"));
+		String content=request.getParameter("bContent");
+		String title=request.getParameter("bTitle");
+		
 		
 		try{
 			
@@ -35,18 +35,18 @@ public class UserQAInsertAction implements Action{
 //				System.out.println(qaDTO);
 //			}
 			
-			mv.setPath("???");
-			mv.setRedirect(false);
-			return mv;
+			mv.setPath("view/QA.jsp");
+			//mv.setRedirect(false);
+			
 			
 			
 		}catch(Exception e) {
 			
 			e.printStackTrace();
 			
-		}*/
+		}
 		
-		return null;
+		return mv;
 	}
 
 }

@@ -17,24 +17,21 @@ public class AdminQAReplyUpdateAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int result = 0;
-		HttpSession session = request.getSession();
-		ModelAndView mv=new ModelAndView();
-		int bIndexNo =(int)session.getAttribute("b_indexno");
-		String qDate = (String)session.getAttribute("qDate");
-		String qContent = (String)session.getAttribute("qContent");
 		
+		ModelAndView mv=new ModelAndView();
+		int qIndexNo =Integer.parseInt(request.getParameter("qIndexNo"));
+
+		String qDate = "1991/11/29";
+		String qContent = request.getParameter("qContent");
+
 		try{
 			
-			result = MumiService.updateAnswer(new QAReplyDTO(bIndexNo, qDate, qContent));
-			request.setAttribute("result", result);
-			/*
-			for(QADTO qaDTO:list) {
-				System.out.println(qaDTO);
-			}*/
+			result = MumiService.updateAnswer(new QAReplyDTO(qIndexNo, qDate, qContent));
 			
-			mv.setPath("???");
-			mv.setRedirect(false);
-			return mv;
+			
+			mv.setPath("view/QA.jsp");
+			//mv.setRedirect(false);
+			
 			
 			
 		}catch(Exception e) {
@@ -43,7 +40,7 @@ public class AdminQAReplyUpdateAction implements Action{
 			
 		}
 		
-		return null;
+		return mv;
 	}
 
 }

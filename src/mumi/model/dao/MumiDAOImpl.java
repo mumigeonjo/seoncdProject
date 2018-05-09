@@ -125,17 +125,19 @@ public class MumiDAOImpl implements MumiDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<QADTO> qlist = new ArrayList<>();
+		System.out.println("aaa");
 		
 		try {
+			System.out.println(1);
 			conn = DBUtil.getConnection();
-			ps = conn.prepareStatement("select * from QA");
+			ps = conn.prepareStatement("select b_indexNo,member_id,b_category,b_content,b_title,b_date,b_hasanswer from QA");
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				QADTO qaDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getInt(3),
-						rs.getString(4), rs.getString(5), rs.getString(6));
+						rs.getString(4), rs.getString(5), rs.getString(6),rs.getInt(7));
 				qlist.add(qaDTO);
-			
 			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -177,11 +179,10 @@ public class MumiDAOImpl implements MumiDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		int result=0;
-
+		
 		try {
 			conn = DBUtil.getConnection();
-			ps = conn.prepareStatement("update QA_Reply set q_date=sysdate,q_content=?) "
-					+ "  where q_indexNo=?");
+			ps = conn.prepareStatement("update QA_Reply set q_date=sysdate,q_content=? where q_indexNo=?");
 			
 			ps.setString(1, reply.getqContent());
 			ps.setInt(2, reply.getqIndexNo());
@@ -239,12 +240,12 @@ public class MumiDAOImpl implements MumiDAO {
 
 		try {
 			conn = DBUtil.getConnection();
-			ps = conn.prepareStatement("select q_date, q_content from QA_Reply where b_indexNo=?");
+			ps = conn.prepareStatement("select q_indexNo,b_indexNo,q_date, q_content from QA_Reply where b_indexNo=?");
 			ps.setInt(1, bIndexNo);
 			// ??의 순서대로 개수만큼 setXxx( , ) 작성
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				qReplyDTO = new QAReplyDTO(rs.getString(1), rs.getString(2));
+				qReplyDTO = new QAReplyDTO(rs.getInt(1),rs.getInt(2), rs.getString(3),rs.getString(4));
 				
 
 			}
@@ -285,7 +286,7 @@ public class MumiDAOImpl implements MumiDAO {
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public int adminProductAllInsert(ProductDTO product) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
@@ -301,7 +302,7 @@ public class MumiDAOImpl implements MumiDAO {
 	public int adminProductAllDelete(int pCode) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
-	}
+	}*/
 
 	@Override
 	public int adminUserDelete(String memberID) throws SQLException {
@@ -309,4 +310,45 @@ public class MumiDAOImpl implements MumiDAO {
 		return 0;
 	}
 
+	@Override
+	public int adminProductInsert(ProductDTO productDTO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int adminProductUpdate(ProductDTO productDTO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int adminProductDelete(String pCode) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int adminQAHasAnswerUpdate(int bIndexNo) throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result=0;
+
+		try {
+			conn = DBUtil.getConnection();
+			ps = conn.prepareStatement("update QA set b_hasanswer=1"
+					+ "  where b_indexNo=?");
+			ps.setInt(1, bIndexNo);
+			
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, ps);
+		}
+
+		return result;
+	}
 }

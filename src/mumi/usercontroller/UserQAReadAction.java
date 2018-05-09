@@ -1,6 +1,7 @@
 package mumi.usercontroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mumi.model.dto.QADTO;
+import mumi.model.dto.QAReplyDTO;
 import mumi.model.service.MumiService;
 
 
@@ -20,25 +22,19 @@ public class UserQAReadAction implements Action {
 		
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
-		String userid = (String) session.getAttribute("memberid");
-		List<QADTO> list;
+		String userid = (String) session.getAttribute("id");
+		List<QADTO> list=new ArrayList<>();
 		
 		try {
 
-			if (userid.equals("admin")) {
-				list = MumiService.selectQAListAll();
-			} else {
-				list = MumiService.selectQAByQAIndex(userid);
-			}
-			request.setAttribute("list", list);
-
-			for (QADTO qaDTO : list) {
-				System.out.println(qaDTO);
-			}
-
-			mv.setPath("???");
-			mv.setRedirect(false);
-			return mv;
+			
+			list = MumiService.selectQAByQAIndex(userid);
+			
+			
+			request.setAttribute("userQARead", list);
+			
+			mv.setPath("view/QA.jsp");
+			
 
 		} catch (Exception e) {
 
@@ -46,6 +42,6 @@ public class UserQAReadAction implements Action {
 
 		}
 
-		return null;
+		return mv;
 	}
 }

@@ -22,24 +22,26 @@ public class AdminQAReplyInsertAction implements Action{
 		HttpSession session = request.getSession();
 		ModelAndView mv=new ModelAndView();
 		
-		
-		int bIndexNo=(int)session.getAttribute("bIndexNo");
-		String content=(String)session.getAttribute("qContent");
-		
+		int bIndexNo=Integer.parseInt(request.getParameter("bIndexNo"));
+		String content=request.getParameter("qContent");
+		System.out.println(bIndexNo);
+
 
 		
 		try{
 			
 			result = MumiService.insertAnswer(new QAReplyDTO(bIndexNo, content));
+			int i =MumiService.updateHasAnswer(bIndexNo);
+			System.out.println(i);
 			request.setAttribute("result", result);
 			/*
 			for(QADTO qaDTO:list) {
 				System.out.println(qaDTO);
 			}*/
 			
-			mv.setPath("???");
-			mv.setRedirect(false);
-			return mv;
+			mv.setPath("view/QA.jsp");
+			//mv.setRedirect(false);
+			
 			
 			
 		}catch(Exception e) {
@@ -48,7 +50,7 @@ public class AdminQAReplyInsertAction implements Action{
 			
 		}
 		
-		return null;
+		return mv;
 	}
 
 }

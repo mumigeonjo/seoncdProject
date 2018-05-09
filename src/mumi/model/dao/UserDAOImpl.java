@@ -364,7 +364,7 @@ public class UserDAOImpl implements UserDAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				QADTO cusDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
-						rs.getString(6));
+						rs.getString(6),rs.getInt(7));
 				qlist.add(cusDTO);
 
 			}
@@ -385,8 +385,8 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			conn = DBUtil.getConnection();
-			ps = conn.prepareStatement("insert into QA(b_indexNo,member_id,b_category,b_content,b_title,b_date) "
-					+ "values(qa_seq.nextval,?,?,?,?,sysdate)");
+			ps = conn.prepareStatement("insert into QA(b_indexNo,member_id,b_category,b_content,b_title,b_date,b_hasanswer) "
+					+ "values(qa_seq.nextval,?,?,?,?,sysdate,0)");
 			ps.setString(1, qaDTO.getMemberID());
 			ps.setInt(2, qaDTO.getbCategory());
 			ps.setString(3, qaDTO.getbContent());
@@ -413,11 +413,11 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			conn = DBUtil.getConnection();
 			ps = conn.prepareStatement(
-					"update QA set b_category=?,b_content=?,b_title=?,b_date=sysdate) " + "  where b_indexNo=?");
-			ps.setInt(1, qaDTO.getbCategory());
-			ps.setString(2, qaDTO.getbContent());
-			ps.setString(3, qaDTO.getbTitle());
-			ps.setInt(4, qaDTO.getbIndexNo());
+					"update QA set b_content=?,b_title=?,b_date=sysdate where b_indexNo=?");
+			
+			ps.setString(1, qaDTO.getbContent());
+			ps.setString(2, qaDTO.getbTitle());
+			ps.setInt(3, qaDTO.getbIndexNo());
 
 			// ??의 순서대로 개수만큼 setXxx( , ) 작성
 			result = ps.executeUpdate();
@@ -447,7 +447,7 @@ public class UserDAOImpl implements UserDAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				qDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
-						rs.getString(6));
+						rs.getString(6),rs.getInt(7));
 
 			}
 		} catch (Exception e) {

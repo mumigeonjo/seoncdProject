@@ -160,7 +160,7 @@ ${sessionScope.id }님 환영합니다.
 							aria-labelledby="navbarDropdownBlog">
 							<a class="dropdown-item" href="full-width.html">Info</a> <a
 								class="dropdown-item" href="sidebar.html">Sidebar Page</a> <a
-								class="dropdown-item" href="faq.html">FAQ</a> <a
+								class="dropdown-item" href="mumi?command=userQARead">FAQ</a> <a
 								class="dropdown-item" href="404.html">404</a> <a
 								class="dropdown-item" href="pricing.html">Pricing Table</a>
 						</div></li>
