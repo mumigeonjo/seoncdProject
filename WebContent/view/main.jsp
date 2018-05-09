@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-<<<<<<< HEAD
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-=======
-	pageEncoding="UTF-8"%>
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,46 +11,25 @@
 <meta name="author" content="">
 
 <title>Modern Business - Start Bootstrap Template</title>
-<<<<<<< HEAD
 <c:set var="path" value="${pageContext.request.contextPath}"
    scope="application" />
-=======
-
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 <!-- Bootstrap core CSS -->
-<<<<<<< HEAD
 <link
    href="${path}/vendor/bootstrap/css/bootstrap.min.css"
    rel="stylesheet">
-=======
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 
 <!-- Custom styles for this template -->
-<<<<<<< HEAD
 <link href="${path}/css/modern-business.css"
    rel="stylesheet">
-=======
-<link href="css/modern-business.css" rel="stylesheet">
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 </head>
 
 <body>
-<<<<<<< HEAD
    <!-- Navigation 1 -->
    <nav
       class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
          <a class="navbar-brand"
             href="${path}/index.html">MuMiGeonJo-BACKPACKS</a>
-=======
-${sessionScope.id }님 환영합니다.
-	<!-- Navigation 1 -->
-	<nav
-		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">MuMiGeonJo-BACKPACKS</a>
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 
 
          <button class="navbar-toggler navbar-toggler-right" type="button"
@@ -64,7 +39,6 @@ ${sessionScope.id }님 환영합니다.
             <span class="navbar-toggler-icon"></span>
          </button>
 
-<<<<<<< HEAD
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                <%
@@ -107,25 +81,6 @@ ${sessionScope.id }님 환영합니다.
 
 
                <!--             
-=======
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<% if(session.getAttribute("id")==null){ %>
-					<li class="nav-item"><a class="nav-link" href="view/loginForm.jsp">Login</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="register.jsp">Register</a>
-					</li>
-					<%}else{  %>
-					<li class="nav-item"><a class="nav-link" href="./mumi?command=userLogout">LogOut</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="contact.html">Mypage</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="contact.html">Cart</a>
-					</li>
-					<%} %>
-
-					<!--             
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Online Shop
@@ -208,7 +163,6 @@ ${sessionScope.id }님 환영합니다.
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Community</a>
             </li>    
-<<<<<<< HEAD
           -->
                <li class="nav-item dropdown"><a
                   class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
@@ -233,41 +187,9 @@ ${sessionScope.id }님 환영합니다.
       <br>
    </nav>
    <!-- Navigation 2 end -->
-=======
- 			-->
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Community </a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="mumi?command=noticeRead">Notice</a> <a
-								class="dropdown-item" href="blog-home-2.html">Blog Home 2</a> <a
-								class="dropdown-item" href="blog-post.html">Blog Post</a>
-						</div></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Customer Support </a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="full-width.html">Info</a> <a
-								class="dropdown-item" href="sidebar.html">Sidebar Page</a> <a
-								class="dropdown-item" href="faq.html">FAQ</a> <a
-								class="dropdown-item" href="404.html">404</a> <a
-								class="dropdown-item" href="pricing.html">Pricing Table</a>
-						</div></li>
-				</ul>
-			</div>
-		</div>
-		<br>
-	</nav>
-	<!-- Navigation 2 end -->
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 
 
 
-<<<<<<< HEAD
    <!-- header -->
    <header>
       <div id="carouselExampleIndicators" class="carousel slide"
@@ -316,56 +238,6 @@ ${sessionScope.id }님 환영합니다.
       </div>
    </header>
    <!-- header end -->
-=======
-	<!-- header -->
-	<header>
-		<div id="carouselExampleIndicators" class="carousel slide"
-			data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0"
-					class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner" role="listbox">
-				<!-- Slide One - Set the background image for this slide in the line below -->
-				<div class="carousel-item active"
-					style="background-image: url('img/home2.PNG')">
-					<div class="carousel-caption d-none d-md-block">
-						<h3>캠핑</h3>
-						<p>This is a description for the first slide.</p>
-					</div>
-				</div>
-				<!-- Slide Two - Set the background image for this slide in the line below -->
-				<div class="carousel-item"
-					style="background-image: url('img/home3.png')">
-					<div class="carousel-caption d-none d-md-block">
-						<h3>기차 여행</h3>
-						<p>This is a description for the second slide.</p>
-					</div>
-				</div>
-				<!-- Slide Three - Set the background image for this slide in the line below -->
-				<div class="carousel-item"
-					style="background-image: url('img/home4.jpg')">
-					<div class="carousel-caption d-none d-md-block">
-						<h3>집에 보관할때도 멋스럽게</h3>
-						<p>This is a description for the third slide.</p>
-					</div>
-				</div>
-			</div>
-			<a class="carousel-control-prev" href="#carouselExampleIndicators"
-				role="button" data-slide="prev"> <span
-				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="sr-only">Previous</span>
-			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-				role="button" data-slide="next"> <span
-				class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="sr-only">Next</span>
-			</a>
-		</div>
-	</header>
-	<!-- header end -->
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 
 
 
@@ -373,7 +245,6 @@ ${sessionScope.id }님 환영합니다.
    <div class="container">
       <h1 class="my-4"></h1>
 
-<<<<<<< HEAD
       <!-- img Section -->
       <div class="row">
          <div class="col-lg-6" style="text-align:center; padding:50px 0px 0px 0px">
@@ -409,37 +280,6 @@ ${sessionScope.id }님 환영합니다.
          <br>
       </div>
       <!-- img Section end -->
-=======
-		<!-- img Section -->
-		<div class="row">
-			<div class="col-lg-6">
-				<h2></h2>
-				<h2>여행하는 즐거움</h2>
-				<p>우리가 킬리를 선택하는 이유:</p>
-				<ul>
-					<li>장기간 여행에 최적화</li>
-					<li>다양한 착용법</li>
-					<li>최고급 품질</li>
-					<li>킬리만의 멋스러운 디자인</li>
-				</ul>
-			</div>
-			<div class="col-lg-6">
-				<img class="img-fluid rounded" src="img/P002.jpg" alt="">
-			</div>
-			<div class="col-lg-6">
-				<a href="mumi?command=userReviewRead&pCode=P003M">
-				<img class="img-fluid rounded" src="img/P003.jpg" alt="">
-			</div>
-			<br>
-			<div class="col-lg-6">
-				<a href="mumi?command=userReviewRead&pCode=P001M">
-				          <img class="img-fluid rounded" src="img/P004.jpg" alt=""></a>
-				
-			</div>
-			<br>
-		</div>
-		<!-- img Section end -->
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 
       <hr>
 

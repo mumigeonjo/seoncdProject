@@ -548,12 +548,8 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return re;
 	}
-<<<<<<< HEAD
 
 	@Override
-=======
-
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	public int userLeave(String id) {
 		Connection con = null;
 		PreparedStatement ps = null;
