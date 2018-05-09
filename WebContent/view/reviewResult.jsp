@@ -28,6 +28,11 @@ ${requestScope.list}
 					${review.rDate}					
 					</span></p>
 		        </td>
+		         <td bgcolor="">
+					<p><span style="font-size:9pt;">					
+					${review.rContent}					
+					</span></p>
+		        </td>
 		    </tr>
     </c:forEach>
 </body>

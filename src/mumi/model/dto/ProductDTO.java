@@ -26,13 +26,11 @@ public class ProductDTO {
 	}
 	
 	//AdminProductUpdate
-	public ProductDTO(String pCode, int pPrice, int pEA, String pImage,	String pDetailImage) {
+	public ProductDTO(String pCode, int pPrice, int pEA) {
 		super();
 		this.pCode = pCode;
 		this.pPrice = pPrice;
 		this.pEA = pEA;
-		this.pImage = pImage;
-		this.pDetailImage = pDetailImage;
 	}
 
 	public String getpCode() {
