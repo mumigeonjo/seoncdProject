@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Modern Business - Start Bootstrap Template</title>
+<title>무미건조</title>
 <c:set var="path" value="${pageContext.request.contextPath}"
    scope="application" />
 <!-- Bootstrap core CSS -->
