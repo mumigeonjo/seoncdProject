@@ -54,7 +54,8 @@ public class MumiService {
 	/**장바구니 읽기
 	 */
 	public static List<CartDTO> readCart(String id) throws SQLException{
-		return userDAO.cartShowAll(id);
+		List<CartDTO> list = userDAO.cartShowAll(id);
+		return list;
 		//널이어도 상관 없음. 아무것도 출력 안 할 거야.
 	}
 
@@ -169,6 +170,7 @@ public class MumiService {
 	
 	//주문하기(UserOrderInsertAction)
 	public static int insertOrder(OrderDTO orderDTO) throws SQLException{
+		System.out.println("from insertOrder Service");
 		int result = userDAO.userOrderComplete(orderDTO);
 		if(result==0)
 			throw new SQLException("결제 실패하였습니다.");
@@ -177,7 +179,8 @@ public class MumiService {
 	
 	//모든 결제내역 확인(로그인 한 유저의 글만)
 	public static List<CartDTO> selectOrderAllById(String id) throws SQLException{
-		return userDAO.orderListRead(id);
+		List<CartDTO> list = userDAO.orderListRead(id);
+		return list;
 		//널이어도 상관 없음. 출력 안 하면 그만.
 	}
 	
@@ -289,7 +292,8 @@ public class MumiService {
 	
 	//모든 주문내역 보기
 	public static List<OrderDTO> selectOrderAll() throws SQLException{
-		return mumiDAO.adminOrderListRead();
+		List<OrderDTO> list = mumiDAO.adminOrderListRead();
+		return list;
 		//널이어도 괜찮아! 그냥 출력 안 하면 그만?
 	}
 	/*

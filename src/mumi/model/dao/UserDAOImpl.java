@@ -145,10 +145,10 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			con=DBUtil.getConnection();
 			ps=con.prepareStatement("select o_indexno, p_name, p_price "
-					+ "from order_detail join product"
-					+ "on order_detail.p_code=product.p_code"
-					+ "and member_id=?"
-					+ "and o_status='0' "
+					+ "from order_detail join product "
+					+ "on order_detail.p_code=product.p_code "
+					+ "and member_id=? "
+					+ "and o_status=0 "
 					+ "order by o_date desc");
 			ps.setString(1, id);
 			rs=ps.executeQuery();
@@ -171,7 +171,7 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			con=DBUtil.getConnection();
 			ps=con.prepareStatement("insert into order_detail values("
-					+ "order_detail_seq,"
+					+ "order_detail_seq.nextval,"
 					+ "?, ?, ?, sysdate, ?, ?, ?)");
 			ps.setString(1, orderDTO.getpCode());
 			ps.setString(2, orderDTO.getMemberID());
@@ -203,11 +203,13 @@ public class UserDAOImpl implements UserDAO {
 		CartDTO cartDTO = new CartDTO();
 		try {
 			con=DBUtil.getConnection();
-			ps=con.prepareStatement("select o_indexno, p_code, p_name, p_price, o_addr, o_phone"
-					+ "from order_detail join product"
-					+ "on oIndexNo=? and product.p_code=order_detail.p_code");
+			ps=con.prepareStatement("select o_indexno, order_detail.p_code, p_name, p_price, o_addr, o_phone "
+					+ "from order_detail join product "
+					+ "on o_IndexNo=? and product.p_code=order_detail.p_code");
 			ps.setInt(1, oIndexNo);
 			rs=ps.executeQuery();
+			if(!rs.next())
+				throw new SQLException("해당되는 주문이 없습니다.");
 			cartDTO.setoIndexNo(rs.getInt(1));
 			cartDTO.setpCode(rs.getString(2));
 			cartDTO.setpName(rs.getString(3));
@@ -259,7 +261,7 @@ public class UserDAOImpl implements UserDAO {
 			con.setAutoCommit(false);
 			
 			ps=con.prepareStatement("update order_detail set p_code=?, o_ea=?, o_date=sysdate, "
-					+ "o_status=1, o_addr=?, o_phone=?"
+					+ "o_status=1, o_addr=?, o_phone=? "
 					+ "where o_indexno=?");
 			ps.setString(1, orderDTO.getpCode());
 			ps.setInt(2, orderDTO.getoEA());
@@ -273,8 +275,11 @@ public class UserDAOImpl implements UserDAO {
 				return updateResult;
 			}
 			
-			ps=con.prepareStatement("update product set p_ea=p_ea-1 where p_code=?");
-			ps.setString(1, orderDTO.getpCode());
+			ps=con.prepareStatement("update product "
+					+ "set p_ea=p_ea-(select o_ea from order_detail where o_indexno=?) "
+					+ "where p_code=?");
+			ps.setInt(1, orderDTO.getoIndexNo());
+			ps.setString(2, orderDTO.getpCode());
 			
 			minusResult=ps.executeUpdate();
 			if(minusResult==0) {
@@ -310,7 +315,7 @@ public class UserDAOImpl implements UserDAO {
 		List<CartDTO> list = new ArrayList<>();
 		try {
 			con=DBUtil.getConnection();
-			ps=con.prepareStatement("select o_date, p_name, o_ea, p_price, o_addr "
+			ps=con.prepareStatement("select o_date, p_name, o_ea, (o_ea*p_price)as price, o_addr "
 					+ "from order_detail join product"
 					+ "on member_id=?"
 					+ "and order_detail.p_code=product.p_code"

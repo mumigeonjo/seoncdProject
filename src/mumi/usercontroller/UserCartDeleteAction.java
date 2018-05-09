@@ -3,6 +3,7 @@ package mumi.usercontroller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ public class UserCartDeleteAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ModelAndView mv = new ModelAndView();
+		ServletContext application = request.getServletContext();
 		
 		//뷰에서 삭제할 상품의 인덱스를 보내준다.
 		try {
@@ -34,7 +36,7 @@ public class UserCartDeleteAction implements Action{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			mv.setPath("/exampleCart.jsp");
+			mv.setPath("/view/cart.jsp");
 		}
 		return mv;
 	}
