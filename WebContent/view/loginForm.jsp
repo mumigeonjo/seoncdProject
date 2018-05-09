@@ -23,13 +23,12 @@ pageEncoding="UTF-8"%>
 	
 <style>
 #footer {
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:70px;   
-    background:#ccc;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	text-align: center;
 }
-
 #loginForm {
 	  padding:20px;
 	  text-align: center;
@@ -169,19 +168,22 @@ $(document).ready(function(){
 </tr>
 </table>
 </form>
-	<!-- Footer -->
-	<footer class="py-5 bg-dark" id="footer">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; 무미건조</p>
-		</div>
-		<!-- /.container -->
-	</footer>
-	<!-- Footer end -->
+	  <!-- Footer -->
+   <footer class="py-5 bg-dark" id="footer" >
+      <div class="container">
+        <p class="m-0 text-center text-white"><strong>Copyright</strong> &copy; 무미건조 &nbsp;</p>
+        <p class="m-0 text-center text-white"><strong>주소</strong> : 경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층 &nbsp;</p>
+        <p class="m-0 text-center text-white"><strong>대표번호</strong> : 031-606-9320 &nbsp;</p>
+      </div>
+      <!-- /.container -->
+   </footer>
+   <!-- Footer end -->
 
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- Bootstrap core JavaScript end -->
+   <!-- Bootstrap core JavaScript -->
+   <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+   <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <!-- Bootstrap core JavaScript end -->
+
 </body>
 </html>

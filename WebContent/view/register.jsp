@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +12,14 @@
 <meta name="author" content="">
 <c:set var="path" value="${pageContext.request.contextPath}"
 	scope="application" />
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	$("#historyback").click(function(){
-		window.history.back();
+	$(document).ready(function() {
+		$("#historyback").click(function() {
+			window.history.back();
+		})
 	})
-})
 </script>
 <!-- Bootstrap core CSS -->
 <link
@@ -30,33 +31,35 @@ $(document).ready(function(){
 	rel="stylesheet">
 <style>
 #footer {
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:70px;   
-    background:#ccc;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	text-align: center;
 }
 
 #registerForm {
-	  padding:20px;
-	  text-align: center;
+	padding: 20px;
+	text-align: center;
 }
+
 table {
-    width: 400px;
-    height: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top:50px;
-  }
-   table, th, td {
-    border: 1px solid #bcbcbc;
-  }
+	width: 400px;
+	height: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+
+table, th, td {
+	border: 1px solid #bcbcbc;
+}
 </style>
 <meta charset="UTF-8">
 <title></title>
 </head>
 <body>
-<!-- Navigation 1 -->
+	<!-- Navigation 1 -->
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
@@ -153,7 +156,9 @@ table {
 		</div>
 		<br>
 	</nav>
-	<form method="post" action="${pageContext.request.contextPath}/mumi?command=userJoin" id="registerForm">
+	<form method="post"
+		action="${pageContext.request.contextPath}/mumi?command=userJoin"
+		id="registerForm">
 		<table>
 			<tr>
 				<th>아이디</th>
@@ -184,12 +189,19 @@ table {
 				<th><button type="button" id="historyback">뒤로가기</button></th>
 			</tr>
 		</table>
-		
 	</form>
 	<!-- Footer -->
 	<footer class="py-5 bg-dark" id="footer">
 		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; 무미건조</p>
+			<p class="m-0 text-center text-white">
+				<strong>Copyright</strong> &copy; 무미건조 &nbsp;
+			</p>
+			<p class="m-0 text-center text-white">
+				<strong>주소</strong> : 경기도 성남시 분당구 삼평동 682 유스페이스2 B동 8층 &nbsp;
+			</p>
+			<p class="m-0 text-center text-white">
+				<strong>대표번호</strong> : 031-606-9320 &nbsp;
+			</p>
 		</div>
 		<!-- /.container -->
 	</footer>
@@ -197,8 +209,11 @@ table {
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- Bootstrap core JavaScript end -->
+
 </body>
 </html>
