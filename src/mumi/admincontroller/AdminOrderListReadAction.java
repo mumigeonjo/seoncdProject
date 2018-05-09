@@ -30,7 +30,7 @@ public class AdminOrderListReadAction implements Action{
 			customerOrderList = MumiService.selectOrderAll();
 			JSONArray orderList = JSONArray.fromObject(customerOrderList);
 			request.setAttribute("orderList", orderList);
-			mv.setPath("");
+			mv.setPath("/view/adminOrderList.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

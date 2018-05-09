@@ -141,9 +141,13 @@ public class UserDAOImpl implements UserDAO {
 		ResultSet rs = null;
 		List<CartDTO> cartList = new ArrayList<>();
 		try {
-			con = DBUtil.getConnection();
-			ps = con.prepareStatement("select o_indexno, p_name, p_price " + "from order_detail join product"
-					+ "on order_detail.p_code=product.p_code" + "and member_id=?" + "and o_status='0' "
+
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("select o_indexno, p_name, p_price "
+					+ "from order_detail join product "
+					+ "on order_detail.p_code=product.p_code "
+					+ "and member_id=? "
+					+ "and o_status=0 "
 					+ "order by o_date desc");
 			ps.setString(1, id);
 			rs = ps.executeQuery();
@@ -164,9 +168,11 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps = null;
 		int result = 0;
 		try {
-			con = DBUtil.getConnection();
-			ps = con.prepareStatement(
-					"insert into order_detail values(" + "order_detail_seq," + "?, ?, ?, sysdate, ?, ?, ?)");
+
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("insert into order_detail values("
+					+ "order_detail_seq.nextval,"
+					+ "?, ?, ?, sysdate, ?, ?, ?)");
 			ps.setString(1, orderDTO.getpCode());
 			ps.setString(2, orderDTO.getMemberID());
 			ps.setInt(3, orderDTO.getoEA());
@@ -196,11 +202,15 @@ public class UserDAOImpl implements UserDAO {
 		ResultSet rs = null;
 		CartDTO cartDTO = new CartDTO();
 		try {
-			con = DBUtil.getConnection();
-			ps = con.prepareStatement("select o_indexno, p_code, p_name, p_price, o_addr, o_phone"
-					+ "from order_detail join product" + "on oIndexNo=? and product.p_code=order_detail.p_code");
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("select o_indexno, order_detail.p_code, p_name, p_price, o_addr, o_phone "
+					+ "from order_detail join product "
+					+ "on o_IndexNo=? and product.p_code=order_detail.p_code");
 			ps.setInt(1, oIndexNo);
-			rs = ps.executeQuery();
+
+			rs=ps.executeQuery();
+			if(!rs.next())
+				throw new SQLException("해당되는 주문이 없습니다.");
 			cartDTO.setoIndexNo(rs.getInt(1));
 			cartDTO.setpCode(rs.getString(2));
 			cartDTO.setpName(rs.getString(3));
@@ -251,8 +261,10 @@ public class UserDAOImpl implements UserDAO {
 			con = DBUtil.getConnection();
 			con.setAutoCommit(false);
 
-			ps = con.prepareStatement("update order_detail set p_code=?, o_ea=?, o_date=sysdate, "
-					+ "o_status=1, o_addr=?, o_phone=?" + "where o_indexno=?");
+			
+			ps=con.prepareStatement("update order_detail set p_code=?, o_ea=?, o_date=sysdate, "
+					+ "o_status=1, o_addr=?, o_phone=? "
+					+ "where o_indexno=?");
 			ps.setString(1, orderDTO.getpCode());
 			ps.setInt(2, orderDTO.getoEA());
 			ps.setString(3, orderDTO.getoAddr());
@@ -264,12 +276,15 @@ public class UserDAOImpl implements UserDAO {
 				con.rollback();
 				return updateResult;
 			}
-
-			ps = con.prepareStatement("update product set p_ea=p_ea-1 where p_code=?");
-			ps.setString(1, orderDTO.getpCode());
-
-			minusResult = ps.executeUpdate();
-			if (minusResult == 0) {
+			
+			ps=con.prepareStatement("update product "
+					+ "set p_ea=p_ea-(select o_ea from order_detail where o_indexno=?) "
+					+ "where p_code=?");
+			ps.setInt(1, orderDTO.getoIndexNo());
+			ps.setString(2, orderDTO.getpCode());
+			
+			minusResult=ps.executeUpdate();
+			if(minusResult==0) {
 				con.rollback();
 				return 0;
 			}
@@ -296,8 +311,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			while(rs.next()) {
 				NoticeDTO dto = new NoticeDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
-				System.out.println(rs.getString(1));
-				
+			
 				list.add(dto);
 			}
 		}catch(Exception e) {
@@ -322,9 +336,12 @@ public class UserDAOImpl implements UserDAO {
 		ResultSet rs = null;
 		List<CartDTO> list = new ArrayList<>();
 		try {
-			con = DBUtil.getConnection();
-			ps = con.prepareStatement("select o_date, p_name, o_ea, p_price, o_addr " + "from order_detail join product"
-					+ "on member_id=?" + "and order_detail.p_code=product.p_code" + "and o_status='1' "
+			con=DBUtil.getConnection();
+			ps=con.prepareStatement("select o_date, p_name, o_ea, (o_ea*p_price)as price, o_addr "
+					+ "from order_detail join product "
+					+ "on member_id=? "
+					+ "and order_detail.p_code=product.p_code "
+					+ "and o_status='1' "
 					+ "order by o_date desc");
 			ps.setString(1, id);
 			rs = ps.executeQuery();
@@ -354,7 +371,7 @@ public class UserDAOImpl implements UserDAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				QADTO cusDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
-						rs.getString(6));
+						rs.getString(6),rs.getInt(7));
 				qlist.add(cusDTO);
 
 			}
@@ -375,8 +392,8 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			conn = DBUtil.getConnection();
-			ps = conn.prepareStatement("insert into QA(b_indexNo,member_id,b_category,b_content,b_title,b_date) "
-					+ "values(qa_seq.nextval,?,?,?,?,sysdate)");
+			ps = conn.prepareStatement("insert into QA(b_indexNo,member_id,b_category,b_content,b_title,b_date,b_hasanswer) "
+					+ "values(qa_seq.nextval,?,?,?,?,sysdate,0)");
 			ps.setString(1, qaDTO.getMemberID());
 			ps.setInt(2, qaDTO.getbCategory());
 			ps.setString(3, qaDTO.getbContent());
@@ -403,11 +420,11 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			conn = DBUtil.getConnection();
 			ps = conn.prepareStatement(
-					"update QA set b_category=?,b_content=?,b_title=?,b_date=sysdate) " + "  where b_indexNo=?");
-			ps.setInt(1, qaDTO.getbCategory());
-			ps.setString(2, qaDTO.getbContent());
-			ps.setString(3, qaDTO.getbTitle());
-			ps.setInt(4, qaDTO.getbIndexNo());
+					"update QA set b_content=?,b_title=?,b_date=sysdate where b_indexNo=?");
+			
+			ps.setString(1, qaDTO.getbContent());
+			ps.setString(2, qaDTO.getbTitle());
+			ps.setInt(3, qaDTO.getbIndexNo());
 
 			// ??의 순서대로 개수만큼 setXxx( , ) 작성
 			result = ps.executeUpdate();
@@ -437,7 +454,7 @@ public class UserDAOImpl implements UserDAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				qDTO = new QADTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
-						rs.getString(6));
+						rs.getString(6),rs.getInt(7));
 
 			}
 		} catch (Exception e) {
@@ -488,7 +505,7 @@ public class UserDAOImpl implements UserDAO {
 			while (rs.next()) {
 				ReviewDTO dto = new ReviewDTO(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3),
 						rs.getString(4), rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)));
-				System.out.println(rs.getString(2));
+				
 				list.add(dto);
 			}
 
@@ -497,7 +514,7 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			DBUtil.dbClose(con, ps, rs);
 		}
-		System.out.println("dao="+list);
+		
 		return list;
 	}
 
@@ -526,28 +543,7 @@ public class UserDAOImpl implements UserDAO {
 		return re;
 	}
 
-	@Override
-	public int userReviewUpdate(ReviewDTO reviewDTO) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		int re = 0;
-		try {
-			con = DBUtil.getConnection();
-			ps = con.prepareStatement(
-					"update review set pCode=?, sysdate, rContent=?, rPhoto=?, rRate=? where member_id=?");
-			ps.setString(1, reviewDTO.getpCode());
-			ps.setString(2, reviewDTO.getrContent());
-			ps.setString(3, reviewDTO.getrPhoto());
-			ps.setInt(4, reviewDTO.getrRate());
-			re = ps.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.dbClose(con, ps);
-		}
-		return re;
-	}
 
 	@Override
 	public int userReviewDelete(int rIndexNo) {
@@ -634,6 +630,57 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return memberDTO;
 	}
+
+	@Override
+	public ReviewDTO userReviewUpdateForm(String rIndexNo) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ReviewDTO dto = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement("select * from review where r_indexNo=?");
+			ps.setString(1, rIndexNo);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+			dto = new ReviewDTO(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)));
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(con, ps, rs);
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public int userReviewUpdate(ReviewDTO reviewDTO) {
+		Connection con = null;
+		PreparedStatement ps= null;
+		int result=0;
+		
+		try {
+			con= DBUtil.getConnection();
+			ps= con.prepareStatement("update review set r_date=sysdate, r_content=?, r_Rate=? where R_indexNo=?");
+			ps.setString(1, reviewDTO.getrContent());
+			ps.setInt(2, reviewDTO.getrRate());
+			ps.setInt(3, reviewDTO.getrIndexNo());
+			result =ps.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+
 
 /*	@Override
 	public int userOrderComplete(OrderDTO orderDTO) {

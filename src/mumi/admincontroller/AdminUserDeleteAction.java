@@ -22,6 +22,7 @@ public class AdminUserDeleteAction implements Action {
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");
 			String memberID=request.getParameter("memberID");
+			
 
 			if (!id.equals("admin")) {
 				throw new Exception("관리자로 로그인하고 이용하세요");

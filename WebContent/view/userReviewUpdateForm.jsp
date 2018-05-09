@@ -21,10 +21,10 @@
 <title>Modern Business - Start Bootstrap Template</title>
 
 <!-- Bootstrap core CSS -->
-<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="../css/modern-business.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/modern-business.css" rel="stylesheet">
 
 <!-- <script type="text/javascript">
     	function sendInsert() {
@@ -47,7 +47,6 @@
 </head>
 
 <body>
-
 	<!-- Navigation 1 -->
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -209,7 +208,7 @@
 			aria-multiselectable="true">
 
 			<form name="reviewForm" method="post"
-				action="../mumi?command=userReviewInsert"
+				action="${pageContext.request.contextPath}/mumi?command=userReviewUpdate&rIndexNo=${requestScope.dto.rIndexNo}"
 				onSubmit='return sendInsert()'>
 				<fieldset style="text-align: center;">
 					<font style="vertical-align: inherit; font-size: 20pt;"> 양식
@@ -240,8 +239,9 @@
 					<div style="margin: 0px 0px 10px">
 						<label for="exampleTextarea">review 내용</label>
 						<textarea class="form-control" id="rContent" name="rContent"
-							rows="3"></textarea>
-					</div>
+							rows="3">${requestScope.dto.rContent }
+							</textarea>
+ 					</div>
 					<div>
 						<input type="hidden" id="memberId" name="memberId" value="${requestScope.memberId}">
 					</div>

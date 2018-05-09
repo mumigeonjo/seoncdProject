@@ -17,18 +17,22 @@ public class AdminReviewDeleteAction implements Action {
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView();
+		
+		HttpSession session = request.getSession();
 		String memberId= (String)session.getAttribute("id");
-			if(memberId=="admin") {
+		
+		String pCode = request.getParameter("pCode");
+		
+			if(memberId.equals("admin")) {
 				int rIndexNo = Integer.parseInt(request.getParameter("rIndexNo"));
-
+				
 				try {
 					int result = MumiService.adminReviewDelete(rIndexNo);
 					if (result > 0) {
-						mv.setPath("???");
-						mv.setRedirect(false);
+						//mv.setPath("view/productDetail.jsp");
+						mv.setPath("mumi?command=userReviewRead&pCode="+pCode);
+						mv.setRedirect(true);
 					} else {
 						throw new SQLException("리뷰삭제에 실패했습니다.");
 
@@ -40,12 +44,10 @@ public class AdminReviewDeleteAction implements Action {
 					mv.setPath("404.html");
 				}
 			}else {
-				mv.setPath("index.jsp");
+				mv.setPath("index.html");
 				mv.setRedirect(true);
 			}
 		
-	
-
 		return mv;
 
 	}

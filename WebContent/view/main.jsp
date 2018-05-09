@@ -263,17 +263,20 @@
             
          </div>
          <div class="col-lg-6">
+                     <a href="mumi?command=userReviewRead&pCode=P002S">
             <img class="img-fluid rounded"
                src="${path}/img/P002.jpg" alt="">
          </div>
          <div class="col-lg-6">
+                     <a href="mumi?command=userReviewRead&pCode=P003S">
             <img class="img-fluid rounded"
                src="${path}/img/P003.jpg" alt="">
          </div>
          <br>
          <div class="col-lg-6">
+                     <a href="mumi?command=userReviewRead&pCode=P004S">
             <img class="img-fluid rounded"
-               src="${path}/img/window.jpg" alt="">
+               src="${path}/img/P004.jpg" alt="">
          </div>
          <br>
       </div>

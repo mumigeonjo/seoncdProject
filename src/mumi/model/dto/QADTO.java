@@ -7,9 +7,12 @@ public class QADTO {
 	private String bContent;
 	private String bTitle;
 	private String bDate;
+	private int bHasDate;
 
 	public QADTO() {
 	}
+	
+	
 	public QADTO(String memberID, int categoryNo, String bContent, String bTitle) {
 		this.memberID = memberID;
 		this.bCategory = categoryNo;
@@ -24,9 +27,10 @@ public class QADTO {
 		
 	}
 	
-	public QADTO(int bIndexNo, String memberID, int bCategory, String bContent, String bTitle, String bDate) {
+	public QADTO(int bIndexNo, String memberID, int bCategory, String bContent, String bTitle, String bDate,int bHasDate) {
 		this(bIndexNo,memberID,bCategory,bContent,bTitle);
 		this.bDate = bDate;
+		this.bHasDate=bHasDate;
 	}
 
 	public int getbIndexNo() {
@@ -75,5 +79,15 @@ public class QADTO {
 
 	public void setbDate(String bDate) {
 		this.bDate = bDate;
+	}
+
+
+	public int getbHasDate() {
+		return bHasDate;
+	}
+
+
+	public void setbHasDate(int bHasDate) {
+		this.bHasDate = bHasDate;
 	}
 }

@@ -7,11 +7,7 @@ drop table product;
 drop table member;
 
 commit
-select * from product;
-select * from product where p_name = 'GO백두산';
-insert into product values('P003M','GO백두산','210000','M', '2018-03-09', '142','P003.png','P003_d.png');
-delete product where p_code='P003M';
-
+select * from review;
 --create table
 create table member(
     member_id varchar2(20) not null constraint mid_pk PRIMARY KEY,

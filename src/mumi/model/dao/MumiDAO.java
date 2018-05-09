@@ -66,13 +66,13 @@ public interface MumiDAO {
 	/**
 	 * QA 자세히 읽기. QA 클릭하면 내용 띄워주기?
 	 * 리플은 어떻게 가져올까. 별개 메소드로?
-	 */
+	 
 	public QADTO adminQAReadDetail() throws SQLException;
-	
+	*/
 	/**
 	 * QA 자세히 읽기- 리뷰 부분만 가져오는 메소드(추가)
 	 */
-	public QAReplyDTO adminQAReplyReadDetail() throws SQLException;
+	public QAReplyDTO adminQAReplyReadDetail(int bIndexNo) throws SQLException;
 	
 	/**
 	 * 리뷰 삭제하기
@@ -120,5 +120,12 @@ public interface MumiDAO {
 	 */
 	public int adminUserDelete(String memberID) throws SQLException;
 	
+	/**
+	 * QA테이블에 있는 column업데이트
+	 * @param bIndexNo
+	 * @return
+	 * @throws SQLException
+	 */
+	public int adminQAHasAnswerUpdate(int bIndexNo) throws SQLException;
 
 }

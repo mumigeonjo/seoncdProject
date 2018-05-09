@@ -18,8 +18,8 @@ public class UserQADeleteAction implements Action{
 		
 		HttpSession session = request.getSession();
 		ModelAndView mv=new ModelAndView();
-		int bIndexNo =(int)session.getAttribute("b_indexno");
-		
+		int bIndexNo =Integer.parseInt(request.getParameter("bIndexNo"));
+		System.out.println(bIndexNo);
 		try{
 			
 			int result = MumiService.deleteQA(bIndexNo);
@@ -29,9 +29,9 @@ public class UserQADeleteAction implements Action{
 				System.out.println(qaDTO);
 			}*/
 			
-			mv.setPath("???");
-			mv.setRedirect(false);
-			return mv;
+			mv.setPath("view/QA.jsp");
+			//mv.setRedirect(false);
+			
 			
 			
 		}catch(Exception e) {
@@ -40,7 +40,7 @@ public class UserQADeleteAction implements Action{
 			
 		}
 		
-		return null;
+		return mv;
 	}
 
 

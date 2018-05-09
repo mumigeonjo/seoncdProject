@@ -20,16 +20,18 @@ public class UserReviewReadAction implements Action{
 			throws ServletException, IOException {
 
 		ModelAndView mv = new ModelAndView();
-		String pCode = request.getParameter("pCode");
+		String pCode = request.getParameter("pCode");//pCode
 		try {
 			List<ReviewDTO> list= MumiService.userReviewRead(pCode);
+			System.out.println("list = " + list);
 			request.setAttribute("list", list);
 			mv.setPath("view/productDetail.jsp");
-			mv.setRedirect(false);
+			//mv.setRedirect(false);
 		}catch(Exception e) {
 			e.printStackTrace();
+			request.setAttribute("errorMsg", e.getMessage());
 			mv.setPath("404.html");
-			mv.setRedirect(true);
+			
 		}
 		return mv;
 	}

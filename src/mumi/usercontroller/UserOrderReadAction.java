@@ -25,25 +25,21 @@ public class UserOrderReadAction implements Action{
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ModelAndView mv = new ModelAndView();
-		Cookie oIndexNoCookie;
-		ServletContext application = request.getServletContext();
+		
 		//request로 넘어오나?
 		try {
-			int oIndexNo = (int)request.getAttribute("oIndexNo");
-			JSONArray cartDTO = 
-					JSONArray.fromObject(MumiService.selectOrderByProductNum(oIndexNo));
+			int oIndexNo = Integer.parseInt(request.getParameter("oIndexNo"));
+			System.out.println(oIndexNo);
+			//JSONArray cartDTO = 
+			//		JSONArray.fromObject(MumiService.selectOrderByProductNum(oIndexNo));
+			CartDTO cartDTO = MumiService.selectOrderByProductNum(oIndexNo);
 			request.setAttribute("order", cartDTO);
-			oIndexNoCookie = new Cookie("oIndexNo", oIndexNo+"");
-			oIndexNoCookie.setMaxAge(60*60);	//1시간
-			oIndexNoCookie.setPath(application.getContextPath());
-			
-			response.addCookie(oIndexNoCookie);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		mv.setPath("");
+		mv.setPath("view/buy.jsp");
 		return mv;
 	}
 

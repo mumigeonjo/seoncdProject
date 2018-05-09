@@ -145,14 +145,6 @@ public class MumiService {
 
 	}
 
-	// 리뷰 게시글 수정(로그인 한 유저의 글만)
-	public static int userReviewUpdate(ReviewDTO reviewDTO) throws SQLException {
-		int re = userDAO.userReviewUpdate(reviewDTO);
-		if (re == 0)
-			throw new SQLException("수정되지 않았습니다.");
-		return re;
-
-	}
 	
 	//공지사항 조회
 	public static List<NoticeDTO> selectNoticeAll()throws SQLException{
@@ -274,11 +266,7 @@ public class MumiService {
 		return 0;
 	}
 	
-	//리뷰 게시글 수정(로그인 한 유저의 글만)
-	public static int updateUserReview() throws SQLException{
-		return 0;
-	}
-	
+
 	//모든 리뷰 게시글 읽기(로그인 한 유저의 글만)
 	public static List<ReviewDTO> selectUserReview() throws SQLException{
 		return null;
@@ -322,42 +310,21 @@ public class MumiService {
 	public static int insertAnswer() throws SQLException{
 		return 0;
 	}
-	*/
-	/*
-	 * //QA 게시글 삭제 public static int deleteQA(QAindex) throws SQLException{ return
-	 * 0; }
-	 * 
-	 * //QA 답글 삽입 public static int insertAnswer() throws SQLException{ return 0; }
-	 */
-	// QA 게시글 모두 조회
-	public static List<QADTO> selectQAListAll() throws SQLException {
-
+	
+	//QA 게시글 모두 조회
+	public static List<QADTO> selectQAListAll() throws SQLException{
 		List<QADTO> list = null;
 		list = mumiDAO.adminQAReadAll();
 		return list;
 	}
-	/*
-	 * //QA 게시글 디테일 조회 public static QADTO selectQADetail() throws SQLException{
-	 * return null; }
-	 * 
-	 * //QA 답글 수정 public static int updateAnswer() throws SQLException{ return 0; }
-	 * 
-	 * //QA 답글 삭제 public static int deleteAnswer() throws SQLException{ return 0; }
-	 * 
-	 * //회원정보 모두 보기 public List<MemberDTO> selectAllUser() throws SQLException{
-	 * return null; }
-	 * 
-	 * //회원 강제 탈퇴 public int dropUser() throws SQLException{ return 0;
-	 * 
-	 * }
-	 */
-
-	public static int adminReviewDelete(int rIndexNo) throws SQLException {
-		int re = mumiDAO.adminReviewDelete(rIndexNo);
-		if (re == 0) {
-			throw new SQLException("삭제되지 않았습니다.");
-		}
-		return re;
+	
+	//QA 답글 수정
+	public static int updateAnswer(QAReplyDTO qaReplyDTO) throws SQLException{
+		int result = 0;
+		
+		result = mumiDAO.adminQAReplyUpdate(qaReplyDTO);
+		if(result==0)throw new SQLException("업데이트되지 않았습니다.");
+		return result;
 	}
 
 	public static int deleteQA(int bIndexNo) {
@@ -396,4 +363,16 @@ public class MumiService {
 		MemberDTO dto = userDAO.userUpdateForm(id);
 		return dto;
 	}
+
+	public static ReviewDTO userReviewUpdateForm(String rIndexNo) {
+		ReviewDTO dto= userDAO.userReviewUpdateForm(rIndexNo);
+		return dto;
+	}
+
+	public static int updateUserReview(ReviewDTO reviewDTO) {
+		int result = userDAO.userReviewUpdate(reviewDTO);
+		return result;
+	}
+
+	
 }

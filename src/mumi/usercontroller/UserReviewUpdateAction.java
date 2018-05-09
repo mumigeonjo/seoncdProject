@@ -17,34 +17,24 @@ public class UserReviewUpdateAction implements Action{
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();
 		ModelAndView mv=new ModelAndView();
-		String memberId = (String)session.getAttribute("id");
-		String rContent = request.getParameter("rContent");
-		String rDate = request.getParameter("rDate");
-		String rPhoto = request.getParameter("rPhoto");
+		
+		int rIndexNo= Integer.parseInt(request.getParameter("rIndexNo"));
+		String pCode= request.getParameter("pCode");
+		String memberId= request.getParameter("memberId");
+		String rContent= request.getParameter("rContent");
 		int rRate = Integer.parseInt(request.getParameter("rRate"));
 		
 		try {
-			int result=MumiService.userReviewUpdate(new ReviewDTO(0, null, null,new Date().toLocaleString(), rContent,  rPhoto,
-			 rRate));
-			if(result>0) {
-			mv.setPath("");
-			mv.setRedirect(true);
-			}else {
-				throw new SQLException("수정에 실패했습니다.");
-			}
-		}catch(SQLException e) {
+			int result = MumiService.updateUserReview(new ReviewDTO(rIndexNo, pCode, memberId, null, rContent, null, rRate));
+			mv.setPath("view/productDetail.jsp");
+		}catch(Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());
-			mv.setPath("404.html");
-			
+			mv.setPath("view/404.html");
 		}
 		
-		
 		return mv;
+
 	}
-
-
 }
