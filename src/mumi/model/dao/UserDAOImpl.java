@@ -489,7 +489,7 @@ public class UserDAOImpl implements UserDAO {
 			while (rs.next()) {
 				ReviewDTO dto = new ReviewDTO(Integer.parseInt(rs.getString(1)), rs.getString(2), rs.getString(3),
 						rs.getString(4), rs.getString(5), rs.getString(6), Integer.parseInt(rs.getString(7)));
-				System.out.println(dto);
+				System.out.println(rs.getString(2));
 				list.add(dto);
 			}
 
@@ -498,7 +498,7 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			DBUtil.dbClose(con, ps, rs);
 		}
-
+		System.out.println("dao="+list);
 		return list;
 	}
 
@@ -569,12 +569,6 @@ public class UserDAOImpl implements UserDAO {
 		return re;
 	}
 
-<<<<<<< HEAD
-	@Override
-=======
-
-	@Override
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
 	public int userLeave(String id) {
 		Connection con = null;
 		PreparedStatement ps = null;

@@ -25,7 +25,7 @@
   </head>
 
   <body>
-
+  ${requestScope.list }
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -131,49 +131,30 @@
 
           <hr>
 
-          <!-- Single Comment -->
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-<<<<<<< HEAD
-              	<c:forEach items="${requestScope.list}" var="list" >
-              	
-              	
-              	
-              	
-              	
-              	
-=======
-              	<%="pCode"%>
-              	<c:forEach items="${requestScope.list}" var="list" >
->>>>>>> branch 'master' of https://github.com/mumigeonjo/seoncdProject.git
-              	
-                <div>${list.pCode}</div>
-                <div>${list.rIndexNo}</div>
-              	<div>${list.rContent}</div>
-              	
-              	</c:forEach>
-              
-            </div>
-          </div>
-
-   
-            
-            
-            
-            
-            
-            	<!-- Comments Form -->
+          
+              	         	<!-- Comments Form -->
           <div class="card my-4">
             <h5 class="card-header">review</h5>
             <div class="card-body">
               <form>
-                <a href="${pageContext.request.contextPath}/view/review.jsp">등록하기</a>
+              <a href="${pageContext.request.contextPath}/view/review.jsp">등록하기</a>
               </form>
+               <c:forEach items="${requestScope.list}" var="list" varStatus="status">
+	        
+	        
+	    
+	               <div data-toggle="collapse" data-parent="#accordion" href="#${list.rIndexNo}" aria-expanded="true" aria-controls="collapseOne">
+	               ${status.count} 제목 : ${list.rContent} 글쓴이 : ${list.memberID}
+	               </div>
+	                 <input type=button value="수정" class = "btn btn-primary" style = "vertical-align : inherit;" onClick="javascript:sendUpdate(${list.rIndexNo});">
+					 <input type=button value="삭제" class = "btn btn-primary" style = "vertical-align : inherit;" onClick="javascript:sendDelete(${list.rIndexNo});">	 
+					  
+              	</c:forEach>
+          
             </div>
           </div>
-
-        </div>
+            </div>
+          </div> 
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">

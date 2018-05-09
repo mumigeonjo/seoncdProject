@@ -245,15 +245,14 @@ ${sessionScope.id }님 환영합니다.
 				<img class="img-fluid rounded" src="img/P002.jpg" alt="">
 			</div>
 			<div class="col-lg-6">
+				<a href="mumi?command=userReviewRead&pCode=P003M">
 				<img class="img-fluid rounded" src="img/P003.jpg" alt="">
 			</div>
 			<br>
 			<div class="col-lg-6">
-				<a href="${pageContext.request.contextPath}/view/productDetail.jsp"><img class="img-fluid rounded" src="img/P004.jpg" alt="" >></a>
-				<a href="${pageContext.request.contextPath}/view/productDetail.jsp"><img
-					class="img-fluid rounded" src="img/P004.jpg" alt="">></a> <img
-					class="img-fluid rounded"
-					src="${pageContext.request.contextPath}/img/P004.jpg" alt="">
+				<a href="mumi?command=userReviewRead&pCode=P001M">
+				          <img class="img-fluid rounded" src="img/P004.jpg" alt=""></a>
+				
 			</div>
 			<br>
 		</div>

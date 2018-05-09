@@ -23,7 +23,6 @@ public class UserReviewReadAction implements Action{
 		String pCode = request.getParameter("pCode");
 		try {
 			List<ReviewDTO> list= MumiService.userReviewRead(pCode);
-			System.out.println(list);
 			request.setAttribute("list", list);
 			mv.setPath("view/productDetail.jsp");
 			mv.setRedirect(false);
@@ -32,7 +31,6 @@ public class UserReviewReadAction implements Action{
 			mv.setPath("404.html");
 			mv.setRedirect(true);
 		}
-		
 		return mv;
 	}
 }
