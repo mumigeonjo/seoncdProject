@@ -20,6 +20,42 @@
 			window.history.back();
 		})
 	})
+	
+	function check(){
+	var forms = document.getElementById("registerForm");
+	var id=registerForm.id.value;
+	var password=registerForm.pwd.value;
+	var name=registerForm.name.value;
+	var phone=registerForm.phone.value;
+	var addr=registerForm.addr.value;
+	
+	if(id.length == 0){
+		alert("아이디를 입력하세요.");
+		registerForm.id.focus();
+		return false;
+	}
+	if(password.length == 0){
+		alert("비밀번호를 입력하세요.");
+		registerForm.pwd.focus();
+		return false;
+	}
+	if(name.length == 0){
+		alert("이름을 입력하세요.");
+		registerForm.name.focus();
+		return false;
+	} 
+	if(phone.length == 0){
+		alert("핸드폰번호를 입력하세요.");
+		registerForm.phone.focus();
+		return false;
+	} 
+	if(addr.length == 0){
+		alert("주소를 입력하세요.");
+		registerForm.addr.focus();
+		return false;
+	} 
+	return true;
+}
 </script>
 <!-- Bootstrap core CSS -->
 <link
@@ -156,10 +192,13 @@ table, th, td {
 		</div>
 		<br>
 	</nav>
+	
+
 	<form method="post"
 		action="${pageContext.request.contextPath}/mumi?command=userJoin"
-		id="registerForm">
+		id="registerForm" onsubmit="return check()">
 		<table>
+		
 			<tr>
 				<th>아이디</th>
 				<th><input type="text" name="id" id="id"></th>
@@ -189,7 +228,10 @@ table, th, td {
 				<th><button type="button" id="historyback">뒤로가기</button></th>
 			</tr>
 		</table>
+			<h5>${requestScope.errorMsg}</h5>
 	</form>
+			
+
 	<!-- Footer -->
 	<footer class="py-5 bg-dark" id="footer">
 		<div class="container">

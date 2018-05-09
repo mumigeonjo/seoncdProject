@@ -13,7 +13,6 @@ public class MoveMainAction implements Action {
 			throws ServletException, IOException {
 		ModelAndView mv = new ModelAndView();
 		mv.setPath("view/main.jsp");
-
 		mv.setRedirect(false);
 		return mv;
 	}

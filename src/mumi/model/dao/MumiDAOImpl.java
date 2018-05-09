@@ -351,7 +351,8 @@ public class MumiDAOImpl implements MumiDAO {
 		} finally {
 			DBUtil.dbClose(con, ps);
 		}
-		System.out.println("ado"+memberID);
+		
+
 		return result;
 	}
 

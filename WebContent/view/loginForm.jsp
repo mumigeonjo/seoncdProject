@@ -13,8 +13,9 @@ pageEncoding="UTF-8"%>
 <c:set var="path" value="${pageContext.request.contextPath}"
    scope="application" />
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+<link
+	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath}/css/modern-business.css"
@@ -46,6 +47,26 @@ table {
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+
+function check(){
+	var forms = document.getElementById("loginForm");
+	var id=loginForm.id.value;
+	var password=loginForm.pwd.value;
+	
+	if(id.length == 0){
+		alert("아이디를 입력하세요.");
+		loginForm.id.focus();
+		return false;
+	}
+	if(password.length == 0){
+		alert("비밀번호를 입력하세요.");
+		loginForm.pwd.focus();
+		return false;
+	} 
+	
+	return true;
+}
+
 $(document).ready(function(){
    $("#historyback").click(function(){
       window.history.back();

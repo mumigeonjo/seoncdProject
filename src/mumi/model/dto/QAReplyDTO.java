@@ -8,13 +8,26 @@ public class QAReplyDTO {
 
 	public QAReplyDTO() {
 	}
-
-	public QAReplyDTO(int qIndexNo, int bIndexNo, String qDate, String qContent) {
-		super();
-		this.qIndexNo = qIndexNo;
-		this.bIndexNo = bIndexNo;
+	
+	public QAReplyDTO(String qDate, String qContent) {
 		this.qContent = qContent;
 		this.qDate = qDate;
+	}
+	public QAReplyDTO(int bIndexNo,String qContent) {
+		this.qContent = qContent;
+		this.bIndexNo = bIndexNo;
+	}
+
+	public QAReplyDTO(int qIndexNo,String qDate, String qContent) {
+		this(qDate,qContent);
+		this.qIndexNo = qIndexNo;
+	}
+	
+	public QAReplyDTO(int qIndexNo, int bIndexNo, String qDate, String qContent) {
+		this(qDate,qContent);
+		this.qIndexNo = qIndexNo;
+		this.bIndexNo = bIndexNo;
+		
 	}
 
 	public int getqIndexNo() {

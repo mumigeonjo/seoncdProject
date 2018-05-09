@@ -21,6 +21,42 @@
 			window.history.back();
 		})
 	})
+	
+	function check(){
+		var forms = document.getElementById("updateForm");
+		var id=updateForm.id.value;
+		var password=updateForm.pwd.value;
+		var name=updateForm.name.value;
+		var phone=updateForm.phone.value;
+		var addr=updateForm.addr.value;
+		
+		if(id.length == 0){
+			alert("아이디를 입력하세요.");
+			updateForm.id.focus();
+			return false;
+		}
+		if(password.length == 0){
+			alert("비밀번호를 입력하세요.");
+			updateForm.pwd.focus();
+			return false;
+		}
+		if(name.length == 0){
+			alert("이름을 입력하세요.");
+			updateForm.name.focus();
+			return false;
+		} 
+		if(phone.length == 0){
+			alert("핸드폰번호를 입력하세요.");
+			updateForm.phone.focus();
+			return false;
+		} 
+		if(addr.length == 0){
+			alert("주소를 입력하세요.");
+			updateForm.addr.focus();
+			return false;
+		} 
+		return true;
+	}
 </script>
 <c:set var="path" value="${pageContext.request.contextPath}"
 	scope="application" />
@@ -158,7 +194,7 @@ table {
 	</nav>
 	<!--Navigation 1 end -->
 	<form method="post"
-		action="${pageContext.request.contextPath}/mumi?command=userUpdate" id="updateForm">
+		action="${pageContext.request.contextPath}/mumi?command=userUpdate" id="updateForm" onsubmit="return check()">
 		<table>
 			<tr>
 				<th>아이디</th>

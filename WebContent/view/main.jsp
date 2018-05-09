@@ -16,6 +16,8 @@
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 <!-- Custom styles for this template -->
 <link href="${path}/css/modern-business.css"  rel="stylesheet">
 
@@ -161,6 +163,59 @@
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Community</a>
             </li>    
+ 			-->
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Community </a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdownBlog">
+							<a class="dropdown-item" href="mumi?command=noticeRead">Notice</a> <a
+								class="dropdown-item" href="blog-home-2.html">Blog Home 2</a> <a
+								class="dropdown-item" href="blog-post.html">Blog Post</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Customer Support </a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdownBlog">
+							<a class="dropdown-item" href="full-width.html">Info</a> <a
+								class="dropdown-item" href="sidebar.html">Sidebar Page</a> <a
+								class="dropdown-item" href="mumi?command=userQARead">FAQ</a> <a
+								class="dropdown-item" href="404.html">404</a> <a
+								class="dropdown-item" href="pricing.html">Pricing Table</a>
+						</div></li>
+				</ul>
+			</div>
+		</div>
+		<br>
+	</nav>
+	<!-- Navigation 2 end -->
+          -->
+               <li class="nav-item dropdown"><a
+                  class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Community </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                     <a class="dropdown-item" href="${path}/mumi?command=noticeRead">Notice</a> 
+                  </div></li>
+               <li class="nav-item dropdown"><a
+                  class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Customer Support </a>
+                  <div class="dropdown-menu dropdown-menu-right"
+                     aria-labelledby="navbarDropdownBlog">
+                     <a class="dropdown-item" href="${pageContext.request.contextPath}/view/Info.jsp">Info</a> 
+                     <a class="dropdown-item" href="${pageContext.request.contextPath}/mumi?command=userQARead">Q&A</a>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <br>
+   </nav>
+   <!-- Navigation 2 end -->
           -->
                <li class="nav-item dropdown"><a
                   class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"

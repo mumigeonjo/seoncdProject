@@ -1,6 +1,7 @@
 package mumi.usercontroller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -29,14 +30,15 @@ public class UserLoginAction implements Action{
 		
 		MemberDTO dto=MumiService.selectUserById(id, pwd);
 		
-		if(dto.getMemberID()==null || dto.getPwd()==null) {
-			throw new SQLException("아이디와 비밀번호를 확인해주세요..");
-		}
+		if(dto==null) {
+			mv.setPath("view/loginForm.jsp");
+			request.setAttribute("errorMsg", "아이디와 비밀번호를 확인하세요");
+		}else {
 		
 		session.setAttribute("id", dto.getMemberID());
 		mv.setPath("view/main.jsp");
 		mv.setRedirect(false);
-		
+		}
 		
 		}catch(Exception e) {
 			e.printStackTrace();
